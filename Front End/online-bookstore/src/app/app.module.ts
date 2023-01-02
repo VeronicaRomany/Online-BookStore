@@ -13,9 +13,18 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { RegisterComponent } from './registeration/register/register.component';
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
+    RegisterComponent,
+   
     HomepageComponent,
     HeadersComponent 
     
@@ -27,7 +36,11 @@ import {MatButtonModule} from '@angular/material/button';
     MatTabsModule,
     MatToolbarModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    FormsModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
