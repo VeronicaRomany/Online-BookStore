@@ -30,3 +30,21 @@ BEGIN
     WHERE ISBN = OLD.ISBN;
 END &&
 DELIMITER ;
+
+DELIMITER &&
+CREATE TRIGGER decrease_stock_when_user_order_placed BEFORE INSERT ON USER_ORDER_BOOKS FOR EACH ROW
+BEGIN
+	IF EXISTS(
+		SELECT 1
+        FROM BOOK
+        WHERE ISBN = NEW.ISBN AND Stock >= NEW.Quantity)
+	THEN
+		UPDATE BOOK
+        SET Stock = Stock - NEW.Quantity
+        WHERE ISBN = NEW.ISBN;
+	ELSE
+		SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Not enough book stock';
+	END IF;
+END &&
+DELIMITER;
