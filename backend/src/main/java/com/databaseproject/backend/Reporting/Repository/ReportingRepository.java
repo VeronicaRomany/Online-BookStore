@@ -13,6 +13,10 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.SqlParameter;
 import org.springframework.stereotype.Repository;
 
+import com.databaseproject.backend.Reporting.Model.BestSelling;
+import com.databaseproject.backend.Reporting.Model.SalesReport;
+import com.databaseproject.backend.Reporting.Model.TopCustomer;
+
 
 @Repository
 public class ReportingRepository {
@@ -22,42 +26,61 @@ public class ReportingRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public Map<String, Object> getTotalSales(){
+    @SuppressWarnings(value = "unchecked")
+    List<Map<String, Object>> extractResults(Map<String, Object> result){
+        return (List<Map<String, Object>>) result.get("#result-set-1");
+    }
+
+    private List<SalesReport> mapSalesReport(Map<String, Object> result){
+        return extractResults(result).stream().map(x -> new SalesReport(x)).toList();
+    }
+
+    private List<TopCustomer> mapTopCustomers(Map<String, Object> result){
+        return extractResults(result).stream().map(x -> new TopCustomer(x)).toList();
+        
+    }
+
+    private List<BestSelling> mapBestSellings(Map<String, Object> result){
+        return extractResults(result).stream().map(x -> new BestSelling(x)).toList();
+        
+    }
+
+    public List<SalesReport> getTotalSales(){
         List<SqlParameter> parameters = Arrays.asList(new SqlParameter(Types.NVARCHAR));
         
-        return jdbcTemplate.call(new CallableStatementCreator() {
+        return mapSalesReport(jdbcTemplate.call(new CallableStatementCreator() {
           @Override
           public CallableStatement createCallableStatement(Connection con) throws SQLException {
             CallableStatement cs = con.prepareCall("{call get_sales_report()}");
             return cs;
           }
-        }, parameters);
+        }, parameters));
 
     }
 
-    public Map<String, Object> getTopCustomers(){
+    public List<TopCustomer> getTopCustomers(){
         List<SqlParameter> parameters = Arrays.asList(new SqlParameter(Types.NVARCHAR));
         
-        return jdbcTemplate.call(new CallableStatementCreator() {
+        return mapTopCustomers(jdbcTemplate.call(new CallableStatementCreator() {
           @Override
           public CallableStatement createCallableStatement(Connection con) throws SQLException {
             CallableStatement cs = con.prepareCall("{call get_top5_customers()}");
             return cs;
           }
-        }, parameters);
+        }, parameters));
 
     }
 
-    public Map<String, Object> getBestSellings(){
+    public List<BestSelling> getBestSellings(){
         List<SqlParameter> parameters = Arrays.asList(new SqlParameter(Types.NVARCHAR));
         
-        return jdbcTemplate.call(new CallableStatementCreator() {
+        return mapBestSellings(jdbcTemplate.call(new CallableStatementCreator() {
           @Override
           public CallableStatement createCallableStatement(Connection con) throws SQLException {
             CallableStatement cs = con.prepareCall("{call get_top_selling_books}");
             return cs;
           }
-        }, parameters);
+        }, parameters));
 
     }
 }

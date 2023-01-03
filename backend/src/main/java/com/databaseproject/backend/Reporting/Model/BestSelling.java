@@ -2,6 +2,13 @@ package com.databaseproject.backend.Reporting.Model;
 
 import java.util.Map;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+@AllArgsConstructor
 public class BestSelling {
     private final String isbn, title;
     private final int amount;

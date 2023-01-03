@@ -25,7 +25,7 @@ public class BookstoreApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		Map<String, Object> l = repo.getBestSellings();
+		// Map<String, Object> l = repo.getBestSellings();
 		int x = 0;
 		
 	}
