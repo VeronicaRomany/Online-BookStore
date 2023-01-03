@@ -116,3 +116,17 @@ BEGIN
 	END IF &&
 END &&
 DELIMITER ;
+
+
+
+DROP PROCEDURE IF EXISTS find_by_username;
+DELIMITER &&
+CREATE PROCEDURE find_by_username(
+	_Username VARCHAR(20)
+    )
+BEGIN
+    SELECT USERNAME as username, PASSWORD as password, IS_MANAGER as isMgr
+    FROM USER
+    WHERE USERNAME = _Username &&
+END &&
+DELIMITER ;
