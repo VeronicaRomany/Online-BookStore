@@ -24,6 +24,7 @@ import { NewBookComponent } from './new-book/new-book/new-book.component';
 import { CartComponent } from './cart/cart.component';
 import { AddCartComponent } from './popUp/add-cart/add-cart.component';
 import {ProfileComponent} from "./profile/profile.component";
+import { CheckOutComponent } from './popUp/check-out/check-out.component';
 
 
 
@@ -39,8 +40,10 @@ import {ProfileComponent} from "./profile/profile.component";
     NewBookComponent,
     CartComponent,
     AddCartComponent,
-    ProfileComponent
+    ProfileComponent,
 
+    CheckOutComponent
+    
   ],
   imports: [
     BrowserModule,
