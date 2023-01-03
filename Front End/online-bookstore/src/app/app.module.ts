@@ -17,6 +17,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RegisterComponent } from './registeration/register/register.component';
+import { LoginComponent } from './login/login.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 
 
 
@@ -24,9 +26,10 @@ import { RegisterComponent } from './registeration/register/register.component';
   declarations: [
     AppComponent,
     RegisterComponent,
-   
+    LoginComponent,
     HomepageComponent,
-    HeadersComponent 
+    HeadersComponent,
+    EditProfileComponent
     
   ],
   imports: [
