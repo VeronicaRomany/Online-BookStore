@@ -1,0 +1,48 @@
+<div class="wrapper">
+  <div class="left">
+      <img src="https://i.imgur.com/cMy8V5j.png" alt="user" width="200" height="200">
+      <h2>{{ currentUserInfo.firstName }}</h2>
+      <h2>{{ currentUserInfo.lastName }}</h2>
+    <h3>{{ currentUserInfo.username }}</h3>
+  </div>
+  <div class="right">
+      <div class="info">
+          <h3>Information</h3>
+          <div class="info_data">
+               <div class="data">
+                  <h4>Email</h4>
+                  <p>{{ currentUserInfo.email }}</p>
+               </div>
+               <div class="data">
+                 <h4>Phone</h4>
+                  <p>{{ currentUserInfo.phone}}</p>
+            </div>
+          </div>
+      </div>
+
+    <div class="projects">
+
+          <div class="projects_data">
+               <div class="data">
+                  <h4>Addres</h4>
+                  <p>{{ currentUserInfo.address }}</p>
+               </div>
+          </div>
+      </div>
+
+      <div class="social_media">
+          <ul>
+            <li><a style="font-size: small;" routerLink="/Edit" >edit</a></li>
+
+        </ul>
+    </div>
+  </div>
+</div>
+
+<div class="container" *ngIf="notLogIn">
+  <ul>
+    <h3>please login</h3>
+  </ul>
+</div>
+
+

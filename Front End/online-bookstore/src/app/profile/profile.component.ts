@@ -1,0 +1,39 @@
+import { Component, OnInit } from '@angular/core';
+import { ProfileService } from '../profile/services/profile.service';
+import { Router } from '@angular/router';
+import {MatDialog} from "@angular/material/dialog";
+import {HttpClient} from "@angular/common/http";
+import {TokenStorageService} from "../_services/token-storage.service";
+import {User} from "../user";
+
+@Component({
+  selector: 'app-profile',
+  templateUrl: './profile.component.html',
+  styleUrls: ['./profile.component.css']
+})
+export class ProfileComponent implements OnInit {
+  currentUser: any;
+  currentUserInfo: User = new User();
+  notLogIn = true
+  userID: number = 0;
+  condition: boolean = false
+  editedID: number = 0
+  loggedIn: boolean = false
+  currentPage: number = 0
+
+  constructor(private token: TokenStorageService, private profile: ProfileService, private router: Router, public dialog: MatDialog, private http: HttpClient) {
+  }
+
+  ngOnInit(): void {
+    this.currentUser = this.token.getUser();
+    this.userID = this.token.getUser().userId;
+    if (this.currentUser.username != undefined) {
+      this.notLogIn = false
+      console.log("ii")
+    }
+    this.profile.getUserInfo(this.userID).subscribe(result => {
+      this.currentUserInfo = result
+      console.log(result)
+    })
+  }
+}

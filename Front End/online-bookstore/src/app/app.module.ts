@@ -23,6 +23,7 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { NewBookComponent } from './new-book/new-book/new-book.component';
 import { CartComponent } from './cart/cart.component';
 import { AddCartComponent } from './popUp/add-cart/add-cart.component';
+import {ProfileComponent} from "./profile/profile.component";
 
 
 
@@ -37,8 +38,9 @@ import { AddCartComponent } from './popUp/add-cart/add-cart.component';
     EditProfileComponent,
     NewBookComponent,
     CartComponent,
-    AddCartComponent
-    
+    AddCartComponent,
+    ProfileComponent
+
   ],
   imports: [
     BrowserModule,
@@ -52,8 +54,8 @@ import { AddCartComponent } from './popUp/add-cart/add-cart.component';
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
-  
-    
+
+
   ],
   providers: [],
   bootstrap: [AppComponent]
