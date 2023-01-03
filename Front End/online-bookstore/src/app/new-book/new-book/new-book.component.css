@@ -1,0 +1,93 @@
+
+ .register-form{
+    height: 60%;
+    width: 50%;
+    border:solid;
+    border-color: rgb(234, 234, 234);
+    padding: 10px 50px 20px;
+ }
+
+ .frame{
+  margin:auto;
+    width: 50%;
+    height: 700px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+input{
+  margin-top: 20px;
+  width: 200px;
+  text-align: center;
+  font-family:cursive ;
+
+}
+.error{
+    color: rgb(147, 13, 13);
+}
+
+.drop{
+  margin-left: 3px;
+  font-family:cursive ;
+  text-align: center;
+}
+
+.fr{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    width: 410px;
+   
+}
+
+
+.addButton{
+    margin-left: 40px;
+    background-color: #4CAF50;
+   border: transparent;
+    color:white
+}
+
+.button{
+
+
+  padding: 16px 20px;
+  text-align: center;
+  
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin: auto;
+  margin: 4px 5px;
+  
+  transition-duration: 0.4s;
+  cursor: pointer;
+  font-family:cursive ;
+
+}
+.button1 {
+    margin-left: 20px;
+    background-color: white; 
+    color: black; 
+    border: 2px solid #4CAF50;
+    
+  }
+  
+  .button1:hover {
+    background-color: #4CAF50;
+    color: white;
+  }
+
+  .button2 {
+    background-color: white; 
+    color: black; 
+    border: 2px solid #008CBA;
+  }
+  
+  .button2:hover {
+    background-color: #008CBA;
+    color: white;
+  }
+  

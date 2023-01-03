@@ -1,0 +1,114 @@
+<p>new-book works!</p>
+
+
+
+
+<div class="frame">
+    <div class="fr">
+        <div class="register-form">
+            <h2 style="font-family: cursive;text-align: center;">Add New Book</h2>
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                
+
+
+                <div class="form-group">
+                    <label for="category" style="font-family:cursive ;">Book Category</label>
+                    <select  formControlName="category" id="category"  
+                        [ngClass]="{ 'is-invalid': submitted && f['category'].errors }" class="drop">
+                        <option  value="geography">Geography</option>
+                        <option  value="science">Science</option>
+                        <option  value="religion">Religion</option>
+                        <option  value="history">History</option>
+                        <option  value="art">Art</option>
+                  </select>
+              
+                  <div *ngIf="submitted && f['category'].errors" class="error">
+                    <div *ngIf="f['category'].errors['required']" >Book Category is required</div>
+                  </div>
+                </div>
+                
+
+
+                <div class="form-group">
+                    <input type="number" placeholder="ISBN Number" formControlName="ISBN" class="form-control" min="0"
+                        [ngClass]="{ 'is-invalid': submitted && f['ISBN'].errors }"/>
+                    <div *ngIf="submitted && f['ISBN'].errors" class="error">
+                        <div *ngIf="f['ISBN'].errors['required']">ISBN Number is required</div>
+                        
+                    </div>
+                </div>
+                    
+  
+    
+                <div class="form-group" >
+                    <input type="text" formControlName="title" placeholder="Book Title" class="form-control"
+                                [ngClass]="{ 'is-invalid': submitted && f['title'].errors }" />
+                    <div *ngIf="submitted && f['title'].errors" class="error" >
+                        <div *ngIf="f['title'].errors['required']">Book title is required</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <input type="text" placeholder="Book Publisher" formControlName="Publisher"  class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f['Publisher'].errors }"/>
+                    <div *ngIf="submitted && f['Publisher'].errors" class="error">
+                        <div *ngIf="f['Publisher'].errors['required']">Publisher name is required</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <input type="number" min="1" max="2022" step="1" placeholder="Publication year" formControlName="publicationYear" 
+                     class="form-control" [ngClass]="{ 'is-invalid': submitted && f['publicationYear'].errors }"/>
+                    <div *ngIf="submitted && f['publicationYear'].errors" class="error">
+                        <div *ngIf="f['publicationYear'].errors['required']">Publication year is required</div>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <input type="number" placeholder="Book Price" formControlName="price" class="form-control" min="0"
+                        [ngClass]="{ 'is-invalid': submitted && f['price'].errors }"/>
+                    <div *ngIf="submitted && f['price'].errors" class="error">
+                        <div *ngIf="f['price'].errors['required']">Book Price is required</div>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <input type="number" placeholder="Minimum Quantity" formControlName="minimumQuantity" class="form-control" min="0"
+                        [ngClass]="{ 'is-invalid': submitted && f['minimumQuantity'].errors }"/>
+                    <div *ngIf="submitted && f['minimumQuantity'].errors" class="error">
+                        <div *ngIf="f['minimumQuantity'].errors['required']">Minimum Quantity is required</div>
+                    </div>
+                </div>
+
+
+                <br>
+                <label style="font-family: cursive;">Add Book Authors</label>
+                <button type="button" class="addButton" (click)="addvalue()">+</button>
+                <div *ngFor="let value of values; let i = index"> 
+                    <input type="text"  id="name_{{i}}" >
+                </div>
+                <div *ngIf="authorError" class="error">Enter Book Author(s)</div>
+                 
+                  
+          
+  
+   
+  
+                
+    
+                <div class="form-group">
+                    <br>
+                    <button type="submit" (click)="onSubmit()"class="button button1">ADD</button>
+                    <button type="button" (click)="onReset()"class="button button2" > Reset</button>
+                </div>
+
+
+                
+               
+
+            </form>
+        </div>
+    </div>
+</div>

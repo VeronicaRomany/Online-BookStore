@@ -1,1 +1,51 @@
-<p>homepage works!</p>
+
+
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<div class="box">
+
+  <div class="search-box">
+    <input type="text" placeholder="Type her...">
+    <div class="ic">
+    <button  class="icon" mat-icon-button><mat-icon >search</mat-icon></button>
+  </div>
+    
+  </div>
+</div>
+
+<div class="cards">
+  <div class="card" *ngFor="let item of books">
+    <li>
+    <img class="card__image" src="https://diwanegypt.com/wp-content/uploads/2022/12/9781925946789-450x600.jpg" alt="">
+    <div class="ribbon-2">2009 </div>
+
+</li>
+    <div class="card__content">
+        <div class="title" style="display:flex;     justify-content: center;">
+        <h4>Title</h4>
+        
+        </div>
+      <div class="authors">
+        <h5>Category</h5>
+        <h5>Author: <a> Mark E. Latif</a></h5>
+        <h5>Publisher: <a> Mark E. Latif</a>  </h5>
+     
+      </div>
+     
+    </div>
+    <div class="card__info">
+        <div class="co">
+      <div style="font-size:medium;">
+       31000  LE
+      </div>
+    
+      </div>
+      <div>
+        <button mat-raised-button (click)="addToCart();" style="padding: 0px;"><mat-icon style="padding: 0px;"> local_grocery_store</mat-icon></button>
+        
+      </div>
+    </div>
+  </div>
+  
+  
+</div>
