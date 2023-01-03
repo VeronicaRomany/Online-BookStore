@@ -1,0 +1,98 @@
+.cards {
+    margin: 0 auto;
+    max-width: 1000px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(225px, 1fr));
+    grid-auto-rows: auto;
+    gap: 30px;
+    font-family: sans-serif;
+    padding-top: 30px;
+}
+.card li{
+    position: relative;list-style: none;background: #ffffff;border-radius: 5px;
+    box-shadow: 0 3px 4px 0 #0001;overflow: hidden;transition: all 0.3s;
+}
+.card li:hover{
+      transform: scale(1.04);box-shadow: 0 4px 14px 0 #0005;
+}
+.cards * {
+    box-sizing: border-box;
+}
+
+.card__image {
+    width: 100%;
+    height:300px;
+    object-fit: cover;
+    display: block;
+    background-size:contain;
+    margin: 0;
+    padding: 5px;
+}
+
+.card__content {
+    line-height: 1.5;
+    font-size: 0.9em;
+    padding: 10px;
+    background: #fafafa;
+
+}
+
+.card__content > p:first-of-type {
+    margin-top: 0;
+}
+
+.card__content > p:last-of-type {
+    margin-bottom: 0;
+}
+
+.card__info {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #555555;
+    background: #eeeeee;
+    font-size: 0.8em;
+    border-bottom: 2px solid #333333;
+
+}
+
+.card__info i {
+    font-size: 0.9em;
+    margin-right: 8px;
+    padding: 0;
+}
+
+.card__link {
+    color: #64968c;
+    text-decoration: none;
+}
+
+.card__link:hover {
+    text-decoration: underline;
+}
+
+h4{
+    margin: 0;
+}
+.ribbon-2 {
+    --f: 10px; /* control the folded part*/
+    --r: 15px; /* control the ribbon shape */
+    --t: 20px; /* the top offset */
+    
+    position: absolute;
+    inset: var(--t) calc(-1*var(--f)) auto auto;
+    padding: 0 10px var(--f) calc(10px + var(--r));
+    clip-path: 
+      polygon(0 0,100% 0,100% calc(100% - var(--f)),calc(100% - var(--f)) 100%,
+        calc(100% - var(--f)) calc(100% - var(--f)),0 calc(100% - var(--f)),
+        var(--r) calc(50% - var(--f)/2));
+        background: #FDC830;  /* fallback for old browsers */
+        background: -webkit-linear-gradient(to right, #F37335, #FDC830);  /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to right, #F37335, #FDC830); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        color: #fafafa;
+        
+    
+    padding-right: 20px;
+   
+  }

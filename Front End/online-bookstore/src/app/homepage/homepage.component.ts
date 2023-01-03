@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./homepage.component.css']
 })
 export class HomepageComponent implements OnInit {
-
+ books:number[]=[1,2,3,4,5,6,7,8]
   constructor() { }
 
   ngOnInit(): void {
