@@ -76,7 +76,8 @@ CREATE PROCEDURE add_book_to_user_order(
 )
 BEGIN
 	INSERT INTO USER_ORDER_BOOKS
-    VALUES(_Order_Id, _ISBN, _Quantity);
+    VALUES(_Order_Id, _ISBN, _Quantity, (SELECT PRICE FROM BOOK WHERE ISBN = _ISBN))  &&
+
 END &&
 DELIMITER ;
 
@@ -89,11 +90,11 @@ CREATE PROCEDURE verify_user_order_info(
     _Expiry_Date DATE
     )
 BEGIN
-	DECLARE sum INT;
+	DECLARE sum INT &&
     
     SELECT SUM(Price*Quantity)
     FROM BOOK NATURAL JOIN USER_ORDER NATURAL JOIN USER_ORDER_BOOKS
-    INTO sum;
+    INTO sum &&
     IF NOT EXISTS(
 		SELECT 1
         FROM CREDIT_CARDS
@@ -106,12 +107,12 @@ BEGIN
 	THEN
 		ROLLBACK;
         SIGNAL SQLSTATE '45000'
-		SET MESSAGE_TEXT = 'Incorrect Credinitals';
+		SET MESSAGE_TEXT = 'Incorrect Credinitals' &&
 	ELSE
 		UPDATE CREDIT_CARDS
         SET Balance = Balance - sum
-        WHERE Credit_Card_No = _Credit_Card_No;
-		COMMIT;
-	END IF;
+        WHERE Credit_Card_No = _Credit_Card_No &&
+		COMMIT &&
+	END IF &&
 END &&
 DELIMITER ;

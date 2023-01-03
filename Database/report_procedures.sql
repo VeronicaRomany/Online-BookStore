@@ -1,0 +1,40 @@
+USE LIBRARY;
+
+DELIMITER &&
+CREATE PROCEDURE get_sales_report()
+BEGIN
+    SELECT DAY(uo.dt), MONTH(up.dt), COUNT(*), SUM(uob.price * uob.Quantity)
+    FROM USER_ORDER as uo
+    NATURAL JOIN USER_ORDER_BOOK as uob
+    WHERE uo.dt > (CURDATE() - INTERVAL 1 MONTH)
+    GROUP BY DAY(uo.dt) &&
+END &&
+DELIMITER ;
+
+
+DELIMITER &&
+CREATE PROCEDURE get_top5_customers()
+BEGIN
+    SELECT uo.USERNAME, SUM(uob.PRICE * uob.QUANTITY) as amount
+    FROM USER_ORDER as uo
+    NATURAL JOIN USER_ORDER_BOOK as uob
+    WHERE uo.dt > (CURDATE() - INTERVAL 3 MONTH)
+    GROUP BY uo.USERNAME
+    ORDER BY amount DESC 
+    LIMIT 5 &&
+END &&
+DELIMITER ;
+
+
+DELIMITER &&
+CREATE PROCEDURE get_top_selling_books()
+BEGIN
+    SELECT b.ISBN, b.TITLE, SUM(uob.QUANTITY) as amount
+    FROM BOOK as b
+    NATURAL JOIN USER_ORDER_BOOK as uob
+    WHERE uo.dt > (CURDATE() - INTERVAL 3 MONTH)
+    GROUP BY b.ISBN
+    ORDER BY amount DESC
+    LIMIT 10 &&
+END &&
+DELIMITER ;
