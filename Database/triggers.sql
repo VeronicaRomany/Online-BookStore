@@ -47,4 +47,4 @@ BEGIN
         SET MESSAGE_TEXT = 'Not enough book stock';
 	END IF;
 END &&
-DELIMITER;
+DELIMITER ;
