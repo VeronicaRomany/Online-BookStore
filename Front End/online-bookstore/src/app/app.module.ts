@@ -17,6 +17,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RegisterComponent } from './registeration/register/register.component';
+import { NewBookComponent } from './new-book/new-book/new-book.component';
 
 
 
@@ -26,7 +27,8 @@ import { RegisterComponent } from './registeration/register/register.component';
     RegisterComponent,
    
     HomepageComponent,
-    HeadersComponent 
+    HeadersComponent ,
+    NewBookComponent
     
   ],
   imports: [
