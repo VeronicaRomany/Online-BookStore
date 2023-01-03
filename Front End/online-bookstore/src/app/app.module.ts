@@ -12,12 +12,16 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
+import {MatDialogModule} from '@angular/material/dialog';
 
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RegisterComponent } from './registeration/register/register.component';
 import { NewBookComponent } from './new-book/new-book/new-book.component';
+import { CartComponent } from './cart/cart.component';
+import { AddCartComponent } from './popUp/add-cart/add-cart.component';
+
 
 
 
@@ -28,7 +32,9 @@ import { NewBookComponent } from './new-book/new-book/new-book.component';
    
     HomepageComponent,
     HeadersComponent ,
-    NewBookComponent
+    NewBookComponent,
+    CartComponent,
+    AddCartComponent
     
   ],
   imports: [
@@ -39,9 +45,11 @@ import { NewBookComponent } from './new-book/new-book/new-book.component';
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
+    MatDialogModule,
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
+  
     
   ],
   providers: [],

@@ -1,6 +1,16 @@
 
 
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<div class="box">
+
+  <div class="search-box">
+    <input type="text" placeholder="Type her...">
+    <button  class="icon" mat-icon-button><mat-icon>search</mat-icon></button>
+    
+  </div>
+</div>
+
 <div class="cards">
   <div class="card" *ngFor="let item of books">
     <li>
@@ -24,12 +34,12 @@
     <div class="card__info">
         <div class="co">
       <div style="font-size:medium;">
-       310   LE
+       31000  LE
       </div>
     
       </div>
       <div>
-        <button mat-raised-button style="padding: 0px;"><mat-icon style="padding: 0px;"> local_grocery_store</mat-icon></button>
+        <button mat-raised-button (click)="addToCart();" style="padding: 0px;"><mat-icon style="padding: 0px;"> local_grocery_store</mat-icon></button>
         
       </div>
     </div>
