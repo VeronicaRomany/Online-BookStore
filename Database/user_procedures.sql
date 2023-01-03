@@ -30,6 +30,34 @@ DELIMITER ;
 
 
 DELIMITER &&
+CREATE PROCEDURE create_user(
+	_Username VARCHAR(20),
+    _Password CHAR(60),
+    _FName VARCHAR(30),
+    _LNAME VARCHAR(30),
+    _Email VARCHAR(30),
+    _Phone VARCHAR(16),
+    _Address VARCHAR(120)
+    )
+BEGIN
+	START TRANSACTION;
+	INSERT INTO `USER`
+    VALUES(
+		Username = _Username,
+        `Password` = _Password,
+        FName = _FName,
+        LNAME = _LNAME,
+        Email = _Email,
+        Phone = _Phone,
+        Address = _Address,
+        False
+    );
+	COMMIT;
+END &&
+DELIMITER ;
+
+
+DELIMITER &&
 CREATE PROCEDURE create_user_order(
 	_Username VARCHAR(20)
     )
