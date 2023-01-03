@@ -78,7 +78,7 @@ public class ReportingServiceTest {
         );
 
         when(repo.getTopCustomers()).thenReturn(data);
-        String html = assertDoesNotThrow(() -> service.getTopCutomers("D:\\CSED2024\\Fall 2022\\DBMS\\Online-BookStore\\"));
+        assertDoesNotThrow(() -> service.getTopCutomers("D:\\CSED2024\\Fall 2022\\DBMS\\Online-BookStore\\"));
 
     }
 }

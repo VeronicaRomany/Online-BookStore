@@ -29,42 +29,43 @@ public class ReportingService {
             this.repo = reportingRepository;
         }
 
-        protected String generateReport(String templatePath, Supplier<List<?>> supplier){
-            String html = "", htmlPath = basePath + "backend\\src\\main\\resources\\static\\Reports\\temp.html";
+        protected byte[] generateReport(String templatePath, Supplier<List<?>> supplier){
+            byte[] rv = new byte[]{};
+            // String html = "", htmlPath = basePath + "backend\\src\\main\\resources\\static\\Reports\\temp.pdf";
             // List<TopCustomer> topCustomers = this.repo.getTopCustomers();
             try {
                 File file = ResourceUtils.getFile("classpath:\\static\\Reports\\" + templatePath);
                 JasperReport report = JasperCompileManager.compileReport(file.getAbsolutePath());
                 JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(supplier.get());
                 JasperPrint jasperPrint = JasperFillManager.fillReport(report, new HashMap<>(), dataSource);
-                JasperExportManager.exportReportToHtmlFile(jasperPrint, htmlPath);
+                rv = JasperExportManager.exportReportToPdf(jasperPrint);
 
-                StringBuilder htmlBuilder = new StringBuilder();
-                BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(new File(htmlPath))));
-                String line = null;
-                while((line = br.readLine()) != null){
-                    htmlBuilder.append(line);
-                }
-                html = htmlBuilder.toString();
+                // StringBuilder htmlBuilder = new StringBuilder();
+                // BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(new File(htmlPath))));
+                // String line = null;
+                // while((line = br.readLine()) != null){
+                //     htmlBuilder.append(line);
+                // }
+                // html = htmlBuilder.toString();
 
             } catch (JRException | IOException e) {
                 e.printStackTrace();
             }
-            return html;
+            return rv;
         }
 
-        public String getTopCutomers(String basePath){
+        public byte[] getTopCutomers(String basePath){
             this.basePath = basePath;
             return generateReport("Top 5 Customers.jrxml", this.repo::getTopCustomers);
         }
 
-        public String getBestSellings(String basePath){
+        public byte[] getBestSellings(String basePath){
             this.basePath = basePath;
 
             return generateReport("BestSellings.jrxml", this.repo::getBestSellings);
         }
 
-        public String getSalesReport(String basePath){
+        public byte[] getSalesReport(String basePath){
             this.basePath = basePath;
             return generateReport("Total sales.jrxml", this.repo::getTotalSales);
         }
