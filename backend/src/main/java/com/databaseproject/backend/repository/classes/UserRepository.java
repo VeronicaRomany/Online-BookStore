@@ -40,7 +40,7 @@ public class UserRepository implements IUserRepository {
     }
 
     @Override
-    public boolean createUserOrder(CreateOrderRequest request, String username) {
+    public Integer createUserOrder(CreateOrderRequest request, String username) {
         Integer orderID = jdbcTemplate.queryForObject("CALL create_user_order(?)",
                 (rs, rowNum) -> rs.getInt(1), username);
 
@@ -56,9 +56,9 @@ public class UserRepository implements IUserRepository {
         try {
             jdbcTemplate.update("CALL verify_user_order_info(?, ?, ?, ?)",
                     orderID, creditCard.getNumber(), creditCard.getCvc(), creditCard.getExpiryDate());
-            return true;
+            return orderID;
         } catch (Exception e) {
-            return false;
+            return -1;
         }
     }
 

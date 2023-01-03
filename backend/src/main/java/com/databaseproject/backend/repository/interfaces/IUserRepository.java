@@ -9,6 +9,6 @@ public interface IUserRepository {
 
     boolean modifyUser(ModifyUserRequest request);
 
-    boolean createUserOrder(CreateOrderRequest request, String username);
+    Integer createUserOrder(CreateOrderRequest request, String username);
 
 }
