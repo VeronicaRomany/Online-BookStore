@@ -55,6 +55,13 @@
 .card{
     scale: 0.9;
 }
+.ic :hover{
+    transform: scale(1.04);box-shadow: 0 4px 14px 0 #0005;
+
+}
+.icon :hover{
+    transform: scale(1.0);box-shadow: 0 1px 0px 0 #971829;;
+}
 .card li{
     
     position: relative;list-style: none;background: #ffffff;border-radius: 5px;
