@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.databaseproject.backend.Reporting.Service.ReportingService;
 
-@RequestMapping("app/manager/reports")
+@RequestMapping("app/v1/manager/reports")
 public class ReportingController {
 
     private final ReportingService reportingService;

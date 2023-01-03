@@ -11,21 +11,36 @@ import java.util.Map;
 import org.springframework.jdbc.core.CallableStatementCreator;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.SqlParameter;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.databaseproject.backend.Utils.TokenUtil;
 import com.databaseproject.backend.model.UserAuthentication;
 
 @Service
 public class UserFinder implements UserDetailsService {
 
     private final JdbcTemplate jdbcTemplate;
+    private final TokenUtil tokenUtil;
 
-    public UserFinder(JdbcTemplate jdbcTemplate){
+    public UserFinder(JdbcTemplate jdbcTemplate, TokenUtil tokenUtil){
         this.jdbcTemplate = jdbcTemplate;
+        this.tokenUtil = tokenUtil;
     }
+
+
+    public String userLogIn(Authentication auth) {
+        try {
+            String token = tokenUtil.generateToken(auth);
+            return token;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
 
     @SuppressWarnings("unchecked")
     protected UserAuthentication mapUser(Map<String, Object> queryResult){

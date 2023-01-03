@@ -82,11 +82,12 @@ public class SecurityConfiguration {
     @Bean
     @Order(2)
     public SecurityFilterChain userFilterChain(HttpSecurity http) throws Exception {
-        String endpoint =  this.endpoint + "/user";
+        String endpoint =  this.endpoint;
         http
             .securityMatcher(endpoint + "/**")
             .authorizeHttpRequests((auth) -> {
                 auth.requestMatchers(endpoint + "/auth").permitAll();
+                auth.requestMatchers(endpoint + "/manager").hasAuthority("mgr");
                 auth.anyRequest().authenticated();
             }
 
@@ -105,9 +106,7 @@ public class SecurityConfiguration {
     public WebSecurityCustomizer webSecurityCustomizer() {
         return (web) -> web.ignoring().requestMatchers(
                 this.endpoint + "/test/**",
-                this.endpoint+"/user",
-                this.endpoint+"/institution",
-                this.endpoint+"/password");
+                this.endpoint+"/user");
     }
 
 }
