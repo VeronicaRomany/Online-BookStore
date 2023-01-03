@@ -22,7 +22,7 @@ public class UserController {
         this.userRepository = userRepository;
     }
 
-    @PostMapping("/signup")
+    @PostMapping("/user")
     public ResponseEntity<GenericResponse> signUpUser(@RequestBody UserRequest user) {
         boolean isCreated = userRepository.createUser(user);
 
@@ -34,7 +34,7 @@ public class UserController {
                 .body(new GenericResponse(false, "Failed to create account!", null));
     }
 
-    @PatchMapping("/account-info")
+    @PatchMapping("/user")
     public ResponseEntity<GenericResponse> modifyUser(@RequestBody ModifyUserRequest modifiedUser,
                                                       Authentication auth) {
         boolean isModified = userRepository.modifyUser(modifiedUser);
