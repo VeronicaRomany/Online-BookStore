@@ -8,8 +8,9 @@
  }
 
  .frame{
-  margin:auto;
-    width: 50%;
+    margin:auto;
+    margin-top: 100px;
+    width: 40%;
     height: 700px;
     display: flex;
     align-items: center;
@@ -38,7 +39,7 @@ input{
     display:flex;
     align-items: center;
     justify-content: center;
-    width: 410px;
+    width: 1500px;
    
 }
 
@@ -90,4 +91,11 @@ input{
     background-color: #008CBA;
     color: white;
   }
+
+  .photo{
+    width:100px;
+    height: 100px;
+    margin-left: 50px;
+    
+}
   
