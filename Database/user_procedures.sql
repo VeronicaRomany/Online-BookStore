@@ -3,7 +3,6 @@ USE LIBRARY;
 DELIMITER &&
 CREATE PROCEDURE modify_user(
     Old_Username VARCHAR(20),
-    Old_Password CHAR(60),
 	New_Username VARCHAR(20),
     New_Password CHAR(60),
     New_FName VARCHAR(30),
@@ -24,7 +23,7 @@ BEGIN
         Phone = New_Phone,
         Address = New_Address
 	WHERE
-		Username = Old_Username AND `Password` = Old_Password;
+		Username = Old_Username;
 	COMMIT;
 END &&
 DELIMITER ;

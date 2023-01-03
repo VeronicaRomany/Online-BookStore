@@ -25,7 +25,6 @@ DELIMITER ;
 DELIMITER &&
 CREATE PROCEDURE promote_user(
 	Manger_Username VARCHAR(20),
-    Manager_Password CHAR(60),
     User_Username VARCHAR(20)
 )
 BEGIN
@@ -34,7 +33,6 @@ IF EXISTS(
 	SELECT 1 FROM `USER` 
     WHERE 
 		Username = Manger_Username AND
-        `Password` = Manager_Password AND
         Is_Manager)
 THEN
 	UPDATE `USER`
