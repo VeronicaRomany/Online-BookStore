@@ -4,6 +4,7 @@ import com.databaseproject.backend.repository.interfaces.IUserRepository;
 import com.databaseproject.backend.request.CreateOrderRequest;
 import com.databaseproject.backend.request.CreditCard;
 import com.databaseproject.backend.request.ModifyUserRequest;
+import com.databaseproject.backend.request.UserRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -17,6 +18,15 @@ public class UserRepository implements IUserRepository {
     @Autowired
     public UserRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
+    }
+
+    @Override
+    public boolean createUser(UserRequest request) {
+        int updateRows = jdbcTemplate.update("CALL create_user(?, ?, ?, ?, ?, ?, ?)",
+                request.getUsername(), request.getPassword(), request.getFirstName(), request.getLastName(),
+                request.getEmail(), request.getPhone(), request.getAddress());
+
+        return updateRows != 0;
     }
 
     @Override
