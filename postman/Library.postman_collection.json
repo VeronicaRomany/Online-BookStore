@@ -1,0 +1,301 @@
+{
+	"info": {
+		"_postman_id": "49596525-ad2f-4546-a9fe-4cfc9c657660",
+		"name": "Library",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18245343"
+	},
+	"item": [
+		{
+			"name": "Create User",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"manager0\",\r\n    \"password\": \"SomePassword\",\r\n    \"firstName\": \"Mohamed\",\r\n    \"lastName\": \"Magdi\",\r\n    \"email\": \"manager@email.com\",\r\n    \"phone\": \"0102128567\",\r\n    \"address\": \"Alexandria, Egypt\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/v1/user",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Log in",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "aNewPassword",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "manager0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/user/auth",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"user",
+						"auth"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit User Info",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoibWFuYWdlcjAiLCJpYXQiOjE2NzI4NDI1Mzh9.jB2Tp84nIcvIS-FcjOrojbKVN47gLe8sa6TmPzfTLrxQjms9cqJYIPCa36dzSwuaD5De4yAXOCT-5rcTnzGJkeX3D1ZsBKGmGj5IcHTVZWL1PgRIgRQsLdLUUYF-1Wb6yBIfcynYPX5dEdQFuk8D9pcr-OuaqCDNrnTgM_G_XI-krKfMpfYN66eeW7jmdJiqUME7vkVs5ZNfIyDxRO0qAxJUMEFBo2OQDXdmLt7A5ksKuWJ_AV695-EFRN75Jo38tIgNduSUD7qB_Shz53U01A45PDVl4OP0cN23FoBduYc5aHSITzcYpwA5pG4CpcpcRNKBSlf7IzbA8vOF869wQA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"oldUserName\": \"manager0\",\r\n    \"newUsername\": \"manager0\",\r\n    \"newPassword\": \"aNewPassword\",\r\n    \"newFName\": \"NewFirst\",\r\n    \"newLName\": \"NewLast\",\r\n    \"newEmail\": \"new@email.com\",\r\n    \"newPhone\": \"01234567\",\r\n    \"newAddress\": \"His New Address\" \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/v1/user",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Place User Order",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoibWFuYWdlcjAiLCJpYXQiOjE2NzI4NDE5MDl9.o0soRpIMPT2oPi6qZyXxnWU-SgbMEO5bWtZX_V34H9Ao8Z8kWbNNkPrXIacOcCIqE-12stt_Jlp3fcwJD3Aa0o8qVXa2DgYpgo1lhEEhzpCiF9eUpo9dFCwgQg3CAZoZfXqRE_j9zp2NSNGHXNpCJaWE_tEFshY79Y4MXc8mFFgf8eWV4sel3Wdysn0RaVg4z3aEsq_bjk8J76FlC-KsNiUzA6s9D7799S0yFFkDBqPEJ3e0SpaepxbrIjqbV1ZGvO1QUiiieD2oD-L7EdsBG4SbcKwlqDPBlZj1kuuqt4Zx8z4dWqn4lWeT0ptn1jsKhYnkHZhx7q57pX-BqENhFA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"creditCard\" : {\r\n        \"number\" : \"1234567890123456\",\r\n        \"expiryDate\" : \"2025-12-01\"\r\n    },\r\n    \"orders\" : {\r\n        \"1234567890123\" : 1\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/v1/order",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"order"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get User Info",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoibWFuYWdlcjAiLCJpYXQiOjE2NzI4NDM4NzF9.FCd86uKFiiRzqCubPOGHdDZg35d-atB7vVq41_4Km6IIMZsiMb4gKplJKegPwxBb8pxe7Xi_j3g8f-qMGmQJnYbVh98xV_1idEYaC7ST623gFCh08m2EPJplb6PQu1u2_PzQLJTP2rmgYrl3bLkV3r8XQ2noLB0qC--0agEVxprsD0gC5O-w4AGIPdmGjrrAzY8RWfb5piNMUm97EcEKkuDxjjdrOfp7BaYG2StxazQPFgSDAOvm_cOfgFjixsPfjQQ2-zpiSMbhg7KhXxAZUzBfexcffk-QsIfgHX-gm3jOcC4oyDSfCUyt_LJ386RU2Vl2ZdxtX71qZDX1GrgqOA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/user",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Book",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "SomePassword",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "manager0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"ISBN\": \"2128491924821\",\r\n    \"title\": \"Best book\",\r\n    \"publisher\": \"J.K Rowling\",\r\n    \"pubYear\": 2005,\r\n    \"price\": 30,\r\n    \"category\": \"Science\",\r\n    \"stock\": 20,\r\n    \"threshold\": 3,\r\n    \"imageURL\": \"Whatever it is\",\r\n    \"authros\": [\r\n        \"asdfaf\", \"dsafdsfs\"\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/manager/book",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"manager",
+						"book"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Library Order",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "SomePassword",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "manager0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"ISBN\": \"9392939438592\",\r\n    \"quantity\": 5\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/v1/manager/order",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"manager",
+						"order"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find book",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Add publisher",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
