@@ -98,7 +98,7 @@ CREATE PROCEDURE add_publisher(
 BEGIN
     START TRANSACTION;
 	INSERT INTO Publisher
-    VALUES(`New_Name`, Address, Phone);
+    VALUES(`Name`, Address, Phone);
     COMMIT;
 END &&
 DELIMITER ;

@@ -12,7 +12,7 @@ BEGIN
 	DECLARE pattern VARCHAR(16);
     SET start_index = (page_no - 1) * count_in_page;
     SET pattern = CONCAT("%", _Username, "%");
-	SELECT Username, FName, LName, Email, Phone
+	SELECT Username, FName, LName, Email, Phone, Is_Manager
     FROM `USER`
     WHERE Username LIKE pattern
     ORDER BY 
