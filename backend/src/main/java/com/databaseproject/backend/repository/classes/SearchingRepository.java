@@ -49,6 +49,7 @@ public class SearchingRepository implements ISearchingRepository {
                     book.setCategory(rs.getString("Category"));
                     book.setStock(rs.getInt("Stock"));
                     book.setThreshold(rs.getInt("Threshold"));
+                    book.setImageURL(rs.getString("Image_URL"));
                     return book;
                 }, key.getISBN(), key.getTitle(), key.getPublisher(), key.getPubYear(), key.getPrice(), key.getCategory(),
                 key.getStock(), key.getAuthorName(), request.getPageNumber(), request.getCountInPage());
@@ -66,6 +67,7 @@ public class SearchingRepository implements ISearchingRepository {
             book.setCategory(rs.getString("Category"));
             book.setStock(rs.getInt("Stock"));
             book.setThreshold(rs.getInt("Threshold"));
+            book.setImageURL(rs.getString("Image_URL"));
             return book;
         }, key.getString(), request.getOrder(), request.getPageNumber(), request.getCountInPage());
     }
@@ -82,6 +84,7 @@ public class SearchingRepository implements ISearchingRepository {
             book.setCategory(rs.getString("Category"));
             book.setStock(rs.getInt("Stock"));
             book.setThreshold(rs.getInt("Threshold"));
+            book.setImageURL(rs.getString("Image_URL"));
             return book;
         }, key.getString(), request.getOrder(), request.getPageNumber(), request.getCountInPage());
     }
@@ -98,6 +101,7 @@ public class SearchingRepository implements ISearchingRepository {
             book.setCategory(rs.getString("Category"));
             book.setStock(rs.getInt("Stock"));
             book.setThreshold(rs.getInt("Threshold"));
+            book.setImageURL(rs.getString("Image_URL"));
             return book;
         }, key.getString(), request.getOrder(), request.getPageNumber(), request.getCountInPage());
     }
@@ -114,6 +118,7 @@ public class SearchingRepository implements ISearchingRepository {
             book.setCategory(rs.getString("Category"));
             book.setStock(rs.getInt("Stock"));
             book.setThreshold(rs.getInt("Threshold"));
+            book.setImageURL(rs.getString("Image_URL"));
             return book;
         }, key.getYear(), request.getMethod(), request.getOrder(), request.getPageNumber(), request.getCountInPage());
     }
@@ -130,6 +135,7 @@ public class SearchingRepository implements ISearchingRepository {
             book.setCategory(rs.getString("Category"));
             book.setStock(rs.getInt("Stock"));
             book.setThreshold(rs.getInt("Threshold"));
+            book.setImageURL(rs.getString("Image_URL"));
             return book;
         }, key.getInteger(), request.getMethod(), request.getOrder(), request.getPageNumber(), request.getCountInPage());
     }
@@ -146,6 +152,7 @@ public class SearchingRepository implements ISearchingRepository {
             book.setCategory(rs.getString("Category"));
             book.setStock(rs.getInt("Stock"));
             book.setThreshold(rs.getInt("Threshold"));
+            book.setImageURL(rs.getString("Image_URL"));
             return book;
         }, key.getInteger(), request.getMethod(), request.getOrder(), request.getPageNumber(), request.getCountInPage());
     }
@@ -162,6 +169,7 @@ public class SearchingRepository implements ISearchingRepository {
             book.setCategory(rs.getString("Category"));
             book.setStock(rs.getInt("Stock"));
             book.setThreshold(rs.getInt("Threshold"));
+            book.setImageURL(rs.getString("Image_URL"));
             return book;
         }, key.getString(), request.getPageNumber(), request.getCountInPage());
     }
@@ -178,6 +186,7 @@ public class SearchingRepository implements ISearchingRepository {
             book.setCategory(rs.getString("Category"));
             book.setStock(rs.getInt("Stock"));
             book.setThreshold(rs.getInt("Threshold"));
+            book.setImageURL(rs.getString("Image_URL"));
             return book;
         }, key.getString(), request.getPageNumber(), request.getCountInPage());
     }

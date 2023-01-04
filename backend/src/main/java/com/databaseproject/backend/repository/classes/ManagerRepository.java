@@ -53,7 +53,11 @@ public class ManagerRepository implements IManagerRepository {
         int updatedRows = jdbcTemplate.update("CALL modify_book(?, ?, ?, ?, ?, ?, ?, ?, ?)",
                 request.getOldISBN(), request.getNewISBN(), request.getNewTitle(), request.getNewPublisher(),
                 request.getNewPubYear(), request.getNewPubYear(), request.getNewCategory(), request.getNewStock(),
-                request.getNewThreshold());
+                request.getNewThreshold(), request.getNewImageURL());
+
+        for(String author: request.getNewAuthors()){
+            jdbcTemplate.update("CALL add_author(?, ?)", request.getNewISBN(), author);
+        }
 
         return updatedRows != 0;
     }
@@ -68,10 +72,13 @@ public class ManagerRepository implements IManagerRepository {
 
     @Override
     public boolean addBook(AddBookRequest request) {
-        int updatedRows = jdbcTemplate.update("CALL add_book(?, ?, ?, ?, ?, ?, ?, ?)",
+        int updatedRows = jdbcTemplate.update("CALL add_book(?, ?, ?, ?, ?, ?, ?, ?, ?)",
                 request.getISBN(), request.getTitle(), request.getPublisher(), request.getPubYear(),
-                request.getPrice(), request.getCategory(), request.getStock(), request.getThreshold());
-
+                request.getPrice(), request.getCategory(), request.getStock(), request.getThreshold(),
+                request.getImageURL());
+        for(String author: request.getAuthors()){
+            jdbcTemplate.update("CALL add_author(?, ?)", request.getISBN(), author);
+        }
         return updatedRows != 0;
     }
 
@@ -86,10 +93,15 @@ public class ManagerRepository implements IManagerRepository {
             book.setCategory(rs.getString("Category"));
             book.setStock(rs.getInt("Stock"));
             book.setThreshold(rs.getInt("Threshold"));
+            book.setImageURL(rs.getString("Image_URL"));
+            List<String> authors = jdbcTemplate.query("CALL get_book_authors(?)", (r, rNum) -> { return r.getString("Name"); }, ISBN);
+            book.setAuthors(authors);
             return book;
         }, ISBN);
 
         return books.stream().findFirst().orElse(null);
     }
+
+
 
 }

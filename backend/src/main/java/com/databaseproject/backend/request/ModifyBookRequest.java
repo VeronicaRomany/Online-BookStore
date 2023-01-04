@@ -17,6 +17,6 @@ public class ModifyBookRequest {
     private String newCategory;
     private Integer newStock;
     private Integer newThreshold;
-    private String imageURL;
-    private String[] authors;
+    private String newImageURL;
+    private String[] newAuthors;
 }

@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.Year;
+import java.util.List;
 
 @Getter
 @Setter
@@ -15,4 +16,6 @@ public class BookInfoResponse {
     private String category;
     private Integer stock;
     private Integer threshold;
+    private String imageURL;
+    private List<String> authors;
 }
