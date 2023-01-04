@@ -8,14 +8,13 @@ import {  ValidatorFn } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from 'src/app/user';
 import { TokenStorageService } from 'src/app/_services/token-storage.service';
-//import { ProfileService } from '../profile/services/profile.service';
 
 
 export default class Validation {
   static match(controlName: string, checkControlName: string): ValidatorFn {
-    
+
     return (controls: AbstractControl) => {
-      
+
       const checkControl = controls.get(checkControlName);
 
       if (checkControl?.errors && !checkControl.errors['matching']) {
@@ -47,13 +46,9 @@ export class EditProfileComponent implements OnInit {
     new_password: new FormControl(''),
     phoneNumber: new FormControl(''),
     address : new FormControl(''),
-
   });
   submitted = false;
-
   urllink:string="";
-
-  
   file:File={
     lastModified: 0,
     name: '',
@@ -79,21 +74,21 @@ export class EditProfileComponent implements OnInit {
   //currentUserInfo=this.profile.getUser()
   currentUserInfo: User=new User()
 
-  
-  
-  
-  
+
+
+
+
 
   constructor(private formBuilder: FormBuilder, private http:HttpClient,
-    /*private profile: ProfileService,*/ private tokenStorage: TokenStorageService,
+    /*private profile: SearchUsersService,*/ private tokenStorage: TokenStorageService,
     private router:Router) {}
 
   ngOnInit(): void {
-   
-  
 
-   
-    
+
+
+
+
     this.form = this.formBuilder.group(
       {
         firstname: ['', Validators.required],
@@ -116,11 +111,11 @@ export class EditProfileComponent implements OnInit {
         Validators.maxLength(40)]
       ],
         phoneNumber: ['',[Validators.required,Validators.minLength(9),Validators.maxLength(11)]],
-      
+
         address : ['',''],
 
       },
-      
+
       {
         validators: [Validation.match("123", 'old_password')]
       }
@@ -155,8 +150,8 @@ export class EditProfileComponent implements OnInit {
     }
 
     var jsonString = JSON.stringify(this.form.value, null, 2)
-    console.log(jsonString);   
-    
+    console.log(jsonString);
+
     this.newAccount.firstName = this.f['firstname'].value
     this.newAccount.lastName = this.f['lastname'].value
     console.log(this.f['new_password'].value,"new_password")
@@ -168,9 +163,9 @@ export class EditProfileComponent implements OnInit {
     this.newAccount.phone = this.f['phoneNumber'].value
     this.newAccount.email = this.f['email'].value
     this.newAccount.address = this.f['address'].value
-    
 
-   
+
+
     var NewAccountJsonString = JSON.stringify(this.newAccount)
     console.log(NewAccountJsonString)
     this.urllink=""

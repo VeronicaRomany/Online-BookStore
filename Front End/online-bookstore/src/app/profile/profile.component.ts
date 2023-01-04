@@ -38,11 +38,13 @@ export class ProfileComponent implements OnInit {
       this.promote=true
     }
   }
-  onPromote(){
-    this.showUser.type == "manager"
-    this.profile.makeManager(this.showUser.userId).subscribe(result => {
-      this.showUser = result
-      console.log(result)
-    })
+  isMyProfile(){
+    return  this.userID == this.token.getUser().userId;
+  }
+  editProfile(){
+    this.router.navigate(['/', 'Edit'])
+  }
+  noSellerPic(){
+    return (this.currentUserInfo.profile_pic_link==null||this.currentUserInfo.profile_pic_link=='')
   }
 }

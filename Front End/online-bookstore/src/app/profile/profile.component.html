@@ -1,9 +1,10 @@
 <div class="wrapper">
   <div class="left">
-      <img src={{currentUserInfo.profile_pic_link}} alt="user" width="200" height="200">
+    <img src={{currentUserInfo.profile_pic_link}} *ngIf="!noSellerPic();" alt="user" width="200" height="200">
+    <img src='assets/p.png' *ngIf="noSellerPic();" alt="user" width="200" height="200">
       <h2>{{ currentUserInfo.firstName }}</h2>
       <h2>{{ currentUserInfo.lastName }}</h2>
-    <h3>{{ currentUserInfo.username }}</h3>
+      <h3>{{ currentUserInfo.username }}</h3>
   </div>
   <div class="right">
       <div class="info">
@@ -29,13 +30,9 @@
                </div>
           </div>
       </div>
-
       <div class="social_media">
           <ul>
-            <li><a style="font-size: small;" routerLink="/Edit" >edit</a></li>
-            <div *ngIf="!promote">
-              <li><a style="font-size: small;" (click)="onPromote()">Promote</a></li>
-            </div>
+            <li><a style="font-size: small;" *ngIf="isMyProfile();" (click)="editProfile();" >Edit</a></li>
         </ul>
     </div>
   </div>

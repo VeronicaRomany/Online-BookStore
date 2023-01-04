@@ -7,14 +7,18 @@ import {User} from "../../user";
 @Injectable({
   providedIn: 'root'
 })
-export class ProfileService {
+export class SearchUsersService {
   currentUserInfo:User = new User
   constructor(private http:HttpClient,private token: TokenStorageService) { }
   userURL:string = "http://localhost:8080/users"
 
-  getUserInfo(userID: number | undefined):Observable<User>{
+  getUsersInfo(userinfo: HTMLInputElement):Observable<User[]>{
+    console.log(userinfo)
+    return this.http.get<User[]>(this.userURL+"/search")
+  }
+  makeManager(userID: number):Observable<User>{
     console.log(userID)
-    return this.http.get<User>(this.userURL+"/profile/"+userID)
+    return this.http.get<User>(this.userURL+"/searchUsers/promote"+userID)
   }
   setUser(user:User){
     this.currentUserInfo=user

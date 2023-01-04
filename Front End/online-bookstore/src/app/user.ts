@@ -9,8 +9,8 @@ export class User {
   email:string=""
   address:string=""
   type:string=""
+  hasPictures:boolean=false
   profile_pic_link:string=""
   constructor(){}
-
 
 }
