@@ -2,11 +2,13 @@ package com.databaseproject.backend.repository.classes;
 
 import com.databaseproject.backend.repository.interfaces.IManagerRepository;
 import com.databaseproject.backend.request.*;
+import com.databaseproject.backend.response.BookInfoResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.sql.CallableStatement;
+import java.util.List;
 
 @Repository
 public class ManagerRepository implements IManagerRepository {
@@ -71,6 +73,23 @@ public class ManagerRepository implements IManagerRepository {
                 request.getPrice(), request.getCategory(), request.getStock(), request.getThreshold());
 
         return updatedRows != 0;
+    }
+
+    @Override
+    public BookInfoResponse findBookByISBN(String ISBN) {
+        List<BookInfoResponse> books = jdbcTemplate.query("CALL get_book_info(?)", (rs, rowNum) -> {
+            BookInfoResponse book = new BookInfoResponse();
+            book.setISBN(rs.getString("ISBN"));
+            book.setTitle(rs.getString("Title"));
+            book.setPublisher(rs.getString("Publisher"));
+            book.setPubYear(rs.getInt("Pub_Year"));
+            book.setCategory(rs.getString("Category"));
+            book.setStock(rs.getInt("Stock"));
+            book.setThreshold(rs.getInt("Threshold"));
+            return book;
+        }, ISBN);
+
+        return books.stream().findFirst().orElse(null);
     }
 
 }

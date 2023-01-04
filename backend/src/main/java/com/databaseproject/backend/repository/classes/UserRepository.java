@@ -5,10 +5,13 @@ import com.databaseproject.backend.request.CreateOrderRequest;
 import com.databaseproject.backend.request.CreditCard;
 import com.databaseproject.backend.request.ModifyUserRequest;
 import com.databaseproject.backend.request.UserRequest;
+import com.databaseproject.backend.response.BookInfoResponse;
+import com.databaseproject.backend.response.UserInfoResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Map;
 
 @Repository
@@ -54,12 +57,30 @@ public class UserRepository implements IUserRepository {
         CreditCard creditCard = request.getCreditCard();
 
         try {
-            jdbcTemplate.update("CALL verify_user_order_info(?, ?, ?, ?)",
-                    orderID, creditCard.getNumber(), creditCard.getCvc(), creditCard.getExpiryDate());
+            jdbcTemplate.update("CALL verify_user_order_info(?, ?, ?)",
+                    orderID, creditCard.getNumber(), creditCard.getExpiryDate());
             return orderID;
         } catch (Exception e) {
             return -1;
         }
+    }
+
+    @Override
+    public UserInfoResponse getUserInfo(String username) {
+        List<UserInfoResponse> users = jdbcTemplate.query("CALL find_by_username(?)", (rs, rowNum) -> {
+            UserInfoResponse user = new UserInfoResponse();
+            user.setUsername(rs.getString("Username"));
+            user.setPassword(rs.getString("Password"));
+            user.setFirstName(rs.getString("FName"));
+            user.setLastName(rs.getString("LName"));
+            user.setEmail(rs.getString("Email"));
+            user.setPhone(rs.getString("Phone"));
+            user.setAddress(rs.getString("Address"));
+            user.setIsManager(rs.getBoolean("Is_Manager"));
+            return user;
+        }, username);
+
+        return users.stream().findFirst().orElse(null);
     }
 
 }
