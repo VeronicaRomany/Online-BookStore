@@ -18,7 +18,7 @@ export class CheckOutComponent implements OnInit {
     
     for(let i=0 ;i<this.cart.length;i++){
       this.amount+=this.cart[i].amount
-      this.cost+= this.cart[i].amount * this.cart[i].book.sellingPrice
+      this.cost+= this.cart[i].amount * this.cart[i].book.price
     }
   }
  

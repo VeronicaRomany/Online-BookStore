@@ -5,8 +5,8 @@
 <div class="cards">
     <div class="card" *ngFor="let item of cart">
       <li>
-      <img class="card__image" src={{item.book.imageLink}} alt="">
-      <div class="ribbon-2">{{item.book.publicationYear}}</div>
+      <img class="card__image" src={{item.book.imageURL}} alt="">
+      <div class="ribbon-2">{{item.book.pubYear}}</div>
   
   </li>
       <div class="card__content">
@@ -20,7 +20,7 @@
       <div class="card__info">
           <div class="co">
         <div style="font-size:medium;">
-          {{item.book.sellingPrice}} LE
+          {{item.book.price}} LE
         </div>
       
         </div>

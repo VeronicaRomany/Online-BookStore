@@ -22,7 +22,7 @@
 <div class="cards">
   <div class="card" *ngFor="let item of books">
     <li>
-    <img class="card__image" src={{item.imageLink}} alt="">
+    <img class="card__image" src={{item.imageURL}} alt="">
     <div class="ribbon-2">{{item.category}} </div>
 
 </li>
@@ -37,14 +37,14 @@
         <h5>Author: <a *ngFor="let e of item.authors"> {{e}},</a></h5>
          
         <h5>Publisher: <a> {{item.publisher}}</a>  </h5>
-        <h5>{{item.publicationYear}}</h5>
+        <h5>{{item.pubYear}}</h5>
       </div>
      
     </div>
     <div class="card__info">
         <div class="co">
       <div style="font-size:medium;">
-       {{item.sellingPrice}}  LE
+       {{item.price}}  LE
       </div>
     
       </div>
