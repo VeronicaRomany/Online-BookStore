@@ -12,12 +12,11 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   login(username: string, password: string) {
-    console.log(btoa(username+':'+password))
+    let incoded=btoa(username+':'+password)
+    console.log(incoded)
 
-    const httpOptions = {
-      headers: new HttpHeaders().append('Authorization','Basic cHk6MTIzNDU2')
-    };
-    console.log(httpOptions)
-    return this.http.post<DataReturned>(AUTH_API ,httpOptions);
+    var headers=new HttpHeaders().append("Authorization","Basic "+incoded)
+    console.log(headers)
+    return this.http.post<DataReturned>(AUTH_API,{} ,{headers});
   }
 }
