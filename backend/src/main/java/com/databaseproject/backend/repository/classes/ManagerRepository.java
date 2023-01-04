@@ -3,6 +3,7 @@ package com.databaseproject.backend.repository.classes;
 import com.databaseproject.backend.repository.interfaces.IManagerRepository;
 import com.databaseproject.backend.request.*;
 import com.databaseproject.backend.response.BookInfoResponse;
+import com.databaseproject.backend.response.LibraryOrderResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -20,10 +21,21 @@ public class ManagerRepository implements IManagerRepository {
     }
 
     @Override
-    public  getLibraryOrders(ConfirmLibraryOrderRequest request) {
-        int updatedRows = jdbcTemplate.update("CALL confirm_library_order(?)", request.getOrderID());
-
-        return updatedRows != 0;
+    public List<LibraryOrderResponse> getLibraryOrders() {
+        return jdbcTemplate.query("CALL get_library_orders()", (rs, rowNum) -> {
+            LibraryOrderResponse libraryOrder = new LibraryOrderResponse();
+            libraryOrder.setOrderID(rs.getInt("ID"));
+            libraryOrder.setQuantity(rs.getInt("Quantity"));
+            libraryOrder.setISBN(rs.getString("ISBN"));
+            libraryOrder.setTitle(rs.getString("Title"));
+            libraryOrder.setPublisher(rs.getString("Publisher"));
+            libraryOrder.setPubYear(rs.getInt("Pub_Year"));
+            libraryOrder.setCategory(rs.getString("Category"));
+            libraryOrder.setStock(rs.getInt("Stock"));
+            libraryOrder.setThreshold(rs.getInt("Threshold"));
+            libraryOrder.setImageURL(rs.getString("Image_URL"));
+            return libraryOrder;
+        });
     }
 
     @Override
@@ -57,7 +69,7 @@ public class ManagerRepository implements IManagerRepository {
 
     @Override
     public boolean modifyBook(ModifyBookRequest request) {
-        int updatedRows = jdbcTemplate.update("CALL modify_book(?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        int updatedRows = jdbcTemplate.update("CALL modify_book(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                 request.getOldISBN(), request.getNewISBN(), request.getNewTitle(), request.getNewPublisher(),
                 request.getNewPubYear(), request.getNewPubYear(), request.getNewCategory(), request.getNewStock(),
                 request.getNewThreshold(), request.getNewImageURL());

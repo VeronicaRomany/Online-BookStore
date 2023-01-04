@@ -4,11 +4,14 @@ import com.databaseproject.backend.repository.interfaces.IManagerRepository;
 import com.databaseproject.backend.request.*;
 import com.databaseproject.backend.response.BookInfoResponse;
 import com.databaseproject.backend.response.GenericResponse;
+import com.databaseproject.backend.response.LibraryOrderResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @CrossOrigin()
@@ -46,6 +49,11 @@ public class ManagerController {
 
         return ResponseEntity.status(HttpStatus.CONFLICT)
                 .body(new GenericResponse(false, "Failed to create order!", null));
+    }
+
+    @GetMapping(test + "/manager/order")
+    public List<LibraryOrderResponse> getLibraryOrders(Authentication auth) {
+        return managerRepository.getLibraryOrders();
     }
 
     @PostMapping(test + "/manager/user-promotion")

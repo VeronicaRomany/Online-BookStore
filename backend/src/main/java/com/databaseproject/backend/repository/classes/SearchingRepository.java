@@ -42,6 +42,7 @@ public class SearchingRepository implements ISearchingRepository {
         DetailedBookKey key = (DetailedBookKey) request.getKey();
         return jdbcTemplate.query("CALL search_book(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", (rs, rowNum) -> {
                     BookInfoResponse book = new BookInfoResponse();
+                    System.out.println(rs.getString("ISBN"));
                     book.setISBN(rs.getString("ISBN"));
                     book.setTitle(rs.getString("Title"));
                     book.setPublisher(rs.getString("Publisher"));

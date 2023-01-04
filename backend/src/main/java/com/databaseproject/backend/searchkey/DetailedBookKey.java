@@ -13,7 +13,7 @@ public class DetailedBookKey extends Key implements Serializable {
     private String ISBN;
     private String title;
     private String publisher;
-    private Year pubYear;
+    private Integer pubYear;
     private String price;
     private String category;
     private Integer stock;
