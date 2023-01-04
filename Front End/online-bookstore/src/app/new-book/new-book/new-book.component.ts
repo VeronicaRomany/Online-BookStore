@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators, AbstractControl, FormArray } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -8,6 +8,7 @@ import { NewBookService } from '../new-book.service';
 import{Book} from 'src/app/shared/Book'
 import { GenericResponse } from 'src/app/shared/GenericResponse';
 import { ModifyBookRequest } from 'src/app/shared/ModifyBookRequest';
+import { TokenStorageService } from 'src/app/_services/token-storage.service';
 
 @Component({
   selector: 'app-new-book',
@@ -47,7 +48,7 @@ export class NewBookComponent implements OnInit {
  
 
   constructor(private formBuilder: FormBuilder,private route:ActivatedRoute, private http:HttpClient,
-    private readonly newbookservice:NewBookService, private router:Router) { }
+    private readonly newbookservice:NewBookService, private router:Router,private token:TokenStorageService) { }
 
   ngOnInit(): void {
     this.form = this.formBuilder.group(
@@ -188,6 +189,8 @@ export class NewBookComponent implements OnInit {
       return;
     }
 
+    var headers=new HttpHeaders().append("Authorization","Bearer "+this.token.getUser().token)
+
     
     console.log("FORM VALUES >>>",this.form.value)
 
@@ -202,7 +205,8 @@ export class NewBookComponent implements OnInit {
       console.log(JSON.parse(jsonString))
 
       // auth ttzwd f al request
-      this.http.post<GenericResponse>("http://localhost:8080/api/v1/manager/book",JSON.parse(jsonString)).subscribe((data) =>{
+      
+      this.http.post<GenericResponse>("http://localhost:8080/api/v1/manager/book",JSON.parse(jsonString),{headers:headers}).subscribe((data) =>{
           if(data.state){
             window.alert(data.message)
             this.router.navigate(['/', 'Home'])
@@ -224,7 +228,7 @@ export class NewBookComponent implements OnInit {
 
 
         // 3ayzen al authentication
-      this.http.patch<GenericResponse>("http://localhost:8080/api/v1/manager/book",JSON.parse(jsonString)).subscribe((data)=>{
+      this.http.patch<GenericResponse>("http://localhost:8080/api/v1/manager/book",JSON.parse(jsonString),{headers:headers}).subscribe((data)=>{
         if(data.state){
           window.alert(data.message)
           this.router.navigate(['/', 'Home'])
