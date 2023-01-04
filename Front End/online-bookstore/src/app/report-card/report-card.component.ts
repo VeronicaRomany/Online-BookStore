@@ -8,9 +8,6 @@ import { ReportingServiceService } from '../reporting-service/reporting-service.
 })
 export class ReportCardComponent implements OnInit {
 
-  // pdfSrc = "D:\\CSED2024\\Fall 2022\\DBMS\\Online-BookStore\\Front End\\online-bookstore\\sample.pdf";
-  // pdfSrc = 'https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf';
-
   pdf!:Uint8Array;
   @Input() endpoint:string = '';
 
