@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 
 import com.databaseproject.backend.Utils.TokenUtil;
 import com.databaseproject.backend.model.UserAuthentication;
+import com.databaseproject.backend.response.SignInResponse;
 
 @Service
 public class UserFinder implements UserDetailsService {
@@ -32,10 +33,11 @@ public class UserFinder implements UserDetailsService {
     }
 
 
-    public String userLogIn(Authentication auth) {
+    public SignInResponse userLogIn(Authentication auth) {
         try {
+            UserDetails user = this.loadUserByUsername(auth.getName());
             String token = tokenUtil.generateToken(auth);
-            return token;
+            return new SignInResponse(token, !user.getAuthorities().isEmpty());
         } catch (Exception e) {
             return null;
         }

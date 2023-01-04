@@ -6,6 +6,7 @@ import com.databaseproject.backend.request.CreateOrderRequest;
 import com.databaseproject.backend.request.ModifyUserRequest;
 import com.databaseproject.backend.request.UserRequest;
 import com.databaseproject.backend.response.GenericResponse;
+import com.databaseproject.backend.response.SignInResponse;
 import com.databaseproject.backend.service.UserFinder;
 
 import java.util.Map;
@@ -48,16 +49,16 @@ public class UserController {
     }
 
     @PostMapping("/user/auth")
-    public ResponseEntity<String> signInUser(Authentication credentials,
+    public ResponseEntity<SignInResponse> signInUser(Authentication credentials,
             @RequestBody Map<String, Object> httpBody) {
 
-        String token = userFinder.userLogIn(credentials);
-        if (token == null) {
+        SignInResponse response = userFinder.userLogIn(credentials);
+        if (response == null) {
 
-            return ResponseEntity.status(422).body("Error");
+            return ResponseEntity.status(422).body(null);
         }
 
-        return ResponseEntity.ok().body(token);
+        return ResponseEntity.ok().body(response);
     }
 
     @PatchMapping("/user")
