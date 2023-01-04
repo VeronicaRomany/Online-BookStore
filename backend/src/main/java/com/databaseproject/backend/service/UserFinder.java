@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.context.annotation.Lazy;
 import org.springframework.jdbc.core.CallableStatementCreator;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.SqlParameter;
@@ -27,7 +28,7 @@ public class UserFinder implements UserDetailsService {
     private final JdbcTemplate jdbcTemplate;
     private final TokenUtil tokenUtil;
 
-    public UserFinder(JdbcTemplate jdbcTemplate, TokenUtil tokenUtil){
+    public UserFinder(JdbcTemplate jdbcTemplate,@Lazy TokenUtil tokenUtil){
         this.jdbcTemplate = jdbcTemplate;
         this.tokenUtil = tokenUtil;
     }
