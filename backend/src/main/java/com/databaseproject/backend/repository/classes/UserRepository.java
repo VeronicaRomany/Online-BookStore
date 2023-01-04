@@ -85,7 +85,8 @@ public class UserRepository implements IUserRepository {
     @Override
     public UserInfoResponse getUserInfo(String username) {
         try {
-            List<UserInfoResponse> users = jdbcTemplate.query("CALL find_by_username(?)", (rs, rowNum) -> {
+            System.out.println(username);
+            List<UserInfoResponse> users = jdbcTemplate.query("CALL get_user_info(?)", (rs, rowNum) -> {
                 UserInfoResponse user = new UserInfoResponse();
                 user.setUsername(rs.getString("Username"));
                 user.setPassword(rs.getString("Password"));
@@ -100,6 +101,7 @@ public class UserRepository implements IUserRepository {
 
             return users.stream().findFirst().orElse(null);
         } catch (Exception e) {
+            e.printStackTrace();
             return null;
         }
     }

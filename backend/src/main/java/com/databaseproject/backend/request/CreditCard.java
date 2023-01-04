@@ -12,6 +12,6 @@ import java.time.LocalDate;
 @Setter
 public class CreditCard implements Serializable {
     private String number;
-    @JsonFormat(pattern = "yyyy/MM")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate expiryDate;
 }
