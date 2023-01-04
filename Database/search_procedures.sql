@@ -22,7 +22,6 @@ BEGIN
 END &&
 DELIMITER ;
 
-
 DELIMITER &&
 CREATE PROCEDURE search_book(
 	_ISBN VARCHAR(13),
@@ -42,7 +41,10 @@ BEGIN
 	SELECT *
     FROM BOOK
     WHERE
-		ISBN IN (SELECT ISBN FROM AUTHOR WHERE `Name` LIKE CONCAT("%", _Author_name, "%"))
+		(CASE 
+			WHEN _Author_name IS NULL THEN TRUE
+			ELSE ISBN IN (SELECT ISBN FROM AUTHOR WHERE `Name` LIKE CONCAT("%", _Author_name, "%"))
+		END)
         AND
         (CASE
 			WHEN _ISBN IS NULL THEN TRUE

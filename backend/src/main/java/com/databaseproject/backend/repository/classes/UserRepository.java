@@ -35,6 +35,7 @@ public class UserRepository implements IUserRepository {
             System.out.println(updateRows);
             return true;
         } catch (Exception e){
+            e.printStackTrace();
             return false;
         }
     }

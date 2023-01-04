@@ -9,5 +9,5 @@ import java.time.Year;
 @Getter
 @Setter
 public class YearKey extends Key implements Serializable {
-    Year year;
+    Integer year;
 }

@@ -3,6 +3,7 @@ package com.databaseproject.backend.repository.classes;
 import com.databaseproject.backend.repository.interfaces.IManagerRepository;
 import com.databaseproject.backend.request.*;
 import com.databaseproject.backend.response.BookInfoResponse;
+import com.databaseproject.backend.response.LibraryOrderResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -19,12 +20,23 @@ public class ManagerRepository implements IManagerRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-//    @Override
-//    public  getLibraryOrders(ConfirmLibraryOrderRequest request) {
-//        int updatedRows = jdbcTemplate.update("CALL confirm_library_order(?)", request.getOrderID());
-//
-//        return updatedRows != 0;
-//    }
+    @Override
+    public List<LibraryOrderResponse> getLibraryOrders() {
+        return jdbcTemplate.query("CALL get_library_orders()", (rs, rowNum) -> {
+            LibraryOrderResponse libraryOrder = new LibraryOrderResponse();
+            libraryOrder.setOrderID(rs.getInt("ID"));
+            libraryOrder.setQuantity(rs.getInt("Quantity"));
+            libraryOrder.setISBN(rs.getString("ISBN"));
+            libraryOrder.setTitle(rs.getString("Title"));
+            libraryOrder.setPublisher(rs.getString("Publisher"));
+            libraryOrder.setPubYear(rs.getInt("Pub_Year"));
+            libraryOrder.setCategory(rs.getString("Category"));
+            libraryOrder.setStock(rs.getInt("Stock"));
+            libraryOrder.setThreshold(rs.getInt("Threshold"));
+            libraryOrder.setImageURL(rs.getString("Image_URL"));
+            return libraryOrder;
+        });
+    }
 
     @Override
     public boolean confirmLibraryOrder(ConfirmLibraryOrderRequest request) {

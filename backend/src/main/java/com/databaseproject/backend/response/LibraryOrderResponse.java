@@ -8,10 +8,14 @@ import lombok.ToString;
 @Setter
 @ToString
 public class LibraryOrderResponse {
-    int orderID;
-    String ISBN;
-    int quantity;
-    String title;
-    int stock;
-    String imageURL;
+    private int orderID;
+    private int quantity;
+    private String ISBN;
+    private String title;
+    private String publisher;
+    private Integer pubYear;
+    private String category;
+    private Integer stock;
+    private Integer threshold;
+    private String imageURL;
 }
