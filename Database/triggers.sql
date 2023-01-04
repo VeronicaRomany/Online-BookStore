@@ -15,9 +15,13 @@ CREATE TRIGGER auto_order_after_update AFTER UPDATE ON BOOK FOR EACH ROW
 BEGIN    
 	# Checks if the update was on stock
     # TODO: Should I Check if there was an order already?
-	IF(NEW.Stock < NEW.Threshold AND OLD.Stock > NEW.Stock) THEN
+	IF(
+		NEW.Stock < NEW.Threshold AND 
+        OLD.Stock > NEW.Stock AND
+        NOT EXISTS(SELECT 1 FROM LIBRARY_ORDER WHERE ISBN = NEW.ISBN AND Quantity = NEW.Threshold)) 
+	THEN
 		INSERT INTO LIBRARY_ORDER 
-        VALUES (0, NEW.ISBN, NEW.Threshold);
+		VALUES (0, NEW.ISBN, NEW.Threshold);
 	END IF;
 END &&
 DELIMITER ;
