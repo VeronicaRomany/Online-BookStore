@@ -13,8 +13,8 @@
     <li>
       <div class="card"  >
         <div class="image-session " >
-          <span class="image" *ngIf="!noSellerPic(item.profile_pic_link);" style="background-image: url({{item.profile_pic_link}});"></span>
-          <span class="image" *ngIf="noSellerPic(item.profile_pic_link);" style="background-image: url('assets/p.png');"></span>
+          <span class="image" *ngIf="photo(item.type)" style="background-image: url('assets/manager.png');"></span>
+          <span class="image" *ngIf="!photo(item.type)" style="background-image: url('assets/p.png');"></span>
           <div class="body">
             <h2 class="t">{{item.username}}</h2>
             <h4 class="t">{{item.firstName}}</h4>

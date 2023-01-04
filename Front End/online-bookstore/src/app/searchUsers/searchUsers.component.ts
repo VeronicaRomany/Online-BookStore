@@ -25,23 +25,23 @@ export class SearchUsersComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.route.queryParams.subscribe((params:any) =>{
-    //   console.log(params.data+" <<<<<<<<<<<<<<<<<<<<<<<<<<")
-    //   if(params.data!=null){
-    //     this.userID=params.data
-    //   }else{
-    //     this.currentUser = this.token.getUser();
-    //     this.userID = this.token.getUser().userId;
-    //     if (this.currentUser.username != undefined) {
-    //       this.notLogIn = false
-    //
-    //       console.log("ii")
-    //     }
-    //     else{
-    //       this.router.navigate(['/', 'Home'])
-    //     }
-    //   }
-    // } )
+    this.route.queryParams.subscribe((params:any) =>{
+      console.log(params.data+" <<<<<<<<<<<<<<<<<<<<<<<<<<")
+      if(params.data!=null){
+        this.userID=params.data
+      }else{
+        this.currentUser = this.token.getUser();
+        this.userID = this.token.getUser().userId;
+        if (this.currentUser.username != undefined) {
+          this.notLogIn = false
+
+          console.log("ii")
+        }
+        else{
+          this.router.navigate(['/', 'Home'])
+        }
+      }
+    } )
   }
   onSearch(){
     var textSearch = document.getElementById('search') as HTMLInputElement
@@ -66,7 +66,7 @@ export class SearchUsersComponent implements OnInit {
     })
     this.getProfile(id)
   }
-  noSellerPic(photo:string){
-    return (photo==null||photo=='')
+  photo(type:string){
+    return type=="manager"
   }
 }

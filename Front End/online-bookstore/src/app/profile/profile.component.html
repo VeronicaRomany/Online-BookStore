@@ -1,7 +1,7 @@
 <div class="wrapper">
   <div class="left">
-    <img src={{currentUserInfo.profile_pic_link}} *ngIf="!noSellerPic();" alt="user" width="200" height="200">
-    <img src='assets/p.png' *ngIf="noSellerPic();" alt="user" width="200" height="200">
+    <img src='assets/manager.png' *ngIf="manager" alt="user" width="200" height="200">
+    <img src='assets/p.png' *ngIf="!manager" alt="user" width="200" height="200">
       <h2>{{ currentUserInfo.firstName }}</h2>
       <h2>{{ currentUserInfo.lastName }}</h2>
       <h3>{{ currentUserInfo.username }}</h3>

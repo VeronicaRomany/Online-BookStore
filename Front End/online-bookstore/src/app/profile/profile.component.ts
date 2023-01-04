@@ -14,11 +14,10 @@ import {User} from "../user";
 export class ProfileComponent implements OnInit {
   currentUser: any;
   currentUserInfo: User = new User();
-  showUser:User=new User()
   notLogIn = true
   userID: number = 0;
   loggedIn: boolean = false
-  promote: boolean = false
+  manager: boolean = true
 
   constructor(private token: TokenStorageService, private profile: ProfileService, private router: Router, public dialog: MatDialog, private http: HttpClient) {
   }
@@ -34,8 +33,8 @@ export class ProfileComponent implements OnInit {
       this.currentUserInfo = result
       console.log(result)
     })
-    if(this.currentUser.type == "manager" && this.showUser.type == "customer"){
-      this.promote=true
+    if(this.currentUser.type == "manager"){
+      this.manager=true
     }
   }
   isMyProfile(){
