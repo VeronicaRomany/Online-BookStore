@@ -1,15 +1,17 @@
 package com.databaseproject.backend.repository.interfaces;
 
+import com.databaseproject.backend.request.DetailedBookSearchRequest;
 import com.databaseproject.backend.request.SearchByRequest;
+import com.databaseproject.backend.request.UserSearchRequest;
 import com.databaseproject.backend.response.BookInfoResponse;
 import com.databaseproject.backend.response.UserInfoResponse;
 
 import java.util.List;
 
 public interface ISearchingRepository {
-    List<UserInfoResponse> searchUsers(SearchByRequest request);
+    List<UserInfoResponse> searchUsers(UserSearchRequest request);
 
-    List<BookInfoResponse> searchBooks(SearchByRequest request);
+    List<BookInfoResponse> searchBooks(DetailedBookSearchRequest request);
 
     List<BookInfoResponse> searchBookByISBN(SearchByRequest request);
 

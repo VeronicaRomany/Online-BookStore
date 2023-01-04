@@ -22,20 +22,26 @@ public class ManagerRepository implements IManagerRepository {
 
     @Override
     public List<LibraryOrderResponse> getLibraryOrders() {
-        return jdbcTemplate.query("CALL get_library_orders()", (rs, rowNum) -> {
-            LibraryOrderResponse libraryOrder = new LibraryOrderResponse();
-            libraryOrder.setOrderID(rs.getInt("ID"));
-            libraryOrder.setQuantity(rs.getInt("Quantity"));
-            libraryOrder.setISBN(rs.getString("ISBN"));
-            libraryOrder.setTitle(rs.getString("Title"));
-            libraryOrder.setPublisher(rs.getString("Publisher"));
-            libraryOrder.setPubYear(rs.getInt("Pub_Year"));
-            libraryOrder.setCategory(rs.getString("Category"));
-            libraryOrder.setStock(rs.getInt("Stock"));
-            libraryOrder.setThreshold(rs.getInt("Threshold"));
-            libraryOrder.setImageURL(rs.getString("Image_URL"));
-            return libraryOrder;
-        });
+        try {
+            return jdbcTemplate.query("CALL get_library_orders()", (rs, rowNum) -> {
+                LibraryOrderResponse libraryOrder = new LibraryOrderResponse();
+                libraryOrder.setOrderID(rs.getInt("ID"));
+                libraryOrder.setQuantity(rs.getInt("Quantity"));
+                libraryOrder.setISBN(rs.getString("ISBN"));
+                libraryOrder.setTitle(rs.getString("Title"));
+                libraryOrder.setPublisher(rs.getString("Publisher"));
+                libraryOrder.setPubYear(rs.getInt("Pub_Year"));
+                libraryOrder.setCategory(rs.getString("Category"));
+                libraryOrder.setStock(rs.getInt("Stock"));
+                libraryOrder.setThreshold(rs.getInt("Threshold"));
+                libraryOrder.setImageURL(rs.getString("Image_URL"));
+                return libraryOrder;
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
     }
 
     @Override
@@ -44,6 +50,7 @@ public class ManagerRepository implements IManagerRepository {
             jdbcTemplate.update("CALL confirm_library_order(?)", request.getOrderID());
             return true;
         } catch (Exception e) {
+            e.printStackTrace();
             return false;
         }
     }
@@ -54,6 +61,7 @@ public class ManagerRepository implements IManagerRepository {
             jdbcTemplate.update("CALL create_library_order(?, ?)", request.getISBN(), request.getQuantity());
             return true;
         } catch (Exception e) {
+            e.printStackTrace();
             return false;
         }
     }
@@ -68,6 +76,7 @@ public class ManagerRepository implements IManagerRepository {
             });
             return true;
         } catch (Exception e) {
+            e.printStackTrace();
             return false;
         }
     }
@@ -77,7 +86,7 @@ public class ManagerRepository implements IManagerRepository {
         try {
             jdbcTemplate.update("CALL modify_book(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                     request.getOldISBN(), request.getNewISBN(), request.getNewTitle(), request.getNewPublisher(),
-                    request.getNewPubYear(), request.getNewPubYear(), request.getNewCategory(), request.getNewStock(),
+                    request.getNewPubYear(), request.getNewPrice(), request.getNewCategory(), request.getNewStock(),
                     request.getNewThreshold(), request.getNewImageURL());
 
             for(String author: request.getNewAuthors()){
@@ -85,6 +94,7 @@ public class ManagerRepository implements IManagerRepository {
             }
             return true;
         } catch (Exception e) {
+            e.printStackTrace();
             return false;
         }
     }
@@ -96,6 +106,7 @@ public class ManagerRepository implements IManagerRepository {
                     request.getName(), request.getName(), request.getAddress());
             return true;
         } catch (Exception e) {
+            e.printStackTrace();
             return false;
         }
     }
@@ -112,6 +123,7 @@ public class ManagerRepository implements IManagerRepository {
             }
             return true;
         } catch (Exception e) {
+            e.printStackTrace();
             return false;
         }
     }
@@ -137,6 +149,7 @@ public class ManagerRepository implements IManagerRepository {
 
             return books.stream().findFirst().orElse(null);
         } catch (Exception e) {
+            e.printStackTrace();
             return null;
         }
     }

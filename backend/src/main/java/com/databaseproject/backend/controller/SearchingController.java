@@ -1,7 +1,9 @@
 package com.databaseproject.backend.controller;
 
 import com.databaseproject.backend.repository.interfaces.ISearchingRepository;
+import com.databaseproject.backend.request.DetailedBookSearchRequest;
 import com.databaseproject.backend.request.SearchByRequest;
+import com.databaseproject.backend.request.UserSearchRequest;
 import com.databaseproject.backend.response.BookInfoResponse;
 import com.databaseproject.backend.response.UserInfoResponse;
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
@@ -14,11 +16,11 @@ import java.util.List;
 
 @RestController
 @CrossOrigin()
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/search")
 public class SearchingController {
     private final ISearchingRepository searchingRepository;
 
-    private final String test = "/test";
+    private final String test = "";
 
     @Autowired
     public SearchingController(ISearchingRepository searchingRepository) {
@@ -26,7 +28,7 @@ public class SearchingController {
     }
 
     @GetMapping(test + "/users")
-    ResponseEntity<List<UserInfoResponse>> searchUsers(@RequestBody SearchByRequest criteria,
+    ResponseEntity<List<UserInfoResponse>> searchUsers(@RequestBody UserSearchRequest criteria,
                                                        Authentication auth) {
         List<UserInfoResponse> users = searchingRepository.searchUsers(criteria);
 
@@ -37,8 +39,9 @@ public class SearchingController {
     }
 
     @GetMapping(test +  "/books-by-details")
-    ResponseEntity<List<BookInfoResponse>> searchBooks(@RequestBody SearchByRequest criteria,
+    ResponseEntity<List<BookInfoResponse>> searchBooks(@RequestBody DetailedBookSearchRequest criteria,
                                                        Authentication auth) {
+        System.out.println(criteria);
         List<BookInfoResponse> books = searchingRepository.searchBooks(criteria);
 
         if(books != null)
