@@ -14,6 +14,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
@@ -71,6 +72,7 @@ public class SecurityConfiguration {
          authenticationManagerBuilder
                .userDetailsService(userDetailsService())
                .passwordEncoder(passwordEncoder());
+            // .passwordEncoder(NoOpPasswordEncoder.getInstance());
          return authenticationManagerBuilder.build();
      }
 
@@ -86,7 +88,7 @@ public class SecurityConfiguration {
         http
             .securityMatcher(endpoint + "/**")
             .authorizeHttpRequests((auth) -> {
-                auth.requestMatchers(endpoint + "/auth").permitAll();
+                auth.requestMatchers(endpoint + "/user/auth").permitAll();
                 auth.requestMatchers(endpoint + "/manager").hasAuthority("mgr");
                 auth.anyRequest().authenticated();
             }

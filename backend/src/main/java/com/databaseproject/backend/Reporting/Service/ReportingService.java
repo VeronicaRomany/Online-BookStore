@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.function.Supplier;
 
+import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
 
 import com.databaseproject.backend.Reporting.Repository.ReportingRepository;
@@ -20,6 +21,7 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
+@Service
 public class ReportingService {
 
         private final ReportingRepository repo;
@@ -39,14 +41,6 @@ public class ReportingService {
                 JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(supplier.get());
                 JasperPrint jasperPrint = JasperFillManager.fillReport(report, new HashMap<>(), dataSource);
                 rv = JasperExportManager.exportReportToPdf(jasperPrint);
-
-                // StringBuilder htmlBuilder = new StringBuilder();
-                // BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(new File(htmlPath))));
-                // String line = null;
-                // while((line = br.readLine()) != null){
-                //     htmlBuilder.append(line);
-                // }
-                // html = htmlBuilder.toString();
 
             } catch (JRException | IOException e) {
                 e.printStackTrace();

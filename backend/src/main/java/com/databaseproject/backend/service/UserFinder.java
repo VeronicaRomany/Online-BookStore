@@ -22,7 +22,10 @@ import com.databaseproject.backend.Utils.TokenUtil;
 import com.databaseproject.backend.model.UserAuthentication;
 import com.databaseproject.backend.response.SignInResponse;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 public class UserFinder implements UserDetailsService {
 
     private final JdbcTemplate jdbcTemplate;
@@ -47,15 +50,19 @@ public class UserFinder implements UserDetailsService {
 
     @SuppressWarnings("unchecked")
     protected UserAuthentication mapUser(Map<String, Object> queryResult){
-
-        return new UserAuthentication((Map<String, Object>)queryResult.get("result-set-1"));
+        Map<String, Object> map =  (Map<String, Object>) ((List<Map<String, Object>>)queryResult.get("#result-set-1")).get(0);
+        // Map<String, Object> map = Map.of();
+        System.out.println(map);
+        log.info(map.toString());
+        return new UserAuthentication(map);
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         List<SqlParameter> parameters = Arrays.asList(new SqlParameter(Types.NVARCHAR));
+        System.out.println(username);
         
-        return mapUser(jdbcTemplate.call(new CallableStatementCreator() {
+        UserAuthentication user =  mapUser(jdbcTemplate.call(new CallableStatementCreator() {
           @Override
           public CallableStatement createCallableStatement(Connection con) throws SQLException {
             CallableStatement cs = con.prepareCall("{call find_by_username(?)}");
@@ -63,6 +70,9 @@ public class UserFinder implements UserDetailsService {
             return cs;
           }
         }, parameters));
+
+        System.out.println(user.getPassword());
+        return user;
     }
     
 }

@@ -77,7 +77,7 @@ public class ReportingRepository {
         return mapBestSellings(jdbcTemplate.call(new CallableStatementCreator() {
           @Override
           public CallableStatement createCallableStatement(Connection con) throws SQLException {
-            CallableStatement cs = con.prepareCall("{call get_top_selling_books}");
+            CallableStatement cs = con.prepareCall("{call get_top_selling_books()}");
             return cs;
           }
         }, parameters));
