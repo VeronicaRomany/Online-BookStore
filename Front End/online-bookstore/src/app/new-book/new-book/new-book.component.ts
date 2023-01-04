@@ -202,7 +202,7 @@ export class NewBookComponent implements OnInit {
       console.log(JSON.parse(jsonString))
 
       // auth ttzwd f al request
-      this.http.post<GenericResponse>("http://localhost:8080/api/v1/test/manager/book",JSON.parse(jsonString)).subscribe((data) =>{
+      this.http.post<GenericResponse>("http://localhost:8080/api/v1/manager/book",JSON.parse(jsonString)).subscribe((data) =>{
           if(data.state){
             window.alert(data.message)
             this.router.navigate(['/', 'Home'])
@@ -224,7 +224,7 @@ export class NewBookComponent implements OnInit {
 
 
         // 3ayzen al authentication
-      this.http.patch<GenericResponse>("http://localhost:8080/api/v1/test/manager/book",JSON.parse(jsonString)).subscribe((data)=>{
+      this.http.patch<GenericResponse>("http://localhost:8080/api/v1/manager/book",JSON.parse(jsonString)).subscribe((data)=>{
         if(data.state){
           window.alert(data.message)
           this.router.navigate(['/', 'Home'])
