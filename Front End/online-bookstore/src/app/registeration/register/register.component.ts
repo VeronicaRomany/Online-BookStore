@@ -50,7 +50,7 @@ export class RegisterComponent implements OnInit {
   });
   submitted = false;
   phoneLen : boolean = false;
-  phone:string=""
+  phone:String=""
 
   user:UserRequest=new UserRequest()
  
@@ -87,15 +87,23 @@ export class RegisterComponent implements OnInit {
     this.form.reset();
   }
 
+
+  calculatelen(s:String):number{
+    let count:number=0;
+    
+    return count;
+  }
   onSubmit():void{
     this.submitted = true;
     if (this.form.invalid) {
       return;
     }
 
-     this.phone   = this.f['phoneNumber'].value
-    console.log(this.phone)
-    console.log(this.f['phoneNumber'].value.length)
+    this.phone   = this.f['phoneNumber'].value
+    // console.log(this.phone)
+     console.log(this.phone)
+    // console.log((this.f['phoneNumber'].value).length)
+
     if(this.phone.length == 10){
       console.log("ana f al len error")
       this.phoneLen=true;
@@ -107,6 +115,9 @@ export class RegisterComponent implements OnInit {
     this.user.fillData(this.f['username'].value,this.f['password'].value,this.f['firstname'].value,
                         this.f['lastname'].value,this.f['email'].value,this.f['phoneNumber'].value,
                         this.f['address'].value)
+
+
+   // console.log("Elrkmmmmmmmmmm",this.user.phone.length)
 
   
 

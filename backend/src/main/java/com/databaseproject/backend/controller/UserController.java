@@ -57,8 +57,11 @@ public class UserController {
 
     @PostMapping(test + "/user/auth")
     public ResponseEntity<SignInResponse> signInUser(Authentication credentials) {
-
+        System.out.println("In login");
+        System.out.println(credentials);
         SignInResponse response = userFinder.userLogIn(credentials);
+        
+        System.out.println(response);
         if (response == null) {
             return ResponseEntity.status(422).body(null);
         }
