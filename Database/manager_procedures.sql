@@ -58,7 +58,8 @@ CREATE PROCEDURE modify_book(
     New_Price INT,
     New_Category ENUM('Science','Art','Religion','History','Geography'),
     New_Stock INT,
-    New_Threshold INT
+    New_Threshold INT,
+    New_Image_URL VARCHAR(200)
     )
 BEGIN
     START TRANSACTION;
@@ -71,7 +72,8 @@ BEGIN
         Price = New_Price,
         Category = New_Category,
         Stock = New_Stock,
-        Threshold = New_Threshold
+        Threshold = New_Threshold,
+        Image_URL = New_Image_URL
 	WHERE
 		ISBN = Old_ISBN;
     COMMIT;
@@ -102,12 +104,35 @@ CREATE PROCEDURE add_book(
     Price INT,
     Category ENUM('Science','Art','Religion','History','Geography'),
     Stock INT,
-    Threshold INT
+    Threshold INT,
+    Image_URL VARCHAR(200)
     )
 BEGIN
 	START TRANSACTION;
 	INSERT INTO BOOK
-    VALUES (ISBN, Title, Publisher, Pub_Year, Price, Category, Stock, Threshold);
+    VALUES (ISBN, Title, Publisher, Pub_Year, Price, Category, Stock, Threshold, Image_URL);
     COMMIT;
+END &&
+DELIMITER ;
+
+DELIMITER &&
+CREATE PROCEDURE add_author(
+	ISBN CHAR(13),
+    `Name` VARCHAR(60)
+    )
+BEGIN
+	START TRANSACTION;
+	INSERT INTO AUTHOR
+    VALUES (`Name`, ISBN);
+    COMMIT;
+END &&
+DELIMITER ;
+
+DELIMITER &&
+CREATE PROCEDURE get_book_info(
+	_ISBN CHAR(13)
+    )
+BEGIN
+	SELECT * FROM BOOK WHERE ISBN = _ISBN;
 END &&
 DELIMITER ;

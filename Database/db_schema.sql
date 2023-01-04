@@ -18,6 +18,7 @@ CREATE TABLE BOOK (
     Category ENUM('Science','Art','Religion','History','Geography'),
     Stock INT,
     Threshold INT,
+    Image_URL VARCHAR(200),
     CONSTRAINT FK_BOOK_Publisher FOREIGN KEY (Publisher) REFERENCES Publisher(`Name`) ON DELETE SET NULL
 );
 
@@ -66,7 +67,6 @@ CREATE TABLE USER_ORDER_BOOKS (
 
 CREATE TABLE CREDIT_CARDS (
 	Credit_Card_No CHAR(16) PRIMARY KEY NOT NULL,
-    CVC CHAR(3) NOT NULL,
     Expiry_Date DATE NOT NULL,
     Balance INT NOT NULL DEFAULT 0
 );

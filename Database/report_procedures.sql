@@ -11,7 +11,7 @@ BEGIN
     FROM USER_ORDER as uo
     NATURAL JOIN USER_ORDER_BOOKS as uob
     WHERE uo.dt > (CURDATE() - INTERVAL 1 MONTH)
-    GROUP BY DAY(uo.dt) &&
+    GROUP BY DAY(uo.dt);
 END &&
 DELIMITER ;
 
@@ -25,7 +25,7 @@ BEGIN
     WHERE uo.dt > (CURDATE() - INTERVAL 3 MONTH)
     GROUP BY uo.USERNAME
     ORDER BY amount DESC 
-    LIMIT 5 &&
+    LIMIT 5;
 END &&
 DELIMITER ;
 
@@ -40,7 +40,7 @@ BEGIN
     WHERE uo.dt > (CURDATE() - INTERVAL 3 MONTH)
     GROUP BY b.ISBN
     ORDER BY amount DESC
-    LIMIT 10 &&
+    LIMIT 10;
 END &&
 DELIMITER ;
 

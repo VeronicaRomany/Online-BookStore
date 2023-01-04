@@ -45,37 +45,37 @@ BEGIN
 		ISBN IN (SELECT ISBN FROM AUTHOR WHERE `Name` LIKE CONCAT("%", _Author_name, "%"))
         AND
         (CASE
-			WHEN _ISBN = NULL THEN TRUE
+			WHEN _ISBN IS NULL THEN TRUE
             ELSE ISBN LIKE CONCAT("%", _ISBN, "%")
 		END)
 		AND
         (CASE
-			WHEN _Title = NULL THEN TRUE
+			WHEN _Title IS NULL THEN TRUE
             ELSE Title LIKE CONCAT("%", _Title, "%")
 		END)
 		AND
         (CASE
-			WHEN _Publisher = NULL THEN TRUE
+			WHEN _Publisher IS NULL THEN TRUE
             ELSE Publisher LIKE CONCAT("%", _Publisher, "%") 
 		END)
         AND
         (CASE
-			WHEN _Pub_Year = NULL THEN TRUE
+			WHEN _Pub_Year IS NULL THEN TRUE
             ELSE Pub_Year = _Pub_Year
 		END)
         AND
         (CASE
-			WHEN _Price = NULL THEN TRUE
+			WHEN _Price IS NULL THEN TRUE
             ELSE Price = _Price
 		END)
         AND
         (CASE
-			WHEN _Category = NULL THEN TRUE
+			WHEN _Category IS NULL THEN TRUE
             ELSE Category = _Category
 		END)
         AND
         (CASE
-			WHEN _Stock = NULL THEN TRUE
+			WHEN _Stock IS NULL THEN TRUE
             ELSE Stock = _Stock
 		END)
         LIMIT start_index,count_in_page
