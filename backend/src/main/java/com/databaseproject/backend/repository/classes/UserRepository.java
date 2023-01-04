@@ -62,8 +62,12 @@ public class UserRepository implements IUserRepository {
             Map<String, Integer> ordersMap = request.getOrders();
 
             for (Map.Entry<String, Integer> entry : ordersMap.entrySet()) {
+                try{
                 jdbcTemplate.update("CALL add_book_to_user_order(?, ?, ?)",
                         orderID, entry.getKey(), entry.getValue());
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
             }
 
             CreditCard creditCard = request.getCreditCard();
