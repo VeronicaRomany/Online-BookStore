@@ -7,8 +7,6 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@Data
-@ToString
 public class UserRequest {
     private String username;
     private String password;

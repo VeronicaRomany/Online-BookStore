@@ -21,17 +21,22 @@ public class ManagerRepository implements IManagerRepository {
 
     @Override
     public boolean confirmLibraryOrder(ConfirmLibraryOrderRequest request) {
-        int updatedRows = jdbcTemplate.update("CALL confirm_library_order(?)", request.getOrderID());
-
-        return updatedRows != 0;
+        try {
+            jdbcTemplate.update("CALL confirm_library_order(?)", request.getOrderID());
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     @Override
     public boolean createLibraryOrder(CreateLibraryOrderRequest request) {
-        int updatedRows = jdbcTemplate.update("CALL create_library_order(?, ?)",
-                request.getISBN(), request.getQuantity());
-
-        return updatedRows != 0;
+        try {
+            jdbcTemplate.update("CALL create_library_order(?, ?)", request.getISBN(), request.getQuantity());
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     @Override
@@ -50,56 +55,71 @@ public class ManagerRepository implements IManagerRepository {
 
     @Override
     public boolean modifyBook(ModifyBookRequest request) {
-        int updatedRows = jdbcTemplate.update("CALL modify_book(?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                request.getOldISBN(), request.getNewISBN(), request.getNewTitle(), request.getNewPublisher(),
-                request.getNewPubYear(), request.getNewPubYear(), request.getNewCategory(), request.getNewStock(),
-                request.getNewThreshold(), request.getNewImageURL());
+        try {
+            jdbcTemplate.update("CALL modify_book(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                    request.getOldISBN(), request.getNewISBN(), request.getNewTitle(), request.getNewPublisher(),
+                    request.getNewPubYear(), request.getNewPubYear(), request.getNewCategory(), request.getNewStock(),
+                    request.getNewThreshold(), request.getNewImageURL());
 
-        for(String author: request.getNewAuthors()){
-            jdbcTemplate.update("CALL add_author(?, ?)", request.getNewISBN(), author);
+            for(String author: request.getNewAuthors()){
+                jdbcTemplate.update("CALL add_author(?, ?)", request.getNewISBN(), author);
+            }
+            return true;
+        } catch (Exception e) {
+            return false;
         }
-
-        return updatedRows != 0;
     }
 
     @Override
     public boolean addPublisher(AddPublisherRequest request) {
-        int updatedRows = jdbcTemplate.update("CALL add_publisher(?, ?, ?)",
-                request.getName(), request.getName(), request.getAddress());
-
-        return updatedRows != 0;
+        try {
+            jdbcTemplate.update("CALL add_publisher(?, ?, ?)",
+                    request.getName(), request.getName(), request.getAddress());
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     @Override
     public boolean addBook(AddBookRequest request) {
-        int updatedRows = jdbcTemplate.update("CALL add_book(?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                request.getISBN(), request.getTitle(), request.getPublisher(), request.getPubYear(),
-                request.getPrice(), request.getCategory(), request.getStock(), request.getThreshold(),
-                request.getImageURL());
-        for(String author: request.getAuthors()){
-            jdbcTemplate.update("CALL add_author(?, ?)", request.getISBN(), author);
+        try {
+            jdbcTemplate.update("CALL add_book(?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                    request.getISBN(), request.getTitle(), request.getPublisher(), request.getPubYear(),
+                    request.getPrice(), request.getCategory(), request.getStock(), request.getThreshold(),
+                    request.getImageURL());
+            for(String author: request.getAuthors()){
+                jdbcTemplate.update("CALL add_author(?, ?)", request.getISBN(), author);
+            }
+            return true;
+        } catch (Exception e) {
+            return false;
         }
-        return updatedRows != 0;
     }
 
     @Override
     public BookInfoResponse findBookByISBN(String ISBN) {
-        List<BookInfoResponse> books = jdbcTemplate.query("CALL get_book_info(?)", (rs, rowNum) -> {
-            BookInfoResponse book = new BookInfoResponse();
-            book.setISBN(rs.getString("ISBN"));
-            book.setTitle(rs.getString("Title"));
-            book.setPublisher(rs.getString("Publisher"));
-            book.setPubYear(rs.getInt("Pub_Year"));
-            book.setCategory(rs.getString("Category"));
-            book.setStock(rs.getInt("Stock"));
-            book.setThreshold(rs.getInt("Threshold"));
-            book.setImageURL(rs.getString("Image_URL"));
-            List<String> authors = jdbcTemplate.query("CALL get_book_authors(?)", (r, rNum) -> { return r.getString("Name"); }, ISBN);
-            book.setAuthors(authors);
-            return book;
-        }, ISBN);
+        try {
+            List<BookInfoResponse> books = jdbcTemplate.query("CALL get_book_info(?)", (rs, rowNum) -> {
+                BookInfoResponse book = new BookInfoResponse();
+                book.setISBN(rs.getString("ISBN"));
+                book.setTitle(rs.getString("Title"));
+                book.setPublisher(rs.getString("Publisher"));
+                book.setPubYear(rs.getInt("Pub_Year"));
+                book.setCategory(rs.getString("Category"));
+                book.setStock(rs.getInt("Stock"));
+                book.setThreshold(rs.getInt("Threshold"));
+                book.setImageURL(rs.getString("Image_URL"));
+                List<String> authors = jdbcTemplate.query("CALL get_book_authors(?)",
+                        (r, rNum) -> r.getString("Name"), ISBN);
+                book.setAuthors(authors);
+                return book;
+            }, ISBN);
 
-        return books.stream().findFirst().orElse(null);
+            return books.stream().findFirst().orElse(null);
+        } catch (Exception e) {
+            return null;
+        }
     }
 
 
