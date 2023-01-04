@@ -8,7 +8,7 @@
         <div class="register-form">
             <h2 style="font-family: cursive;text-align: center;">Add New Book</h2>
             <br>
-            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <form [formGroup]="form">
                 
 
                 <div class="form-group">
@@ -38,16 +38,18 @@
                 
 
 
+               
+
                 <div class="form-group" *ngIf="!edit">
-                    <input type="number" placeholder="ISBN Number" formControlName="ISBN" class="form-control" min="0"
-                        [ngClass]="{ 'is-invalid': submitted && f['ISBN'].errors }"/>
-                    <div *ngIf="submitted && f['ISBN'].errors" class="error">
-                        <div *ngIf="f['ISBN'].errors['required']">ISBN Number is required</div>
+                    <input type="text" formControlName="ISBN" placeholder="ISBN" class="form-control"
+                                [ngClass]="{ 'is-invalid': submitted && f['ISBN'].errors }" />
+                    <div *ngIf="submitted && f['ISBN'].errors" class="error" >
+                        <div *ngIf="f['ISBN'].errors['required']">ISBN is required</div>
                     </div>
                 </div>
 
                 <div class="form-group" *ngIf="edit">
-                    <input type="number" formControlName="ISBN" value="{{editBook.ISBN}}" class="form-control" readonly
+                    <input type="text" formControlName="ISBN" value="{{editBook.ISBN}}" class="form-control" readonly
                         [ngClass]="{ 'is-invalid': submitted && f['ISBN'].errors }"/>
                 </div>
                     
@@ -88,10 +90,19 @@
 
 
                 <div class="form-group">
-                    <input type="number" placeholder="Minimum Quantity" formControlName="minimumQuantity" class="form-control" min="0"
+                    <input type="number" placeholder="Stock" formControlName="minimumQuantity" class="form-control" min="0"
                         [ngClass]="{ 'is-invalid': submitted && f['minimumQuantity'].errors }"/>
                     <div *ngIf="submitted && f['minimumQuantity'].errors" class="error">
-                        <div *ngIf="f['minimumQuantity'].errors['required']">Minimum Quantity is required</div>
+                        <div *ngIf="f['minimumQuantity'].errors['required']">Stock is required</div>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <input type="number" placeholder="Threshold" formControlName="threshold" class="form-control" min="0"
+                        [ngClass]="{ 'is-invalid': submitted && f['threshold'].errors }"/>
+                    <div *ngIf="submitted && f['threshold'].errors" class="error">
+                        <div *ngIf="f['threshold'].errors['required']">Threshold is required</div>
                     </div>
                 </div>
 

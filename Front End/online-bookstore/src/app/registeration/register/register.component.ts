@@ -1,5 +1,8 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { GenericResponse } from 'src/app/shared/GenericResponse';
+import { UserRequest } from 'src/app/shared/UserRequest';
 
 
 export default class Validation {
@@ -41,14 +44,16 @@ export class RegisterComponent implements OnInit {
     confirmPassword: new FormControl(''),
     phoneNumber: new FormControl(''),
     address : new FormControl(''),
-    type: new FormControl('')
+   
    
   });
   submitted = false;
   phoneLen : boolean = false;
+
+  user:UserRequest=new UserRequest()
  
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder,private http:HttpClient) { }
 
   ngOnInit(): void {
     this.form = this.formBuilder.group(
@@ -61,7 +66,7 @@ export class RegisterComponent implements OnInit {
         confirmPassword: ['', Validators.required],
         phoneNumber: ['',[Validators.required,Validators.minLength(9),Validators.maxLength(11)]],
         address : ['',Validators.required],
-        type : ['',Validators.required]
+       
       },
       {
         validators: [Validation.match('password', 'confirmPassword')]
@@ -81,8 +86,6 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit():void{
-  
-
     this.submitted = true;
     if (this.form.invalid) {
       return;
@@ -95,10 +98,25 @@ export class RegisterComponent implements OnInit {
       return;
     }
 
-    console.log(this.form.value)
-   
+   // console.log(this.form.value)
+   // console.log(this.user)
+    this.user.fillData(this.f['username'].value,this.f['password'].value,this.f['firstname'].value,
+                        this.f['lastname'].value,this.f['email'].value,this.f['phoneNumber'].value,
+                        this.f['address'].value)
+
+  
 
 
+   let jsonString = JSON.stringify(this.user)
+   console.log(JSON.parse(jsonString))
+
+   this.http.post<GenericResponse>("http://localhost:8080/api/v1/test/user",JSON.parse(jsonString)).subscribe((data) =>{
+        if(data.state){
+            // request login
+        }else{
+          window.alert(data.message+",Try again")
+        }
+    })
   }
 
 }

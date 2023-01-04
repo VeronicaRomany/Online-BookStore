@@ -4,7 +4,7 @@
     <div class="fr">
         <div class="register-form">
             <h2 style="font-family: cursive;text-align: center;">Registration Form</h2>
-            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <form [formGroup]="form">
   
        
    
@@ -89,19 +89,7 @@
                 </div>
 
                 <br>
-                <div class="form-group">
-                    <label for="type" style="font-family:cursive ;">User Type</label>
-                    <select  formControlName="type" id="type"  [ngClass]="{ 'is-invalid': submitted && f['type'].errors }" class="drop">
-                        <option  value="user">User</option>
-                        <option  value="manager">Manager</option>
-                  </select>
-              
-                  <div *ngIf="submitted && f['type'].errors" class="error">
-                    <div *ngIf="f['type'].errors['required']" >User Type is required</div>
-                  </div>
-
-                </div>
-                <br>
+               
     
                 <div class="form-group">
                     <button type="submit" (click)="onSubmit()"class="button button1">Register</button>
@@ -110,8 +98,6 @@
 
 
                 
-               
-
             </form>
         </div>
     </div>
