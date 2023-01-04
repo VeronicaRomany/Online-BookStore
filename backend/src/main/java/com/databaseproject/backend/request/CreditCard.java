@@ -10,6 +10,5 @@ import java.time.LocalDate;
 @Setter
 public class CreditCard implements Serializable {
     private String number;
-    private String cvc;
     private LocalDate expiryDate;
 }

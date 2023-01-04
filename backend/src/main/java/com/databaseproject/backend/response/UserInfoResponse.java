@@ -7,8 +7,11 @@ import lombok.Setter;
 @Setter
 public class UserInfoResponse {
     String username;
+    String password;
     String firstName;
     String lastName;
     String email;
     String phone;
+    String address;
+    Boolean isManager;
 }

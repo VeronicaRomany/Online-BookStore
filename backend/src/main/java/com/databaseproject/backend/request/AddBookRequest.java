@@ -16,4 +16,6 @@ public class AddBookRequest {
     private String category;
     private Integer stock;
     private Integer threshold;
+    private String imageURL;
+    private String[] authors;
 }

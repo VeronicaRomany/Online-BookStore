@@ -1,6 +1,7 @@
 package com.databaseproject.backend.repository.interfaces;
 
 import com.databaseproject.backend.request.*;
+import com.databaseproject.backend.response.BookInfoResponse;
 
 import java.sql.CallableStatement;
 
@@ -16,5 +17,7 @@ public interface IManagerRepository {
     boolean addPublisher(AddPublisherRequest request);
 
     boolean addBook(AddBookRequest request);
+
+    BookInfoResponse findBookByISBN(String ISBN);
 
 }

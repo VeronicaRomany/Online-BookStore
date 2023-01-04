@@ -7,6 +7,7 @@ import com.databaseproject.backend.request.ModifyUserRequest;
 import com.databaseproject.backend.request.UserRequest;
 import com.databaseproject.backend.response.GenericResponse;
 import com.databaseproject.backend.response.SignInResponse;
+import com.databaseproject.backend.response.UserInfoResponse;
 import com.databaseproject.backend.service.UserFinder;
 
 import java.util.Map;
@@ -85,6 +86,16 @@ public class UserController {
 
         return ResponseEntity.status(HttpStatus.CONFLICT)
                 .body(new GenericResponse(false, "Failed to create your oder!", null));
+    }
+
+    @GetMapping("/user")
+    public ResponseEntity<UserInfoResponse> getUserInfo(Authentication auth) {
+        UserInfoResponse user = userRepository.getUserInfo(auth.getName());
+
+        if(user != null)
+            return ResponseEntity.ok(user);
+
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
     }
 
 }

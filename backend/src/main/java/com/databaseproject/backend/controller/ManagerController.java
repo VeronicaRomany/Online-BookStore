@@ -2,6 +2,7 @@ package com.databaseproject.backend.controller;
 
 import com.databaseproject.backend.repository.interfaces.IManagerRepository;
 import com.databaseproject.backend.request.*;
+import com.databaseproject.backend.response.BookInfoResponse;
 import com.databaseproject.backend.response.GenericResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -91,6 +92,16 @@ public class ManagerController {
 
         return ResponseEntity.status(HttpStatus.CONFLICT)
                 .body(new GenericResponse(false, "Failed to add book!", null));
+    }
+
+    @GetMapping("/book")
+    public ResponseEntity<BookInfoResponse> findBook(@RequestParam String bookISBN) {
+        BookInfoResponse book = managerRepository.findBookByISBN(bookISBN);
+
+        if(book != null)
+            return ResponseEntity.ok(book);
+
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
     }
 
 }
