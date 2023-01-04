@@ -7,10 +7,12 @@ import com.databaseproject.backend.request.ModifyUserRequest;
 import com.databaseproject.backend.request.UserRequest;
 import com.databaseproject.backend.response.BookInfoResponse;
 import com.databaseproject.backend.response.UserInfoResponse;
+import org.apache.commons.beanutils.converters.SqlDateConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -25,11 +27,16 @@ public class UserRepository implements IUserRepository {
 
     @Override
     public boolean createUser(UserRequest request) {
-        int updateRows = jdbcTemplate.update("CALL create_user(?, ?, ?, ?, ?, ?, ?)",
-                request.getUsername(), request.getPassword(), request.getFirstName(), request.getLastName(),
-                request.getEmail(), request.getPhone(), request.getAddress());
-
-        return updateRows != 0;
+        try {
+            System.out.println(request);
+            int updateRows = jdbcTemplate.update("{ CALL create_user (?,?,?,?,?,?,?) }",
+                    request.getUsername(), request.getPassword(), request.getFirstName(), request.getLastName(),
+                    request.getEmail(), request.getPhone(), request.getAddress());
+            System.out.println(updateRows);
+            return true;
+        } catch (Exception e){
+            return false;
+        }
     }
 
     @Override
@@ -47,6 +54,8 @@ public class UserRepository implements IUserRepository {
         Integer orderID = jdbcTemplate.queryForObject("CALL create_user_order(?)",
                 (rs, rowNum) -> rs.getInt(1), username);
 
+        System.out.println("Order Id = " + orderID);
+
         Map<String, Integer> ordersMap = request.getOrders();
 
         for (Map.Entry<String, Integer> entry : ordersMap.entrySet()) {
@@ -58,16 +67,17 @@ public class UserRepository implements IUserRepository {
 
         try {
             jdbcTemplate.update("CALL verify_user_order_info(?, ?, ?)",
-                    orderID, creditCard.getNumber(), creditCard.getExpiryDate());
+                    orderID, creditCard.getNumber(), Date.valueOf(creditCard.getExpiryDate()));
             return orderID;
         } catch (Exception e) {
+            e.printStackTrace();
             return -1;
         }
     }
 
     @Override
     public UserInfoResponse getUserInfo(String username) {
-        List<UserInfoResponse> users = jdbcTemplate.query("CALL find_by_username(?)", (rs, rowNum) -> {
+        List<UserInfoResponse> users = jdbcTemplate.query("CALL get_user_info(?)", (rs, rowNum) -> {
             UserInfoResponse user = new UserInfoResponse();
             user.setUsername(rs.getString("Username"));
             user.setPassword(rs.getString("Password"));

@@ -12,16 +12,18 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin()
-@RequestMapping("/api/v1/manager")
+@RequestMapping("/api/v1")
 public class ManagerController {
     private final IManagerRepository managerRepository;
+
+    private final String test = "/test";
 
     @Autowired
     public ManagerController(IManagerRepository managerRepository) {
         this.managerRepository = managerRepository;
     }
 
-    @PostMapping("/order-confirmation")
+    @PostMapping(test + "/manager/order-confirmation")
     public ResponseEntity<GenericResponse> confirmLibraryOrder(@RequestBody ConfirmLibraryOrderRequest request,
                                                                Authentication auth) {
         boolean isConfirmed = managerRepository.confirmLibraryOrder(request);
@@ -34,7 +36,7 @@ public class ManagerController {
                 .body(new GenericResponse(false, "Order is Rejected!", null));
     }
 
-    @PostMapping("/order")
+    @PostMapping(test + "/manager/order")
     public ResponseEntity<GenericResponse> createLibraryOrder(@RequestBody CreateLibraryOrderRequest request,
                                                               Authentication auth) {
         boolean isCreated = managerRepository.createLibraryOrder(request);
@@ -46,7 +48,7 @@ public class ManagerController {
                 .body(new GenericResponse(false, "Failed to create order!", null));
     }
 
-    @PostMapping("/user-promotion")
+    @PostMapping(test + "/manager/user-promotion")
     public ResponseEntity<GenericResponse> promoteUser(@RequestBody PromoteUserRequest request,
                                                        Authentication auth) {
         boolean isPromoted = managerRepository.promoteUser(request, auth.getName());
@@ -58,7 +60,7 @@ public class ManagerController {
                 .body(new GenericResponse(false, "Failed to promote user!", null));
     }
 
-    @PatchMapping("/book")
+    @PatchMapping(test + "/manager/book")
     public ResponseEntity<GenericResponse> modifyBook(@RequestBody ModifyBookRequest request,
                                                       Authentication auth) {
         boolean isModified = managerRepository.modifyBook(request);
@@ -70,7 +72,7 @@ public class ManagerController {
                 .body(new GenericResponse(false, "Failed to modify book!", null));
     }
 
-    @PostMapping("/publisher")
+    @PostMapping(test + "/manager/publisher")
     public ResponseEntity<GenericResponse> addPublisher(@RequestBody AddPublisherRequest request,
                                                         Authentication auth) {
         boolean isAdded = managerRepository.addPublisher(request);
@@ -83,7 +85,7 @@ public class ManagerController {
                 .body(new GenericResponse(false, "Failed to add publisher!", null));
     }
 
-    @PostMapping("/book")
+    @PostMapping(test + "/manager/book")
     public ResponseEntity<GenericResponse> addBook(@RequestBody AddBookRequest request, Authentication auth) {
         boolean isAdded = managerRepository.addBook(request);
 
@@ -94,7 +96,7 @@ public class ManagerController {
                 .body(new GenericResponse(false, "Failed to add book!", null));
     }
 
-    @GetMapping("/book")
+    @GetMapping(test + "/manager/book")
     public ResponseEntity<BookInfoResponse> findBook(@RequestParam String bookISBN) {
         BookInfoResponse book = managerRepository.findBookByISBN(bookISBN);
 

@@ -17,67 +17,69 @@ import java.util.List;
 public class SearchingController {
     private final ISearchingRepository searchingRepository;
 
+    private final String test = "/test";
+
     @Autowired
     public SearchingController(ISearchingRepository searchingRepository) {
         this.searchingRepository = searchingRepository;
     }
 
-    @GetMapping("/users")
+    @GetMapping(test + "/users")
     ResponseEntity<List<UserInfoResponse>> searchUsers(@RequestBody SearchByRequest criteria,
                                                        Authentication auth) {
         return ResponseEntity.ok(searchingRepository.searchUsers(criteria));
     }
 
-    @GetMapping("/books-by-details")
+    @GetMapping(test +  "/books-by-details")
     ResponseEntity<List<BookInfoResponse>> searchBooks(@RequestBody SearchByRequest criteria,
                                                        Authentication auth) {
         return ResponseEntity.ok(searchingRepository.searchBooks(criteria));
     }
 
 
-    @GetMapping("/books-by-ISBN")
+    @GetMapping(test + "/books-by-ISBN")
     ResponseEntity<List<BookInfoResponse>> searchBookByISBN(@RequestBody SearchByRequest criteria,
                                                             Authentication auth) {
         return ResponseEntity.ok(searchingRepository.searchBookByISBN(criteria));
     }
 
-    @GetMapping("/books-by-title")
+    @GetMapping(test + "/books-by-title")
     ResponseEntity<List<BookInfoResponse>> searchBookByTitle(@RequestBody SearchByRequest criteria,
                                                              Authentication auth) {
         return ResponseEntity.ok(searchingRepository.searchBookByTitle(criteria));
     }
 
-    @GetMapping("/books-by-publisher")
+    @GetMapping(test + "/books-by-publisher")
     ResponseEntity<List<BookInfoResponse>> searchBookByPublisher(@RequestBody SearchByRequest criteria,
                                                                  Authentication auth) {
         return ResponseEntity.ok(searchingRepository.searchBookByPublisher(criteria));
     }
 
-    @GetMapping("/books-by-publication-year")
+    @GetMapping(test + "/books-by-publication-year")
     ResponseEntity<List<BookInfoResponse>> searchBookByPubYear(@RequestBody SearchByRequest criteria,
                                                                Authentication auth) {
         return ResponseEntity.ok(searchingRepository.searchBookByPubYear(criteria));
     }
 
-    @GetMapping("/books-by-price")
+    @GetMapping(test + "/books-by-price")
     ResponseEntity<List<BookInfoResponse>> searchBookByPrice(@RequestBody SearchByRequest criteria,
                                                              Authentication auth) {
         return ResponseEntity.ok(searchingRepository.searchBookByPrice(criteria));
     }
 
-    @GetMapping("/books-by-stock")
+    @GetMapping(test + "/books-by-stock")
     ResponseEntity<List<BookInfoResponse>> searchBookByStock(@RequestBody SearchByRequest criteria,
                                                              Authentication auth) {
         return ResponseEntity.ok(searchingRepository.searchBookByStock(criteria));
     }
 
-    @GetMapping("/books-by-category")
+    @GetMapping(test + "/books-by-category")
     ResponseEntity<List<BookInfoResponse>> searchBookByCategory(@RequestBody SearchByRequest criteria,
                                                                 Authentication auth) {
         return ResponseEntity.ok(searchingRepository.searchBookByCategory(criteria));
     }
 
-    @GetMapping("/books-by-author")
+    @GetMapping(test + "/books-by-author")
     ResponseEntity<List<BookInfoResponse>> searchBookByAuthor(SearchByRequest criteria,
                                                               @RequestBody Authentication auth) {
         return ResponseEntity.ok(searchingRepository.searchBookByAuthor(criteria));

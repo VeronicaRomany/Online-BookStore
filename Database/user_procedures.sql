@@ -42,20 +42,12 @@ CREATE PROCEDURE create_user(
 BEGIN
 	START TRANSACTION;
 	INSERT INTO `USER`
-    VALUES(
-		Username = _Username,
-        `Password` = _Password,
-        FName = _FName,
-        LNAME = _LNAME,
-        Email = _Email,
-        Phone = _Phone,
-        Address = _Address,
-        False
-    );
+    VALUES(_Username, _Password, _FName,
+        _LNAME, _Email, _Phone, _Address,
+        False);
 	COMMIT;
 END &&
 DELIMITER ;
-
 
 DELIMITER &&
 CREATE PROCEDURE create_user_order(
@@ -63,7 +55,7 @@ CREATE PROCEDURE create_user_order(
     )
 BEGIN
 	START TRANSACTION;
-    INSERT INTO USER_ORDER VALUES (0, _Username);
+    INSERT INTO USER_ORDER(Username, TOTAL) VALUES (_Username, 0);
     SELECT LAST_INSERT_ID();
 END &&
 DELIMITER ;
@@ -76,15 +68,14 @@ CREATE PROCEDURE add_book_to_user_order(
 )
 BEGIN
 	INSERT INTO USER_ORDER_BOOKS
-    VALUES(_Order_Id, _ISBN, _Quantity, (SELECT PRICE FROM BOOK WHERE ISBN = _ISBN));
+    VALUES(_Order_Id, _ISBN, _Quantity, 0);
 
 END &&
 DELIMITER ;
 
-
 DELIMITER &&
 CREATE PROCEDURE verify_user_order_info(
-	_Order_Id VARCHAR(20),
+	_Order_Id INT,
     _Credit_Card_No CHAR(16),
     _Expiry_Date DATE
     )

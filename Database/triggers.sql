@@ -39,6 +39,7 @@ BEGIN
         FROM BOOK
         WHERE ISBN = NEW.ISBN AND Stock >= NEW.Quantity)
 	THEN
+		SET NEW.PRICE_OF_UNIT = (SELECT PRICE FROM BOOK WHERE ISBN = NEW.ISBN);
 		UPDATE BOOK
         SET Stock = Stock - NEW.Quantity
         WHERE ISBN = NEW.ISBN;
