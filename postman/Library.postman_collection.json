@@ -3,7 +3,7 @@
 		"_postman_id": "49596525-ad2f-4546-a9fe-4cfc9c657660",
 		"name": "Library",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "18245343"
+		"_exporter_id": "25183390"
 	},
 	"item": [
 		{
@@ -214,7 +214,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"ISBN\": \"2128491924821\",\r\n    \"title\": \"Best book\",\r\n    \"publisher\": \"J.K Rowling\",\r\n    \"pubYear\": 2005,\r\n    \"price\": 30,\r\n    \"category\": \"Science\",\r\n    \"stock\": 20,\r\n    \"threshold\": 3,\r\n    \"imageURL\": \"Whatever it is\",\r\n    \"authros\": [\r\n        \"asdfaf\", \"dsafdsfs\"\r\n    ]\r\n}",
+					"raw": "{\r\n    \"isbn\": \"2128491924821\",\r\n    \"title\": \"Best book\",\r\n    \"publisher\": \"J.K Rowling\",\r\n    \"pubYear\": 2005,\r\n    \"price\": 30,\r\n    \"category\": \"Science\",\r\n    \"stock\": 20,\r\n    \"threshold\": 3,\r\n    \"imageURL\": \"Whatever it is\",\r\n    \"authors\": [\r\n        \"asdfaf\", \"dsafdsfs\"\r\n    ]\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -222,13 +222,59 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/api/manager/book",
+					"raw": "localhost:8080/api/v1/manager/book",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
 						"api",
+						"v1",
+						"manager",
+						"book"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modify Book",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "SomePassword",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "manager0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"oldISBN\": \"1528451914736\",\r\n    \"newISBN\": \"1528451914736\",\r\n    \"newTitle\": \"Best book\",\r\n    \"newPublisher\": \"J.K Rowling\",\r\n    \"newPubYear\": 2005,\r\n    \"newPrice\": 3000000,\r\n    \"newCategory\": \"Science\",\r\n    \"newStock\": 20,\r\n    \"newThreshold\": 3,\r\n    \"newImageURL\": \"Whatever it is\",\r\n    \"newAuthors\": [\r\n        \"asdfaf\", \"dsafdsfs\"\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/v1/manager/book",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
 						"manager",
 						"book"
 					]
@@ -258,7 +304,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"ISBN\": \"9392939438592\",\r\n    \"quantity\": 5\r\n}",
+					"raw": "{\r\n    \"isbn\": \"2128491924821\",\r\n    \"quantity\": 10\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -284,16 +330,309 @@
 		{
 			"name": "Find book",
 			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "SomePassword",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "manager0",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/manager/book?bookISBN=2128491924821",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"manager",
+						"book"
+					],
+					"query": [
+						{
+							"key": "bookISBN",
+							"value": "2128491924821"
+						}
+					]
+				}
 			},
 			"response": []
 		},
 		{
 			"name": "Add publisher",
 			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "SomePassword",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "manager0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"J.K Rowling\",\r\n    \"address\": \"515 street\",\r\n    \"phone\": \"01518239234\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/v1/manager/publisher",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"manager",
+						"publisher"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get library order",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "SomePassword",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "manager0",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/manager/orders",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"manager",
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Confrim Library Order",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "SomePassword",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "manager0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"orderID\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/v1/manager/order-confirmation",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"manager",
+						"order-confirmation"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Promote User",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "SomePassword",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "manager0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userUsername\": \"manager1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/v1/manager/user-promotion",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"manager",
+						"user-promotion"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search users",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "SomePassword",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "manager0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"key\": \"manager\",\r\n    \"method\": null,\r\n    \"order\": \"A\",\r\n    \"pageNumber\": 1,\r\n    \"countInPage\": 5\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/v1/search/users",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"search",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search books",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "SomePassword",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "manager0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"isbn\": \"15\",\r\n    \"title\": null,\r\n    \"publisher\": null,\r\n    \"pubYear\": null,\r\n    \"price\": null,\r\n    \"category\": null,\r\n    \"stock\": null,\r\n    \"threshold\": null,\r\n    \"imageURL\": null,\r\n    \"authors\": null,\r\n    \"method\": null,\r\n    \"order\": \"A\",\r\n    \"pageNumber\": 1,\r\n    \"countInPage\": 5\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/v1/search/books-by-details",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"search",
+						"books-by-details"
+					]
+				}
 			},
 			"response": []
 		}

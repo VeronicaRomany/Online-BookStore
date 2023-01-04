@@ -19,7 +19,7 @@ import java.util.List;
 public class ManagerController {
     private final IManagerRepository managerRepository;
 
-    private final String test = "/test";
+    private final String test = "";
 
     @Autowired
     public ManagerController(IManagerRepository managerRepository) {
@@ -51,7 +51,7 @@ public class ManagerController {
                 .body(new GenericResponse(false, "Failed to create order!", null));
     }
 
-    @GetMapping(test + "/manager/order")
+    @GetMapping(test + "/manager/orders")
     public List<LibraryOrderResponse> getLibraryOrders(Authentication auth) {
         return managerRepository.getLibraryOrders();
     }

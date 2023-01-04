@@ -2,9 +2,10 @@ package com.databaseproject.backend.repository.classes;
 
 import com.databaseproject.backend.repository.interfaces.ISearchingRepository;
 import com.databaseproject.backend.request.SearchByRequest;
+import com.databaseproject.backend.request.UserSearchRequest;
 import com.databaseproject.backend.response.BookInfoResponse;
 import com.databaseproject.backend.response.UserInfoResponse;
-import com.databaseproject.backend.searchkey.DetailedBookKey;
+import com.databaseproject.backend.request.DetailedBookSearchRequest;
 import com.databaseproject.backend.searchkey.IntKey;
 import com.databaseproject.backend.searchkey.StringKey;
 import com.databaseproject.backend.searchkey.YearKey;
@@ -25,9 +26,8 @@ public class SearchingRepository implements ISearchingRepository {
     }
 
     @Override
-    public List<UserInfoResponse> searchUsers(SearchByRequest request) {
+    public List<UserInfoResponse> searchUsers(UserSearchRequest request) {
         try {
-            StringKey key = (StringKey) request.getKey();
             return jdbcTemplate.query("CALL search_user(?, ?, ?, ?)", (rs, rowNum) -> {
                 UserInfoResponse user = new UserInfoResponse();
                 user.setUsername(rs.getString("Username"));
@@ -35,18 +35,19 @@ public class SearchingRepository implements ISearchingRepository {
                 user.setLastName(rs.getString("LName"));
                 user.setEmail(rs.getString("Email"));
                 user.setPhone(rs.getString("Phone"));
+                user.setIsManager(rs.getBoolean("Is_Manager"));
                 return user;
-            }, key.getString(), request.getOrder(), request.getPageNumber(), request.getCountInPage());
+            }, request.getKey(), request.getOrder(), request.getPageNumber(), request.getCountInPage());
         } catch (Exception e) {
+            e.printStackTrace();
             return null;
         }
 
     }
 
     @Override
-    public List<BookInfoResponse> searchBooks(SearchByRequest request) {
+    public List<BookInfoResponse> searchBooks(DetailedBookSearchRequest request) {
         try {
-            DetailedBookKey key = (DetailedBookKey) request.getKey();
             return jdbcTemplate.query("CALL search_book(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", (rs, rowNum) -> {
                         BookInfoResponse book = new BookInfoResponse();
                         book.setISBN(rs.getString("ISBN"));
@@ -58,10 +59,11 @@ public class SearchingRepository implements ISearchingRepository {
                         book.setThreshold(rs.getInt("Threshold"));
                         book.setImageURL(rs.getString("Image_URL"));
                         return book;
-                    }, key.getISBN(), key.getTitle(), key.getPublisher(), key.getPubYear(), key.getPrice(), key.getCategory(),
-                    key.getStock(), key.getAuthorName(), request.getPageNumber(), request.getCountInPage());
+                    }, request.getISBN(), request.getTitle(), request.getPublisher(), request.getPubYear(), request.getPrice(), request.getCategory(),
+                    request.getStock(), request.getAuthorName(), request.getPageNumber(), request.getCountInPage());
         } catch (Exception e) {
-            return null;
+            e.printStackTrace();
+            return new ArrayList<>();
         }
 
     }
@@ -83,6 +85,7 @@ public class SearchingRepository implements ISearchingRepository {
                 return book;
             }, key.getString(), request.getOrder(), request.getPageNumber(), request.getCountInPage());
         } catch (Exception e) {
+            e.printStackTrace();
             return null;
         }
 
@@ -105,6 +108,7 @@ public class SearchingRepository implements ISearchingRepository {
                 return book;
             }, key.getString(), request.getOrder(), request.getPageNumber(), request.getCountInPage());
         } catch (Exception e) {
+            e.printStackTrace();
             return null;
         }
 
@@ -127,6 +131,7 @@ public class SearchingRepository implements ISearchingRepository {
                 return book;
             }, key.getString(), request.getOrder(), request.getPageNumber(), request.getCountInPage());
         } catch (Exception e) {
+            e.printStackTrace();
             return null;
         }
 
@@ -149,6 +154,7 @@ public class SearchingRepository implements ISearchingRepository {
                 return book;
             }, key.getYear(), request.getMethod(), request.getOrder(), request.getPageNumber(), request.getCountInPage());
         } catch (Exception e) {
+            e.printStackTrace();
             return null;
         }
     }
@@ -170,6 +176,7 @@ public class SearchingRepository implements ISearchingRepository {
                 return book;
             }, key.getInteger(), request.getMethod(), request.getOrder(), request.getPageNumber(), request.getCountInPage());
         } catch (Exception e) {
+            e.printStackTrace();
             return null;
         }
     }
@@ -191,6 +198,7 @@ public class SearchingRepository implements ISearchingRepository {
                 return book;
             }, key.getInteger(), request.getMethod(), request.getOrder(), request.getPageNumber(), request.getCountInPage());
         } catch (Exception e) {
+            e.printStackTrace();
             return null;
         }
 
@@ -213,6 +221,7 @@ public class SearchingRepository implements ISearchingRepository {
                 return book;
             }, key.getString(), request.getPageNumber(), request.getCountInPage());
         } catch (Exception e) {
+            e.printStackTrace();
             return null;
         }
 
@@ -235,6 +244,7 @@ public class SearchingRepository implements ISearchingRepository {
                 return book;
             }, key.getString(), request.getPageNumber(), request.getCountInPage());
         } catch (Exception e) {
+            e.printStackTrace();
             return null;
         }
 

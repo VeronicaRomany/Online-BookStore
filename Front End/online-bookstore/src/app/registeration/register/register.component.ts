@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { Route, Router } from '@angular/router';
 import { GenericResponse } from 'src/app/shared/GenericResponse';
 import { UserRequest } from 'src/app/shared/UserRequest';
 
@@ -49,11 +50,12 @@ export class RegisterComponent implements OnInit {
   });
   submitted = false;
   phoneLen : boolean = false;
+  phone:String=""
 
   user:UserRequest=new UserRequest()
  
 
-  constructor(private formBuilder: FormBuilder,private http:HttpClient) { }
+  constructor(private formBuilder: FormBuilder,private http:HttpClient,private route:Router) { }
 
   ngOnInit(): void {
     this.form = this.formBuilder.group(
@@ -85,15 +87,25 @@ export class RegisterComponent implements OnInit {
     this.form.reset();
   }
 
+
+  calculatelen(s:String):number{
+    let count:number=0;
+    
+    return count;
+  }
   onSubmit():void{
     this.submitted = true;
     if (this.form.invalid) {
       return;
     }
 
-    let phone   = this.f['phoneNumber'].value
- 
-    if(phone.length == 10){
+    this.phone   = this.f['phoneNumber'].value
+    // console.log(this.phone)
+     console.log(this.phone)
+    // console.log((this.f['phoneNumber'].value).length)
+
+    if(this.phone.length == 10){
+      console.log("ana f al len error")
       this.phoneLen=true;
       return;
     }
@@ -104,15 +116,20 @@ export class RegisterComponent implements OnInit {
                         this.f['lastname'].value,this.f['email'].value,this.f['phoneNumber'].value,
                         this.f['address'].value)
 
+
+   // console.log("Elrkmmmmmmmmmm",this.user.phone.length)
+
   
 
 
    let jsonString = JSON.stringify(this.user)
    console.log(JSON.parse(jsonString))
 
-   this.http.post<GenericResponse>("http://localhost:8080/api/v1/test/user",JSON.parse(jsonString)).subscribe((data) =>{
+   this.http.post<GenericResponse>("http://localhost:8080/api/v1/user",JSON.parse(jsonString)).subscribe((data) =>{
         if(data.state){
             // request login
+            console.log(data)
+            this.route.navigate(['/', 'Home'])
         }else{
           window.alert(data.message+",Try again")
         }

@@ -34,35 +34,27 @@ export class LoginComponent implements OnInit {
   onSubmit(): void {
     const { username, password } = this.form;
 
-  //   this.authService.login(username, password).subscribe((dataReturned)=> {
-  //       let data=dataReturned.isMgr
-  //       let token=dataReturned.token
-
-  //       if(data > 0){
-  //         this.tokenStorage.saveToken(username);
-  //         this.tokenStorage.saveUser({"username":username,"password":password,"userId":data,"token":token});
-  //         console.log(this.tokenStorage.getUser())
+     this.authService.login(username, password).subscribe((dataReturned)=> {
+         
+          console.log(dataReturned)
+         let data=dataReturned.isMgr
+         let token=dataReturned.token
+           this.tokenStorage.saveToken(username);
+           this.tokenStorage.saveUser({"username":username,"password":password,"isMgr":data,"token":token});
+           console.log(this.tokenStorage.getUser())
 
     
-  //         this.isLoginFailed = false;
-  //         this.isLoggedIn = true;
-  //         this.username = this.tokenStorage.getUser().username;
-  //         this.router.navigate(['/', 'Home'])
-  //       }
-  //       else{
-  //         if(data == -1) {
-  //           this.errorMessage='Please enter valid username'
-  //           this.isLoginFailed = true;
-  //         }
-  //         if(data == -2) {
-  //           this.errorMessage='Please enter correct password'
-  //           this.isLoginFailed = true;
-  //         }
-
-  //       }
-  //     },
-  // );
-  // this.reloadPage
+           this.isLoginFailed = false;
+           this.isLoggedIn = true;
+           this.username = this.tokenStorage.getUser().username;
+           this.router.navigate(['/', 'Home'])
+       },(error) => {
+        console.log(error.status);
+        this.errorMessage='Please enter valid username or password'
+        this.isLoginFailed = true;
+       }
+   );
+   this.reloadPage
   }
 
   reloadPage(): void {
