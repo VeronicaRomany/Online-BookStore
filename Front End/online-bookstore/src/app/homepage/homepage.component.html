@@ -3,47 +3,38 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 <div class="box">
-  <select class="la" name="" id="sort">
-    <option selected disabled>Sort by</option>
-    <option value="price">Price</option>
-    <option value="date">Date</option>
-    <option value="area">Area</option>
-
- </select>
-  <div class="cont">
-    <div>
-      <label for="">
-        <input type="checkbox" name="">
-        <span>Dubai</span>
-      </label>
-    </div>
-
-    <div>
-      <label for="">
-        <input type="checkbox" name="">
-        <span>Dubai</span>
-      </label>
-    </div>
-
-    <div>
-      <label for="">
-        <input type="checkbox" name="">
-        <span>Dubai2</span>
-      </label>
-    </div>
-
-    <div>
-      <label for="">
-        <input type="checkbox" name="">
-        <span>Dubai3</span>
-      </label>
-    </div>
-
+  
+  <div class="search-box">
+    <input type="text" placeholder="Title" id="title">
+  </div>
+  <div class="search-box" >
+    <input type="text" placeholder="Publisher" id="publisher">
   </div>
   <div class="search-box">
-    <input type="text" placeholder="Type here...">
+    <input type="text" placeholder="Author" id="author">
+  </div>
+  <div class="search-box">
+    <input type="text" placeholder="ISBN" id="isbn">
+  </div>
+  <div class="search-box">
+    <select class="la" name="" id="category">
+      <option selected disabled>Category</option>
+      <option value="Science">Science</option>
+      <option value="Religion">Religion</option>
+      <option value="Art">Art</option>
+      <option value="History">History</option>
+      <option value="Geography">Geography</option>
+      
+  
+   </select>
+  </div>
+ 
+  <div class="search-box">
+ 
+   
+    
     <div class="ic">
-    <button  class="icon" mat-icon-button><mat-icon >search</mat-icon></button>
+    <button (click)="search();" class="icon" mat-icon-button><mat-icon >search</mat-icon></button>
   </div>
     
   </div>
@@ -85,5 +76,12 @@
     </div>
   </div>
   
+  
+</div>
+<div class="paging">
+  <button mat-raised-button class="previous" (click)="previousPage()" >&laquo; Previous</button>
+  
+  <h2 style="color:rgb(0, 0, 0)" >{{currentPage}}</h2>
+  <button mat-raised-button class="next" (click)="nextPage()">Next &raquo;</button>
   
 </div>

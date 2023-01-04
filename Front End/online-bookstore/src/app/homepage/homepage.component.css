@@ -1,6 +1,9 @@
 .box{
-  
-    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 200px);
+    grid-auto-rows: auto;
+    gap: 5px;
+    justify-content: center;
     margin-top: 40px;
 
 }
@@ -15,7 +18,7 @@
 }
 
 .search-box input{
-    position: absolute;
+    
     height: 100%;
     width: 100%;
     border-radius: 25px;
@@ -23,6 +26,18 @@
     outline: none;
     border:none;
     padding-left: 20px;
+    font-size: 18px;
+}
+.search-box select{
+    
+    height: 100%;
+    width: 100%;
+    border-radius: 25px;
+    background: #fff;
+    outline: none;
+    border:none;
+    padding-left: 20px;
+    padding-right: 20px;
     font-size: 18px;
 }
 .search-box .icon{
@@ -39,32 +54,7 @@
     font-size: 20px;
     border-radius: px;
 }
-.cont{
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    flex-wrap: wrap;
-}
-.cont div{
-    margin: 10px;
-}
-.cont div label {
-    cursor: pointer;
-}
-.cont div label input[type="checkbox"]
-{
-    display: none;
-}
-.cont div label span {
-    position:relative;
-    display: inline-block;
-    background: #424242;
-    padding: 15px 30px;
-    color: #555;
-    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
-    border-radius: 30px;
-    font-size: 20px;
-}
+
 .cards {
     
     margin: 0 auto;
@@ -175,3 +165,40 @@ h4{
     padding-right: 20px;
    
   }
+  .previous {
+    background-color:#971829;
+    color: white;
+    margin-left: 550px;
+  }
+  
+  .next {
+    background-color: #971829;
+    color: white;
+    margin-right: 550px;
+  }
+  
+  .round {
+    border-radius: 50%;
+  }
+  .paging{
+      display: flex;
+      margin-bottom: 40px ;
+     
+  }
+  
+  .disablednext{
+      background-color: #848484 ;
+      color: white;
+      margin-right: 550px;
+  }
+  .disabledprevious{
+      background-color: #848484;
+      color: white;
+      margin-left: 550px;
+  }
+  .paging button {
+    text-decoration: none;
+    display: inline-block;
+    padding: 8px 16px;
+  }
+  

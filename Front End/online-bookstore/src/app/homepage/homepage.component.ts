@@ -9,6 +9,10 @@ import { Book } from '../shared/Book';
 })
 export class HomepageComponent implements OnInit {
  books:Book[]=[]
+ currentPage:number=0
+ numOfPosts:number=0
+ postFlag:boolean=false
+ maxPagesNum:number=0
   constructor(public dialog:MatDialog) { }
 
 
@@ -48,5 +52,26 @@ export class HomepageComponent implements OnInit {
   addToCart(book:Book){
     this.dialog.open(AddCartComponent,{data:{book:book }});
   }
+   search(){
 
+    var title = document.getElementById("title") as HTMLInputElement
+    var publisher = document.getElementById("publisher") as HTMLInputElement
+    var author = document.getElementById("author") as HTMLInputElement
+    var isbn = document.getElementById("isbn") as HTMLInputElement
+    var category = document.getElementById("category") as HTMLSelectElement
+    console.log(title.value);
+    console.log(category.value);
+    
+    
+    
+   }
+   nextPage(){
+      this.currentPage++
+   }
+   previousPage(){
+    if(this.currentPage>0){
+      this.currentPage--
+    }
+
+   }
 }
