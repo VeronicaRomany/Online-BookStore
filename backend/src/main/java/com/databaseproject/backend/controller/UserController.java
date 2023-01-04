@@ -80,10 +80,10 @@ public class UserController {
 
         if (orderID > 0)
             return ResponseEntity
-                    .ok(new GenericResponse(true, "Order created successfully!", null));
+                    .ok(new GenericResponse(true, "Order created successfully!", orderID));
 
         return ResponseEntity.status(HttpStatus.CONFLICT)
-                .body(new GenericResponse(false, "Failed to create your oder!", orderID));
+                .body(new GenericResponse(false, "Failed to create your oder!", null));
     }
 
 }
