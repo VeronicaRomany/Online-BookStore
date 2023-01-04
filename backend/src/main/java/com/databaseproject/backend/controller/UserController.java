@@ -14,8 +14,10 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.web.HttpMediaTypeNotAcceptableException;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -29,6 +31,8 @@ public class UserController {
     private final IUserRepository userRepository;
     private final UserFinder userFinder;
 
+    private final String test = "/test";
+
     @Autowired
     public UserController(IUserRepository userRepository, UserFinder userFinder, EncoderService encoderService) {
         this.userRepository = userRepository;
@@ -36,8 +40,9 @@ public class UserController {
         this.encoderService = encoderService;
     }
 
-    @PostMapping("/user")
+    @PostMapping(test + "/user")
     public ResponseEntity<GenericResponse> signUpUser(@RequestBody UserRequest user) {
+        System.out.println(user);
         user.setPassword(encoderService.encode(user.getPassword()));
         boolean isCreated = userRepository.createUser(user);
 
@@ -49,20 +54,18 @@ public class UserController {
                 .body(new GenericResponse(false, "Failed to create account!", null));
     }
 
-    @PostMapping("/user/auth")
-    public ResponseEntity<SignInResponse> signInUser(Authentication credentials,
-            @RequestBody Map<String, Object> httpBody) {
+    @PostMapping(test + "/user/auth")
+    public ResponseEntity<SignInResponse> signInUser(Authentication credentials) {
 
         SignInResponse response = userFinder.userLogIn(credentials);
         if (response == null) {
-
             return ResponseEntity.status(422).body(null);
         }
 
         return ResponseEntity.ok().body(response);
     }
 
-    @PatchMapping("/user")
+    @PatchMapping(test + "/user")
     public ResponseEntity<GenericResponse> modifyUser(@RequestBody ModifyUserRequest modifiedUser,
                                                       Authentication auth) {
         boolean isModified = userRepository.modifyUser(modifiedUser);
@@ -75,7 +78,7 @@ public class UserController {
                 .body(new GenericResponse(false, "Failed to modify account!", null));
     }
 
-    @PostMapping("/order")
+    @PostMapping(test + "/order")
     public ResponseEntity<GenericResponse> placeOrder(@RequestBody CreateOrderRequest order,
                                                       Authentication auth) {
         Integer orderID = userRepository.createUserOrder(order, auth.getName());
@@ -88,7 +91,7 @@ public class UserController {
                 .body(new GenericResponse(false, "Failed to create your oder!", null));
     }
 
-    @GetMapping("/user")
+    @GetMapping(test + "/user")
     public ResponseEntity<UserInfoResponse> getUserInfo(Authentication auth) {
         UserInfoResponse user = userRepository.getUserInfo(auth.getName());
 

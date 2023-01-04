@@ -7,10 +7,12 @@ import com.databaseproject.backend.request.ModifyUserRequest;
 import com.databaseproject.backend.request.UserRequest;
 import com.databaseproject.backend.response.BookInfoResponse;
 import com.databaseproject.backend.response.UserInfoResponse;
+import org.apache.commons.beanutils.converters.SqlDateConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -26,15 +28,15 @@ public class UserRepository implements IUserRepository {
     @Override
     public boolean createUser(UserRequest request) {
         try {
-            jdbcTemplate.update("CALL create_user(?, ?, ?, ?, ?, ?, ?)",
+            System.out.println(request);
+            int updateRows = jdbcTemplate.update("{ CALL create_user (?,?,?,?,?,?,?) }",
                     request.getUsername(), request.getPassword(), request.getFirstName(), request.getLastName(),
                     request.getEmail(), request.getPhone(), request.getAddress());
-
+            System.out.println(updateRows);
             return true;
-        } catch (Exception e) {
+        } catch (Exception e){
             return false;
         }
-
     }
 
     @Override
@@ -67,10 +69,10 @@ public class UserRepository implements IUserRepository {
             CreditCard creditCard = request.getCreditCard();
 
             jdbcTemplate.update("CALL verify_user_order_info(?, ?, ?)",
-                    orderID, creditCard.getNumber(), creditCard.getExpiryDate());
-
+                    orderID, creditCard.getNumber(), Date.valueOf(creditCard.getExpiryDate()));
             return orderID;
         } catch (Exception e) {
+            e.printStackTrace();
             return -1;
         }
     }

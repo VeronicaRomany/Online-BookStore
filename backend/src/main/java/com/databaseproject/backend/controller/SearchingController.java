@@ -18,12 +18,14 @@ import java.util.List;
 public class SearchingController {
     private final ISearchingRepository searchingRepository;
 
+    private final String test = "/test";
+
     @Autowired
     public SearchingController(ISearchingRepository searchingRepository) {
         this.searchingRepository = searchingRepository;
     }
 
-    @GetMapping("/users")
+    @GetMapping(test + "/users")
     ResponseEntity<List<UserInfoResponse>> searchUsers(@RequestBody SearchByRequest criteria,
                                                        Authentication auth) {
         List<UserInfoResponse> users = searchingRepository.searchUsers(criteria);
@@ -34,7 +36,7 @@ public class SearchingController {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
     }
 
-    @GetMapping("/books-by-details")
+    @GetMapping(test +  "/books-by-details")
     ResponseEntity<List<BookInfoResponse>> searchBooks(@RequestBody SearchByRequest criteria,
                                                        Authentication auth) {
         List<BookInfoResponse> books = searchingRepository.searchBooks(criteria);
@@ -46,7 +48,7 @@ public class SearchingController {
     }
 
 
-    @GetMapping("/books-by-ISBN")
+    @GetMapping(test + "/books-by-ISBN")
     ResponseEntity<List<BookInfoResponse>> searchBookByISBN(@RequestBody SearchByRequest criteria,
                                                             Authentication auth) {
         List<BookInfoResponse> books = searchingRepository.searchBookByISBN(criteria);
@@ -57,7 +59,7 @@ public class SearchingController {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
     }
 
-    @GetMapping("/books-by-title")
+    @GetMapping(test + "/books-by-title")
     ResponseEntity<List<BookInfoResponse>> searchBookByTitle(@RequestBody SearchByRequest criteria,
                                                              Authentication auth) {
         List<BookInfoResponse> books = searchingRepository.searchBookByTitle(criteria);
@@ -68,7 +70,7 @@ public class SearchingController {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
     }
 
-    @GetMapping("/books-by-publisher")
+    @GetMapping(test + "/books-by-publisher")
     ResponseEntity<List<BookInfoResponse>> searchBookByPublisher(@RequestBody SearchByRequest criteria,
                                                                  Authentication auth) {
         List<BookInfoResponse> books = searchingRepository.searchBookByPublisher(criteria);
@@ -79,7 +81,7 @@ public class SearchingController {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
     }
 
-    @GetMapping("/books-by-publication-year")
+    @GetMapping(test + "/books-by-publication-year")
     ResponseEntity<List<BookInfoResponse>> searchBookByPubYear(@RequestBody SearchByRequest criteria,
                                                                Authentication auth) {
         List<BookInfoResponse> books = searchingRepository.searchBookByPubYear(criteria);
@@ -90,7 +92,7 @@ public class SearchingController {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
     }
 
-    @GetMapping("/books-by-price")
+    @GetMapping(test + "/books-by-price")
     ResponseEntity<List<BookInfoResponse>> searchBookByPrice(@RequestBody SearchByRequest criteria,
                                                              Authentication auth) {
         List<BookInfoResponse> books = searchingRepository.searchBookByPrice(criteria);
@@ -101,7 +103,7 @@ public class SearchingController {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
     }
 
-    @GetMapping("/books-by-stock")
+    @GetMapping(test + "/books-by-stock")
     ResponseEntity<List<BookInfoResponse>> searchBookByStock(@RequestBody SearchByRequest criteria,
                                                              Authentication auth) {
         List<BookInfoResponse> books = searchingRepository.searchBookByStock(criteria);
@@ -112,7 +114,7 @@ public class SearchingController {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
     }
 
-    @GetMapping("/books-by-category")
+    @GetMapping(test + "/books-by-category")
     ResponseEntity<List<BookInfoResponse>> searchBookByCategory(@RequestBody SearchByRequest criteria,
                                                                 Authentication auth) {
         List<BookInfoResponse> books = searchingRepository.searchBookByCategory(criteria);
@@ -123,7 +125,7 @@ public class SearchingController {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
     }
 
-    @GetMapping("/books-by-author")
+    @GetMapping(test + "/books-by-author")
     ResponseEntity<List<BookInfoResponse>> searchBookByAuthor(SearchByRequest criteria,
                                                               @RequestBody Authentication auth) {
         List<BookInfoResponse> books = searchingRepository.searchBookByAuthor(criteria);

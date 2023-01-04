@@ -19,6 +19,13 @@ public class ManagerRepository implements IManagerRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
+//    @Override
+//    public  getLibraryOrders(ConfirmLibraryOrderRequest request) {
+//        int updatedRows = jdbcTemplate.update("CALL confirm_library_order(?)", request.getOrderID());
+//
+//        return updatedRows != 0;
+//    }
+
     @Override
     public boolean confirmLibraryOrder(ConfirmLibraryOrderRequest request) {
         try {
