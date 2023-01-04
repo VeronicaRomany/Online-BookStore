@@ -5,9 +5,7 @@ import com.databaseproject.backend.request.CreateOrderRequest;
 import com.databaseproject.backend.request.CreditCard;
 import com.databaseproject.backend.request.ModifyUserRequest;
 import com.databaseproject.backend.request.UserRequest;
-import com.databaseproject.backend.response.BookInfoResponse;
 import com.databaseproject.backend.response.UserInfoResponse;
-import org.apache.commons.beanutils.converters.SqlDateConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -34,7 +32,7 @@ public class UserRepository implements IUserRepository {
                     request.getEmail(), request.getPhone(), request.getAddress());
             System.out.println(updateRows);
             return true;
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
@@ -50,6 +48,7 @@ public class UserRepository implements IUserRepository {
 
             return true;
         } catch (Exception e) {
+            e.printStackTrace();
             return false;
         }
     }
@@ -63,10 +62,10 @@ public class UserRepository implements IUserRepository {
             Map<String, Integer> ordersMap = request.getOrders();
 
             for (Map.Entry<String, Integer> entry : ordersMap.entrySet()) {
-                try{
-                jdbcTemplate.update("CALL add_book_to_user_order(?, ?, ?)",
-                        orderID, entry.getKey(), entry.getValue());
-                } catch (Exception e){
+                try {
+                    jdbcTemplate.update("CALL add_book_to_user_order(?, ?, ?)",
+                            orderID, entry.getKey(), entry.getValue());
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }

@@ -2,11 +2,9 @@ package com.databaseproject.backend;
 
 import com.databaseproject.backend.config.RsaKeyProperties;
 
-import com.databaseproject.backend.repository.classes.UserRepository;
-import com.databaseproject.backend.repository.interfaces.IManagerRepository;
 import com.databaseproject.backend.repository.interfaces.ISearchingRepository;
 import com.databaseproject.backend.request.*;
-import com.databaseproject.backend.searchkey.DetailedBookKey;
+import com.databaseproject.backend.request.DetailedBookSearchRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -14,13 +12,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.data.relational.core.sql.In;
-import org.springframework.security.core.parameters.P;
-
-import java.time.LocalDate;
-import java.time.Year;
-import java.util.HashMap;
-import java.util.Map;
 
 @EnableConfigurationProperties(RsaKeyProperties.class)
 @ConfigurationPropertiesScan
@@ -40,7 +31,7 @@ public class BookstoreApplication {
 			SearchByRequest request = new SearchByRequest();
 			request.setPageNumber(1);
 			request.setCountInPage(10);
-			DetailedBookKey key = new DetailedBookKey();
+			DetailedBookSearchRequest key = new DetailedBookSearchRequest();
 			key.setAuthorName(null);
 			key.setISBN("123");
 			key.setCategory(null);
@@ -60,7 +51,7 @@ public class BookstoreApplication {
 //			request.setTitle("A Title");
 //			request.setPubYear(2022);
 //			request.setImageURL("URL");
-			System.out.println(repo.searchBooks(request));
+//			System.out.println(repo.searchBooks(request));
 		};
 	}
 
