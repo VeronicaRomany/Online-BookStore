@@ -6,7 +6,7 @@ import { NewBookComponent } from './new-book/new-book.component';
 
 @NgModule({
   declarations: [
-    NewBookComponent
+  
   ],
   imports: [
     CommonModule

@@ -1,5 +1,5 @@
 export class DataReturned{
-  id:number=0;
-  token:string=''
+  token:string="";
+  isMgr:boolean=false;
   constructor(){}
 }

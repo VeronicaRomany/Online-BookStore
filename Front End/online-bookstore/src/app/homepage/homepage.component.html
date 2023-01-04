@@ -3,9 +3,45 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 <div class="box">
+  <select class="la" name="" id="sort">
+    <option selected disabled>Sort by</option>
+    <option value="price">Price</option>
+    <option value="date">Date</option>
+    <option value="area">Area</option>
 
+ </select>
+  <div class="cont">
+    <div>
+      <label for="">
+        <input type="checkbox" name="">
+        <span>Dubai</span>
+      </label>
+    </div>
+
+    <div>
+      <label for="">
+        <input type="checkbox" name="">
+        <span>Dubai</span>
+      </label>
+    </div>
+
+    <div>
+      <label for="">
+        <input type="checkbox" name="">
+        <span>Dubai2</span>
+      </label>
+    </div>
+
+    <div>
+      <label for="">
+        <input type="checkbox" name="">
+        <span>Dubai3</span>
+      </label>
+    </div>
+
+  </div>
   <div class="search-box">
-    <input type="text" placeholder="Type her...">
+    <input type="text" placeholder="Type here...">
     <div class="ic">
     <button  class="icon" mat-icon-button><mat-icon >search</mat-icon></button>
   </div>
@@ -16,32 +52,34 @@
 <div class="cards">
   <div class="card" *ngFor="let item of books">
     <li>
-    <img class="card__image" src="https://diwanegypt.com/wp-content/uploads/2022/12/9781925946789-450x600.jpg" alt="">
-    <div class="ribbon-2">2009 </div>
+    <img class="card__image" src={{item.imageURL}} alt="">
+    <div class="ribbon-2">{{item.category}} </div>
 
 </li>
     <div class="card__content">
         <div class="title" style="display:flex;     justify-content: center;">
-        <h4>Title</h4>
+        <h4>{{item.title}} </h4>
         
         </div>
-      <div class="authors">
-        <h5>Category</h5>
-        <h5>Author: <a> Mark E. Latif</a></h5>
-        <h5>Publisher: <a> Mark E. Latif</a>  </h5>
-     
+      <div class="authors" >
+        
+        
+        <h5>Author: <a *ngFor="let e of item.authors"> {{e}},</a></h5>
+         
+        <h5>Publisher: <a> {{item.publisher}}</a>  </h5>
+        <h5>{{item.pubYear}}</h5>
       </div>
      
     </div>
     <div class="card__info">
         <div class="co">
       <div style="font-size:medium;">
-       31000  LE
+       {{item.price}}  LE
       </div>
     
       </div>
       <div>
-        <button mat-raised-button (click)="addToCart();" style="padding: 0px;"><mat-icon style="padding: 0px;"> local_grocery_store</mat-icon></button>
+        <button mat-raised-button (click)="addToCart(item);" style="padding: 0px;"><mat-icon style="padding: 0px;"> local_grocery_store</mat-icon></button>
         
       </div>
     </div>

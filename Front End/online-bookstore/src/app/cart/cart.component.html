@@ -3,29 +3,29 @@
 </div>
 <button mat-raised-button style="color: white; background-color: rgb(63, 149, 241);" (click)="checkOut();">Check Out</button>
 <div class="cards">
-    <div class="card" *ngFor="let item of [1,2,3,4,5,6,7,89,8]">
+    <div class="card" *ngFor="let item of cart">
       <li>
-      <img class="card__image" src="https://diwanegypt.com/wp-content/uploads/2022/12/9781925946789-450x600.jpg" alt="">
-      <div class="ribbon-2">2009 </div>
+      <img class="card__image" src={{item.book.imageURL}} alt="">
+      <div class="ribbon-2">{{item.book.pubYear}}</div>
   
   </li>
       <div class="card__content">
           <div class="title" style="display:flex;     justify-content: center;">
-          <h4>Title</h4>
+          <h4 >{{item.book.title}}</h4>
           
           </div>
-      
+          <h4 style="display:flex;     justify-content: center;">{{item.amount}}</h4>
        
       </div>
       <div class="card__info">
           <div class="co">
         <div style="font-size:medium;">
-         31000  LE
+          {{item.book.price}} LE
         </div>
       
         </div>
         <div>
-          <button mat-raised-button  style="padding: 0px;"><mat-icon style="padding: 0px;"> delete</mat-icon></button>
+          <button mat-raised-button (click)="remove();" style="padding: 0px;"><mat-icon style="padding: 0px;"> delete</mat-icon></button>
           
         </div>
       </div>
