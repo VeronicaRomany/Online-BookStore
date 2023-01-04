@@ -1,13 +1,13 @@
 <div class="wrapper">
   <div class="left">
-      <img src="https://i.imgur.com/cMy8V5j.png" alt="user" width="200" height="200">
+      <img src={{currentUserInfo.profile_pic_link}} alt="user" width="200" height="200">
       <h2>{{ currentUserInfo.firstName }}</h2>
       <h2>{{ currentUserInfo.lastName }}</h2>
     <h3>{{ currentUserInfo.username }}</h3>
   </div>
   <div class="right">
       <div class="info">
-          <h3>Information</h3>
+          <h3>{{ currentUserInfo.type }}</h3>
           <div class="info_data">
                <div class="data">
                   <h4>Email</h4>
@@ -33,7 +33,9 @@
       <div class="social_media">
           <ul>
             <li><a style="font-size: small;" routerLink="/Edit" >edit</a></li>
-
+            <div *ngIf="!promote">
+              <li><a style="font-size: small;" (click)="onPromote()">Promote</a></li>
+            </div>
         </ul>
     </div>
   </div>

@@ -14,12 +14,11 @@ import {User} from "../user";
 export class ProfileComponent implements OnInit {
   currentUser: any;
   currentUserInfo: User = new User();
+  showUser:User=new User()
   notLogIn = true
   userID: number = 0;
-  condition: boolean = false
-  editedID: number = 0
   loggedIn: boolean = false
-  currentPage: number = 0
+  promote: boolean = false
 
   constructor(private token: TokenStorageService, private profile: ProfileService, private router: Router, public dialog: MatDialog, private http: HttpClient) {
   }
@@ -33,6 +32,16 @@ export class ProfileComponent implements OnInit {
     }
     this.profile.getUserInfo(this.userID).subscribe(result => {
       this.currentUserInfo = result
+      console.log(result)
+    })
+    if(this.currentUser.type == "manager" && this.showUser.type == "customer"){
+      this.promote=true
+    }
+  }
+  onPromote(){
+    this.showUser.type == "manager"
+    this.profile.makeManager(this.showUser.userId).subscribe(result => {
+      this.showUser = result
       console.log(result)
     })
   }

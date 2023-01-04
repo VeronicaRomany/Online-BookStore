@@ -16,6 +16,10 @@ export class ProfileService {
     console.log(userID)
     return this.http.get<User>(this.userURL+"/profile/"+userID)
   }
+  makeManager(userID: number):Observable<User>{
+    console.log(userID)
+    return this.http.get<User>(this.userURL+"/profile/promote"+userID)
+  }
   setUser(user:User){
     this.currentUserInfo=user
   }

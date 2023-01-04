@@ -39,7 +39,7 @@ import {ProfileComponent} from "./profile/profile.component";
     NewBookComponent,
     CartComponent,
     AddCartComponent,
-    ProfileComponent
+    ProfileComponent,
 
   ],
   imports: [

@@ -6,15 +6,17 @@ import { LoginComponent } from './login/login.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { NewBookComponent } from './new-book/new-book/new-book.component';
 import { RegisterComponent } from './registeration/register/register.component';
+import {ProfileComponent} from "./profile/profile.component";
 
 const routes: Routes = [
-  
+
   {path:"Home" , component:HomepageComponent},
   {path:"Login" , component:LoginComponent},
   {path:"Edit" , component:EditProfileComponent},
   {path:"newBook" , component:NewBookComponent},
   {path:"Register" , component:RegisterComponent},
   {path:"Cart" , component:CartComponent},
+  {path:"Profile" , component:ProfileComponent},
   {path:"**" ,redirectTo:"Home",pathMatch:"full"}
 ];
 
