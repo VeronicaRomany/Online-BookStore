@@ -69,6 +69,7 @@ public class UserController {
     @PatchMapping(test + "/user")
     public ResponseEntity<GenericResponse> modifyUser(@RequestBody ModifyUserRequest modifiedUser,
                                                       Authentication auth) {
+        modifiedUser.setNewPassword(encoderService.encode(modifiedUser.getNewPassword()));
         boolean isModified = userRepository.modifyUser(modifiedUser);
 
         if (isModified)
@@ -79,9 +80,10 @@ public class UserController {
                 .body(new GenericResponse(false, "Failed to modify account!", null));
     }
 
-    @PostMapping(test + "/order")
+    @PostMapping(test + "/user/order")
     public ResponseEntity<GenericResponse> placeOrder(@RequestBody CreateOrderRequest order,
                                                       Authentication auth) {
+        System.out.println(auth.getName());
         Integer orderID = userRepository.createUserOrder(order, auth.getName());
 
         if (orderID > 0)
@@ -92,8 +94,9 @@ public class UserController {
                 .body(new GenericResponse(false, "Failed to create your oder!", null));
     }
 
-    @GetMapping(test + "/user")
+    @GetMapping(test + "/user/info")
     public ResponseEntity<UserInfoResponse> getUserInfo(Authentication auth) {
+        System.out.println(auth.getName());
         UserInfoResponse user = userRepository.getUserInfo(auth.getName());
 
         if(user != null)
