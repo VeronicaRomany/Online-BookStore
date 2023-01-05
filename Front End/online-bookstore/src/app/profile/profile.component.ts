@@ -17,7 +17,7 @@ export class ProfileComponent implements OnInit {
   notLogIn = true
   userID: number = 0;
   loggedIn: boolean = false
-  manager: boolean = true
+  manager: boolean = false
 
   constructor(private token: TokenStorageService, private profile: ProfileService, private router: Router, public dialog: MatDialog, private http: HttpClient) {
   }
@@ -42,8 +42,5 @@ export class ProfileComponent implements OnInit {
   }
   editProfile(){
     this.router.navigate(['/', 'Edit'])
-  }
-  noSellerPic(){
-    return (this.currentUserInfo.profile_pic_link==null||this.currentUserInfo.profile_pic_link=='')
   }
 }
