@@ -95,6 +95,7 @@ public class SecurityConfiguration {
 
             )
             .csrf().disable()
+            .cors().and()
             .httpBasic()
             .and()
             .authenticationManager(this.userAuthenticationManager(http))
