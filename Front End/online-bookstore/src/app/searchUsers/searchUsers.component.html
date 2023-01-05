@@ -24,7 +24,7 @@
             <h3 class="address">{{item.address}}</h3>
           </div>
           <div class="footer">
-            <a style="font-size: small;" class="settings" (click)="onPromote(item.userId)" *ngIf="(item.type == 'customer')&&isManager();">Promote</a>
+            <a style="font-size: small;" class="settings" (click)="onPromote(item.username)" *ngIf="(item.type == 'customer')&&isManager();">Promote</a>
           </div>
         </div>
       </div>

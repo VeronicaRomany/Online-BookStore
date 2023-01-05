@@ -12,13 +12,13 @@ export class SearchUsersService {
   constructor(private http:HttpClient,private token: TokenStorageService) { }
   userURL:string = "http://localhost:8080/users"
 
-  getUsersInfo(userinfo: HTMLInputElement):Observable<User[]>{
+  getUsersInfo(userinfo: string):Observable<User[]>{
     console.log(userinfo)
     return this.http.get<User[]>(this.userURL+"/search")
   }
-  makeManager(userID: number):Observable<User>{
-    console.log(userID)
-    return this.http.get<User>(this.userURL+"/searchUsers/promote"+userID)
+  makeManager(userName: string):Observable<User>{
+    console.log(userName)
+    return this.http.get<User>(this.userURL+"/searchUsers/promote")
   }
   setUser(user:User){
     this.currentUserInfo=user

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SearchUsersService } from '../SearchUsers/services/SearchUsers.service';
+import { SearchUsersService } from './services/searchUsers.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {HttpClient} from "@angular/common/http";
@@ -25,27 +25,14 @@ export class SearchUsersComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe((params:any) =>{
-      console.log(params.data+" <<<<<<<<<<<<<<<<<<<<<<<<<<")
-      if(params.data!=null){
-        this.userID=params.data
-      }else{
-        this.currentUser = this.token.getUser();
-        this.userID = this.token.getUser().userId;
-        if (this.currentUser.username != undefined) {
-          this.notLogIn = false
-
-          console.log("ii")
-        }
-        else{
-          this.router.navigate(['/', 'Home'])
-        }
-      }
-    } )
+    this.searchUsers.getUsersInfo("").subscribe(result => {
+      this.users = result
+      console.log(result)
+    })
   }
   onSearch(){
     var textSearch = document.getElementById('search') as HTMLInputElement
-    this.searchUsers.getUsersInfo(textSearch).subscribe(result => {
+    this.searchUsers.getUsersInfo(textSearch.value).subscribe(result => {
       this.users = result
       console.log(result)
     })
@@ -56,15 +43,13 @@ export class SearchUsersComponent implements OnInit {
   isManager(){
     return this.token.getUser().type == "manager";
   }
-  getProfile(id:number){
-    this.router.navigate([ '/','Profile'],{queryParams:{data:id}})
-    //this.dialogRef.close()
-  }
-  onPromote(id:number){
-    this.searchUsers.makeManager(id).subscribe(result => {
+
+  onPromote(userName:string){
+    this.searchUsers.makeManager(userName).subscribe(result => {
       console.log(result)
     })
-    this.getProfile(id)
+   
+   
   }
   photo(type:string){
     return type=="manager"
