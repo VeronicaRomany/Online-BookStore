@@ -1,0 +1,18 @@
+<!-- <h2>ng2-pdf-viewer simple usage</h2>
+
+<input (change)="loadFile($event)" type="file"> -->
+<p *ngIf="pdf == null">loading...</p>
+<!-- <div  id="outerContainer"> -->
+  <div *ngIf="pdf != null" class="pdf-container"  class="card">
+    <pdf-viewer
+      [src]="pdf"
+      [original-size]="false"
+      [show-all]="false"
+      [fit-to-page]="true"
+      [zoom-scale]="'page-fit'"
+      [render-text]="true"
+      [autoresize]="true"
+      style="max-width: 100%; height: 100%"
+    ></pdf-viewer>
+  </div>
+<!-- </div> -->

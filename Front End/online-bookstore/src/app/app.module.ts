@@ -17,6 +17,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+
 import { RegisterComponent } from './registeration/register/register.component';
 import { LoginComponent } from './login/login.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
@@ -29,6 +30,8 @@ import {SearchUsersComponent} from "./searchUsers/searchUsers.component";
 import { OrdersComponent } from './orders/orders.component';
 import { PlaceOrderComponent } from './popUp/place-order/place-order.component';
 import { modifyUserRequest } from './modifyUserRequest';
+import { ReportViewerComponent } from './report-viewer/report-viewer.component';
+import { ReportCardComponent } from './report-card/report-card.component';
 
 
 
@@ -48,8 +51,10 @@ import { modifyUserRequest } from './modifyUserRequest';
     SearchUsersComponent,
     CheckOutComponent,
     OrdersComponent,
-    PlaceOrderComponent
+    PlaceOrderComponent,
     
+    ReportViewerComponent,
+    ReportCardComponent
 
   ],
   imports: [
@@ -65,6 +70,9 @@ import { modifyUserRequest } from './modifyUserRequest';
     HttpClientModule,
     ReactiveFormsModule,
    
+
+
+
 
   ],
   providers: [ modifyUserRequest],
