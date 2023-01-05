@@ -38,7 +38,7 @@ public class SearchingController {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
     }
 
-    @GetMapping(test +  "/books-by-details")
+    @PostMapping(test +  "/books-by-details")
     ResponseEntity<List<BookInfoResponse>> searchBooks(@RequestBody DetailedBookSearchRequest criteria,
                                                        Authentication auth) {
         System.out.println(criteria);

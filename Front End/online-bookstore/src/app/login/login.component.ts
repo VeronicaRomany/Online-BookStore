@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
          let data=dataReturned.isMgr
          let token=dataReturned.token
            this.tokenStorage.saveToken(username);
-           this.tokenStorage.saveUser({"username":username,"password":password,"isMgr":data,"token":token});
+           this.tokenStorage.saveUser({"username":username,"password":password,"isMgr":true,"token":token});
            console.log(this.tokenStorage.getUser())
 
     

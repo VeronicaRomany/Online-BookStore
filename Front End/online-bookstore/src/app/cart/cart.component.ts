@@ -27,6 +27,9 @@ export class CartComponent implements OnInit {
   
   this.dialog.open(CheckOutComponent,{data:{cart:this.cart }});
  }
+ isEmpty(){
+  return this.cart.length==0
+ }
  remove(){
   if(localStorage.getItem("cart")!=null)
         {

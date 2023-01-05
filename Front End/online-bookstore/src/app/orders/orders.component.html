@@ -1,0 +1,29 @@
+<div style="text-align: center;  background-color: rgb(115, 195, 99); height: 100px;">
+    <h1 style="display: -webkit-inline-box;">Books Orders</h1>
+</div>
+
+
+<div class="cards">
+    <div class="card" *ngFor="let item of orders">
+      <li>
+      <img class="card__image" src={{item.imageURL}} alt="">
+      <div class="ribbon-2">{{item.category}}</div>
+  
+  </li>
+      <div class="card__content">
+        
+          <div class="title" style="display:flex;     justify-content: center;">
+          <h3 >{{item.title}}</h3>
+          
+          </div>
+          <h3 >quantity: {{item.quantity}}</h3>
+       
+      </div>
+      <div class="card__info">
+      
+        <div>
+          <button mat-raised-button (click)="confirm(item.orderID)" style="padding: 0px; color:black;">Confirm</button>
+          
+        </div>
+      </div>
+    </div>

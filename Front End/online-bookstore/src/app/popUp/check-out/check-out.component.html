@@ -20,6 +20,7 @@
         <div class="inputBox">
             <span>card number</span>
             <input type="text" maxlength="16" class="card-number-input" id="cardNum">
+            <label for="" *ngIf="inValidCard" style="color: rgb(143, 6, 6);">Please enter valid card number</label>
         </div>
       
         <div class="flexbox">
@@ -39,6 +40,7 @@
                     <option value="2029">2029</option>
                     <option value="2030">2030</option>
                 </select>
+                <label for="" *ngIf="inValidYear" style="color: rgb(143, 6, 6);">Please choose the expiry date</label>
             </div>
 
         </div>

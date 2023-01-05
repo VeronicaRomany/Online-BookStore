@@ -26,6 +26,7 @@ import { AddCartComponent } from './popUp/add-cart/add-cart.component';
 import {ProfileComponent} from "./profile/profile.component";
 import { CheckOutComponent } from './popUp/check-out/check-out.component';
 import {SearchUsersComponent} from "./searchUsers/searchUsers.component";
+import { OrdersComponent } from './orders/orders.component';
 
 
 
@@ -43,7 +44,8 @@ import {SearchUsersComponent} from "./searchUsers/searchUsers.component";
     AddCartComponent,
     ProfileComponent,
     SearchUsersComponent,
-    CheckOutComponent
+    CheckOutComponent,
+    OrdersComponent
 
   ],
   imports: [

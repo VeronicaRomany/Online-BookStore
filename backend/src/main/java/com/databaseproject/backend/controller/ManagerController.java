@@ -53,6 +53,7 @@ public class ManagerController {
 
     @GetMapping(test + "/manager/orders")
     public List<LibraryOrderResponse> getLibraryOrders(Authentication auth) {
+        System.out.println("ana hna le");
         return managerRepository.getLibraryOrders();
     }
 

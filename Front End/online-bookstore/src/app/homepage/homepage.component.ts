@@ -41,6 +41,8 @@ export class HomepageComponent implements OnInit {
     book.publisher="M.E"
     book.price=90000
     book.title="Database"
+    book.threshold=2
+    book1.threshold=4
     book1.ISBN="2"
     book1.authors= ["peter","bero"]
     book1.category="science"
@@ -72,8 +74,13 @@ export class HomepageComponent implements OnInit {
       req.pageNumber=0
       req.publisher=publisher.value
       req.title=title.value
-      var headers=new HttpHeaders().append("Authorization","Bearer "+this.token.getUser().token)
-    //   this.http.get<Book[]>("http://localhost:8080/api/v1/search/books-by-details",{header:headers}).subscribe((data:any) =>{ })
+      console.log(req);
+      
+//       var headers=new HttpHeaders().append("Authorization","Bearer "+this.token.getUser().token)
+//  this.http.post<Book[]>("http://localhost:8080/api/v1/search/books-by-details",req,{headers}).subscribe((data:any) =>{
+//     console.log(data);
+    
+//   })
       
     
    }

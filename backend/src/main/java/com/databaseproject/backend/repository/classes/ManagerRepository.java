@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.CallableStatement;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
 
 @Repository
 public class ManagerRepository implements IManagerRepository {
@@ -38,6 +39,7 @@ public class ManagerRepository implements IManagerRepository {
                 return libraryOrder;
             });
         } catch (Exception e) {
+            System.out.println("geeeet ordeeers");
             e.printStackTrace();
             return null;
         }

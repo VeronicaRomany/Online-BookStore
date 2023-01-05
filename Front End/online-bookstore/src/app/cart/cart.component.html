@@ -1,7 +1,13 @@
 <div style="text-align: center;  background-color: rgb(255, 240, 154); height: 100px;">
     <h1 style="display: -webkit-inline-box;">Books Cart</h1>
 </div>
-<button mat-raised-button style="color: white; background-color: rgb(63, 149, 241);" (click)="checkOut();">Check Out</button>
+<h1 style=" color:rgba(128, 128, 128, 0.737); margin-bottom:40px;  text-align: center;
+height: 450px;
+display: flex;
+align-items: center;
+justify-content: center;
+" *ngIf="isEmpty()">Your Cart is Empty</h1>
+<button mat-raised-button *ngIf="!isEmpty()" style="color: white; background-color: rgb(63, 149, 241);" (click)="checkOut();">Check Out</button>
 <div class="cards">
     <div class="card" *ngFor="let item of cart">
       <li>

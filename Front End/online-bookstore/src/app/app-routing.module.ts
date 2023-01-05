@@ -8,6 +8,7 @@ import { NewBookComponent } from './new-book/new-book/new-book.component';
 import { RegisterComponent } from './registeration/register/register.component';
 import {ProfileComponent} from "./profile/profile.component";
 import {SearchUsersComponent} from "./searchUsers/searchUsers.component";
+import { OrdersComponent } from './orders/orders.component';
 
 const routes: Routes = [
 
@@ -19,6 +20,7 @@ const routes: Routes = [
   {path:"Cart" , component:CartComponent},
   {path:"Profile" , component:ProfileComponent},
   {path:"SearchUsers" , component:SearchUsersComponent},
+  {path:"Orders" , component:OrdersComponent},
   {path:"**" ,redirectTo:"Home",pathMatch:"full"}
 ];
 
