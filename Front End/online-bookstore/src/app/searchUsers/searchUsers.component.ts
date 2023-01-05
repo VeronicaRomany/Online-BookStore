@@ -39,15 +39,13 @@ export class SearchUsersComponent implements OnInit {
     return this.users.length==0
   }
   isManager(){
-    return this.token.getUser().type == "manager";
+    
+    return this.token.getUser().isMgr;
   }
 
   onPromote(userName:string){
-    this.searchUsers.makeManager(userName).subscribe(result => {
-      console.log(result)
-    })
+    this.searchUsers.makeManager(userName)
+    window.location.reload();
   }
-  photo(type:string){
-    return type=="manager"
-  }
+  
 }

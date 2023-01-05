@@ -71,6 +71,7 @@ public class UserController {
     @PatchMapping(test + "/user")
     public ResponseEntity<GenericResponse> modifyUser(@RequestBody ModifyUserRequest modifiedUser,
                                                       Authentication auth) {
+        System.out.println(modifiedUser.getNewPassword()+"Password is here");
         modifiedUser.setNewPassword(encoderService.encode(modifiedUser.getNewPassword()));
         boolean isModified = userRepository.modifyUser(modifiedUser);
 

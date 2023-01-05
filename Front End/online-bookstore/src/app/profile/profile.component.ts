@@ -29,11 +29,12 @@ export class ProfileComponent implements OnInit {
       this.notLogIn = false
       console.log("ii")
     }
-    this.profile.getUserInfo(this.userID).subscribe(result => {
+    this.profile.getUserInfo().subscribe(result => {
       this.currentUserInfo = result
+      this.profile.setUser(this.currentUserInfo)
       console.log(result)
     })
-    if(this.currentUser.type == "manager"){
+    if(this.currentUser.isMgr){
       this.manager=true
     }
   }

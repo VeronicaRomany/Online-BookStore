@@ -28,13 +28,19 @@ public class SearchingController {
         this.searchingRepository = searchingRepository;
     }
 
-    @GetMapping(test + "/users")
+    @PostMapping(test + "/users")
     ResponseEntity<List<UserInfoResponse>> searchUsers(@RequestBody UserSearchRequest criteria,
                                                        Authentication auth) {
+        System.out.println(criteria.getKey());                                                
         List<UserInfoResponse> users = searchingRepository.searchUsers(criteria);
+        
 
-        if(users != null)
+        if(users != null){
+            System.out.println("We have a user"+users.size());
+
             return ResponseEntity.ok(users);
+        }
+            
 
         return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
     }

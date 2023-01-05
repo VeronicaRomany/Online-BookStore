@@ -28,6 +28,7 @@ import { CheckOutComponent } from './popUp/check-out/check-out.component';
 import {SearchUsersComponent} from "./searchUsers/searchUsers.component";
 import { OrdersComponent } from './orders/orders.component';
 import { PlaceOrderComponent } from './popUp/place-order/place-order.component';
+import { modifyUserRequest } from './modifyUserRequest';
 
 
 
@@ -48,6 +49,7 @@ import { PlaceOrderComponent } from './popUp/place-order/place-order.component';
     CheckOutComponent,
     OrdersComponent,
     PlaceOrderComponent
+    
 
   ],
   imports: [
@@ -62,10 +64,10 @@ import { PlaceOrderComponent } from './popUp/place-order/place-order.component';
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
-
+   
 
   ],
-  providers: [],
+  providers: [ modifyUserRequest],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

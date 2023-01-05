@@ -8,7 +8,9 @@
   </div>
   <div class="right">
       <div class="info">
-          <h3>{{ currentUserInfo.type }}</h3>
+          <h3 *ngIf="manager"> Manager</h3>
+          <h3 *ngIf="!manager"> customer</h3>
+
           <div class="info_data">
                <div class="data">
                   <h4>Email</h4>
