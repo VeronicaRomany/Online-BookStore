@@ -19,9 +19,6 @@ import org.springframework.stereotype.Repository;
 import com.databaseproject.backend.Reporting.Model.BestSelling;
 import com.databaseproject.backend.Reporting.Model.SalesReport;
 import com.databaseproject.backend.Reporting.Model.TopCustomer;
-import com.lowagie.text.pdf.hyphenation.TernaryTree.Iterator;
-
-import net.sf.jasperreports.engine.export.data.DateTextValue;
 
 
 @Repository
