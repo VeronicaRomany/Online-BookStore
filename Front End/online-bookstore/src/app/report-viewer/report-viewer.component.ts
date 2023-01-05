@@ -7,10 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReportViewerComponent implements OnInit {
 
-  salesReport:string = "https://www.africau.edu/images/default/sample.pdf";
+  salesReport:string = "/sale";
 
-  topCustomers:string = "";
-  bestSelling:string = "";
+  topCustomers:string = "/topCustomers";
+  bestSelling:string = "/bestSellings";
 
   width = 700;
   height = 750;
