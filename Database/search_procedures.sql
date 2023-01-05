@@ -22,68 +22,71 @@ BEGIN
 END &&
 DELIMITER ;
 
+DROP PROCEDURE search_book;
+
 DELIMITER &&
 CREATE PROCEDURE search_book(
-	_ISBN VARCHAR(13),
+    _ISBN VARCHAR(13),
     _Title VARCHAR(120),
     _Publisher VARCHAR(60),
     _Pub_Year YEAR,
     _Price INT,
-    _Category ENUM('Science','Art','Religion','History','Geography'),
+    _Category ENUM('Science','Art','Religion','History','Geography', ''),
     _Stock INT,
     _Author_name VARCHAR(60),
-    page_no INT,	-- starts from 1
+    page_no INT,    -- starts from 1
     count_in_page INT
     )
 BEGIN
-	DECLARE start_index INT;
+    DECLARE start_index INT;
     SET start_index = (page_no - 1) * count_in_page;
-	SELECT *
+    SELECT *
     FROM BOOK
     WHERE
-		(CASE 
-			WHEN _Author_name IS NULL THEN TRUE
-			ELSE ISBN IN (SELECT ISBN FROM AUTHOR WHERE `Name` LIKE CONCAT("%", _Author_name, "%"))
-		END)
+        (CASE 
+            WHEN _Author_name IS NULL OR _Author_name = "" THEN TRUE
+            ELSE ISBN IN (SELECT ISBN FROM AUTHOR WHERE Name LIKE CONCAT("%", _Author_name, "%"))
+        END)
         AND
         (CASE
-			WHEN _ISBN IS NULL THEN TRUE
+            WHEN _ISBN IS NULL OR _ISBN = "" THEN TRUE
             ELSE ISBN LIKE CONCAT("%", _ISBN, "%")
-		END)
-		AND
+        END)
+        AND
         (CASE
-			WHEN _Title IS NULL THEN TRUE
+            WHEN _Title IS NULL OR _Title = "" THEN TRUE
             ELSE Title LIKE CONCAT("%", _Title, "%")
-		END)
-		AND
+        END)
+        AND
         (CASE
-			WHEN _Publisher IS NULL THEN TRUE
+            WHEN _Publisher IS NULL OR _Publisher = "" THEN TRUE
             ELSE Publisher LIKE CONCAT("%", _Publisher, "%") 
-		END)
+        END)
         AND
         (CASE
-			WHEN _Pub_Year IS NULL THEN TRUE
+            WHEN _Pub_Year IS NULL THEN TRUE
             ELSE Pub_Year = _Pub_Year
-		END)
+        END)
         AND
         (CASE
-			WHEN _Price IS NULL THEN TRUE
+            WHEN _Price IS NULL THEN TRUE
             ELSE Price = _Price
-		END)
+        END)
         AND
         (CASE
-			WHEN _Category IS NULL THEN TRUE
+            WHEN _Category IS NULL OR _Category = "" THEN TRUE
             ELSE Category = _Category
-		END)
+        END)
         AND
         (CASE
-			WHEN _Stock IS NULL THEN TRUE
+            WHEN _Stock IS NULL THEN TRUE
             ELSE Stock = _Stock
-		END)
+        END)
         LIMIT start_index,count_in_page
         ;
 END &&
 DELIMITER ;
+
 
 
 DELIMITER &&

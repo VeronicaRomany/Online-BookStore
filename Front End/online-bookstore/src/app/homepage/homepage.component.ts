@@ -70,18 +70,19 @@ export class HomepageComponent implements OnInit {
     console.log(category.value);
       var req = new searchRequest()
       req.ISBN=isbn.value
-      req.authorName=author.value
+     
       req.category=category.value == "Category"? "":category.value
-      req.pageNumber=0
+      req.pageNumber=1
       req.publisher=publisher.value
       req.title=title.value
       console.log(req);
       
-//       var headers=new HttpHeaders().append("Authorization","Bearer "+this.token.getUser().token)
-//  this.http.post<Book[]>("http://localhost:8080/api/v1/search/books-by-details",req,{headers}).subscribe((data:any) =>{
-//     console.log(data);
+      var headers=new HttpHeaders().append("Authorization","Bearer "+this.token.getUser().token)
+ this.http.post<Book[]>("http://localhost:8080/api/v1/search/books-by-details",JSON.parse(JSON.stringify(req)),{headers}).subscribe((data:any) =>{
+    console.log(data);
+    this.books=data
     
-//   })
+  })
       
 
 

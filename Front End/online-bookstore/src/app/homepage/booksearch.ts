@@ -3,7 +3,7 @@ export class searchRequest{
    title:string=""
    publisher:string=""
    category:string=""
-   authorName:string=""
+   authorName?:string
    pageNumber:number=0
    countInPage:number=8
 
