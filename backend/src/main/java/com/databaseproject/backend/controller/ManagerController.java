@@ -52,10 +52,11 @@ public class ManagerController {
                 .body(new GenericResponse(false, "Failed to create order!", null));
     }
 
-    @GetMapping(test + "/manager/orders")
-    public List<LibraryOrderResponse> getLibraryOrders(Authentication auth) {
+    @GetMapping(test + "/manager/orders/test")
+    public ResponseEntity< List<LibraryOrderResponse>> getLibraryOrders(Authentication auth) {
         System.out.println("ana hna le");
-        return managerRepository.getLibraryOrders();
+        List<LibraryOrderResponse> list =managerRepository.getLibraryOrders();
+        return ResponseEntity.ok().body( list) ;
     }
 
     @PostMapping(test + "/manager/user-promotion")

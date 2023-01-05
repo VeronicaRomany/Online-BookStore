@@ -24,6 +24,7 @@ public class ManagerRepository implements IManagerRepository {
     @Override
     public List<LibraryOrderResponse> getLibraryOrders() {
         try {
+            
             return jdbcTemplate.query("CALL get_library_orders()", (rs, rowNum) -> {
                 LibraryOrderResponse libraryOrder = new LibraryOrderResponse();
                 libraryOrder.setOrderID(rs.getInt("ID"));

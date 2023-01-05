@@ -15,10 +15,10 @@ export class OrdersComponent implements OnInit {
   constructor(private http:HttpClient, private serv: OrdersService,private token:TokenStorageService) { }
 
   ngOnInit(): void {
-    this.orders=this.dummy()
+    //this.orders=this.dummy()
    this.serv.getManagerOrders().subscribe(res=>{
      console.log(res);
-     
+       this.orders=res
     })
   }
   confirm(orderID:number){

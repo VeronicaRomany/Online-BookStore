@@ -14,6 +14,6 @@ export class OrdersService {
   getManagerOrders():Observable<ManagerOrder[]>{
    
     var headers=new HttpHeaders().append("Authorization","Bearer "+this.token.getUser().token)
-    return this.http.get<ManagerOrder[]>("http://localhost:8080/api/v1/manager/orders",{headers})
+    return this.http.get<ManagerOrder[]>("http://localhost:8080/api/v1/manager/orders/test",{headers})
   }
 }

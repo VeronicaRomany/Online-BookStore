@@ -1,1 +1,16 @@
-<p>place-order works!</p>
+<div class="container" style=" width: 200px; border-width:40px rgb(201, 112, 112);">
+    <h4 style="margin-bottom: 0;">Order Amount</h4>
+    <h4 style="margin-top: 0; margin-bottom: 30px;">_____________</h4>
+    <div style="display: flex; justify-content: space-between;" class="amount" >
+    <button mat-raised-button (click)="decrease();" style="background-color: #ffdb95;">
+        <span class="mat-button-wrapper" style="font-size: 20px;">-</span>
+    </button>
+    <h4>{{amount}}</h4>
+    <button mat-raised-button (click)="increase(); "style="background-color:#ffdb95;">
+        <span class="mat-button-wrapper" style="font-size: 20px;">+</span>
+    </button>
+    </div>
+    <div class="sumbit" style="margin-top: 20px;     text-align: end;">
+    <button mat-raised-button (click)="addToOrders();">Add</button>
+    </div>
+    </div>

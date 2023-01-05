@@ -75,7 +75,7 @@
         <button mat-raised-button (click)="addToCart(item);" style="padding: 0px;"><mat-icon style="padding: 0px;"> local_grocery_store</mat-icon></button>
         
       </div>
-      <button mat-raised-button (click)="order()" *ngIf="isManager()" style="margin-left:2px;">order</button>
+      <button mat-raised-button (click)="order(item)" *ngIf="isManager()" style="margin-left:2px;">order</button>
     </div>
 
       <button mat-raised-button (click)="edit(item.isbn)" *ngIf="isManager()" style="margin-left:2px;">Edit</button>

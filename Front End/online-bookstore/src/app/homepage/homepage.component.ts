@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { AddCartComponent } from '../popUp/add-cart/add-cart.component';
+import { PlaceOrderComponent } from '../popUp/place-order/place-order.component';
 import { Book } from '../shared/Book';
 import { TokenStorageService } from '../_services/token-storage.service';
 import { searchRequest } from './booksearch';
@@ -22,11 +23,8 @@ export class HomepageComponent implements OnInit {
 
   
   ngOnInit(): void {
-
-    this.books.push(this.dummy()[0])
-    this.books.push(this.dummy()[1])
-    this.books.push(this.dummy()[0])
-    this.books.push(this.dummy()[1])
+    this.search()
+    
   }
   
   dummy(){
@@ -106,8 +104,8 @@ export class HomepageComponent implements OnInit {
     }
 
    }
-   order(){
-
+   order(book:Book){
+    this.dialog.open(PlaceOrderComponent,{data:{book:book }});
    }
    isManager(){
     return this.token.getUser().isMgr
