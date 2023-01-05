@@ -11,7 +11,8 @@ BEGIN
     FROM USER_ORDER as uo
     NATURAL JOIN USER_ORDER_BOOKS as uob
     WHERE uo.dt > (CURDATE() - INTERVAL 1 MONTH)
-    GROUP BY DAY(uo.dt);
+    GROUP BY uo.dt
+    ORDER BY uo.dt &&
 END &&
 DELIMITER ;
 
