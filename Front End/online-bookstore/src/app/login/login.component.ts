@@ -40,17 +40,19 @@ export class LoginComponent implements OnInit {
      this.authService.login(username, password).subscribe((dataReturned)=> {
          
           console.log(dataReturned)
-         let data=dataReturned.isMgr
+         let data=dataReturned.mgr
          let token=dataReturned.token
            this.tokenStorage.saveToken(username);
            this.tokenStorage.saveUser({"username":username,"password":password,"isMgr":data,"token":token});
-           console.log(this.tokenStorage.getUser())
+           console.log(this.tokenStorage.getUser().mgr)
 
     
            this.isLoginFailed = false;
            this.isLoggedIn = true;
            this.username = this.tokenStorage.getUser().username;
            window.location.reload();
+           console.log(this.tokenStorage.getUser().mgr)
+
            this.router.navigate(['/', 'Home'])
        },(error) => {
         console.log(error.status);
