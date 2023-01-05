@@ -19,9 +19,7 @@ export class SearchUsersComponent implements OnInit {
   userID: number = 0;
   loggedIn: boolean = false
   promote: boolean = false
-  constructor(private token: TokenStorageService,
-              //private dialogRef: MatDialogRef<SearchUsersComponent>,
-              private route:ActivatedRoute, private searchUsers: SearchUsersService, private router: Router, public dialog: MatDialog, private http: HttpClient) {
+  constructor(private token: TokenStorageService, private route:ActivatedRoute, private searchUsers: SearchUsersService, private router: Router, public dialog: MatDialog, private http: HttpClient) {
   }
 
   ngOnInit(): void {
@@ -48,8 +46,6 @@ export class SearchUsersComponent implements OnInit {
     this.searchUsers.makeManager(userName).subscribe(result => {
       console.log(result)
     })
-   
-   
   }
   photo(type:string){
     return type=="manager"
