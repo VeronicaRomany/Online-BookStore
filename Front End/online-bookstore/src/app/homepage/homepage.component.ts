@@ -1,7 +1,10 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AddCartComponent } from '../popUp/add-cart/add-cart.component';
 import { Book } from '../shared/Book';
+import { TokenStorageService } from '../_services/token-storage.service';
+import { searchRequest } from './booksearch';
 @Component({
   selector: 'app-homepage',
   templateUrl: './homepage.component.html',
@@ -13,11 +16,12 @@ export class HomepageComponent implements OnInit {
  numOfPosts:number=0
  postFlag:boolean=false
  maxPagesNum:number=0
-  constructor(public dialog:MatDialog) { }
+  constructor(public dialog:MatDialog,private http:HttpClient, private token: TokenStorageService) { }
 
 
   
   ngOnInit(): void {
+
     this.books.push(this.dummy()[0])
     this.books.push(this.dummy()[1])
     this.books.push(this.dummy()[0])
@@ -61,8 +65,16 @@ export class HomepageComponent implements OnInit {
     var category = document.getElementById("category") as HTMLSelectElement
     console.log(title.value);
     console.log(category.value);
-    
-    
+      var req = new searchRequest()
+      req.ISBN=isbn.value
+      req.authorName=author.value
+      req.category=category.value == "Category"? "":category.value
+      req.pageNumber=0
+      req.publisher=publisher.value
+      req.title=title.value
+      var headers=new HttpHeaders().append("Authorization","Bearer "+this.token.getUser().token)
+    //   this.http.get<Book[]>("http://localhost:8080/api/v1/search/books-by-details",{header:headers}).subscribe((data:any) =>{ })
+      
     
    }
    nextPage(){
