@@ -9,7 +9,7 @@ import lombok.Setter;
 public class UserSearchRequest {
     private String key;
     private String method;
-    private String order;
-    private Integer pageNumber;
-    private Integer countInPage;
+    private String order;//A
+    private Integer pageNumber;//1
+    private Integer countInPage;//10000
 }

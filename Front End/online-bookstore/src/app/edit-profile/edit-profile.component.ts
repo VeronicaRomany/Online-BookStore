@@ -3,11 +3,13 @@ import { Component, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 
-
+import { GenericResponse } from 'src/app/shared/GenericResponse';
 import {  ValidatorFn } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from 'src/app/user';
 import { TokenStorageService } from 'src/app/_services/token-storage.service';
+import { ProfileService } from '../profile/services/profile.service';
+import { modifyUserRequest } from '../modifyUserRequest';
 
 
 export default class Validation {
@@ -69,10 +71,10 @@ export class EditProfileComponent implements OnInit {
     }
   }
 
-  newAccount:User= new User()
+  newAccount:modifyUserRequest= new modifyUserRequest()
   user:User=new User()
-  //currentUserInfo=this.profile.getUser()
-  currentUserInfo: User=new User()
+  currentUserInfo=this.profile.getUser()
+  //currentUserInfo: User=new User()
 
 
 
@@ -80,8 +82,8 @@ export class EditProfileComponent implements OnInit {
 
 
   constructor(private formBuilder: FormBuilder, private http:HttpClient,
-    /*private profile: SearchUsersService,*/ private tokenStorage: TokenStorageService,
-    private router:Router) {}
+    private profile: ProfileService, private tokenStorage: TokenStorageService,
+    private router:Router,private modify: modifyUserRequest) {}
 
   ngOnInit(): void {
 
@@ -117,16 +119,10 @@ export class EditProfileComponent implements OnInit {
       },
 
       {
-        validators: [Validation.match("123", 'old_password')]
+        validators: [Validation.match(this.tokenStorage.getUser().password, 'old_password')]
       }
     );
-    this.currentUserInfo.firstName="Peter"
-    this.currentUserInfo.lastName="Yasser"
-    this.currentUserInfo.password="1234567"
-    this.currentUserInfo.phone="0123456789"
-    this.currentUserInfo.address="Alex"
-    this.currentUserInfo.username="PY"
-    this.currentUserInfo.email="p@gmail.com"
+    
     console.log(this.currentUserInfo);
     this.f['firstname'].setValue(this.currentUserInfo.firstName);
     this.f['lastname'].setValue(this.currentUserInfo.lastName);
@@ -152,31 +148,39 @@ export class EditProfileComponent implements OnInit {
     var jsonString = JSON.stringify(this.form.value, null, 2)
     console.log(jsonString);
 
-    this.newAccount.firstName = this.f['firstname'].value
-    this.newAccount.lastName = this.f['lastname'].value
+    this.newAccount.newFName = this.f['firstname'].value
+    this.newAccount.newLName = this.f['lastname'].value
     console.log(this.f['new_password'].value,"new_password")
-    if(this.f['new_password'].value!='')
-       this.newAccount.password=this.f['new_password'].value
+    if(this.f['new_password'].value!=''){
+      
+       this.newAccount.newPassword=this.f['new_password'].value
+       console.log(this.newAccount.newPassword)
+      }
     else
-       this.newAccount.password=this.f['old_password'].value
-    this.newAccount.username = this.f['username'].value
-    this.newAccount.phone = this.f['phoneNumber'].value
-    this.newAccount.email = this.f['email'].value
-    this.newAccount.address = this.f['address'].value
+       this.newAccount.newPassword=this.f['old_password'].value
+    this.newAccount.oldUserName = this.f['username'].value
+    this.newAccount.newUsername = this.f['username'].value
+    this.newAccount.newPhone = this.f['phoneNumber'].value
+    this.newAccount.newEmail = this.f['email'].value
+    this.newAccount.newAddress = this.f['address'].value
 
 
 
     var NewAccountJsonString = JSON.stringify(this.newAccount)
     console.log(NewAccountJsonString)
+
     this.urllink=""
 
-    /*var headers=new HttpHeaders().append("Authorization","Bearer "+this.tokenStorage.getUser().token)
-    this.http.post<boolean>("http://localhost:8080/users/profile/edit/"+this.tokenStorage.getUser().userId,JSON.parse(NewAccountJsonString),{headers: headers}).subscribe((data:boolean) =>{
-      if(data)
-      alert("Your edit saved")
-      console.log(data);
-      this.router.navigate(['/', 'Profile'])
-  },);*/
+    var headers=new HttpHeaders().append("Authorization","Bearer "+this.tokenStorage.getUser().token)
+    this.http.patch<GenericResponse>("http://localhost:8080/api/v1/user",JSON.parse(NewAccountJsonString),{headers:headers}).subscribe((data) =>{
+        if(data.state){
+            // request login
+            console.log(data)
+            this.router.navigate(['/', 'Profile'])
+        }else{
+          window.alert(data.message+",Try again")
+        }
+    })
 }
 
   onReset(): void {

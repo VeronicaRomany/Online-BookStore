@@ -27,6 +27,7 @@ import {ProfileComponent} from "./profile/profile.component";
 import { CheckOutComponent } from './popUp/check-out/check-out.component';
 import {SearchUsersComponent} from "./searchUsers/searchUsers.component";
 import { OrdersComponent } from './orders/orders.component';
+import { modifyUserRequest } from './modifyUserRequest';
 
 
 
@@ -45,7 +46,8 @@ import { OrdersComponent } from './orders/orders.component';
     ProfileComponent,
     SearchUsersComponent,
     CheckOutComponent,
-    OrdersComponent
+    OrdersComponent,
+    
 
   ],
   imports: [
@@ -60,10 +62,10 @@ import { OrdersComponent } from './orders/orders.component';
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
-
+   
 
   ],
-  providers: [],
+  providers: [ modifyUserRequest],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

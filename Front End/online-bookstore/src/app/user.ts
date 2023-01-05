@@ -8,7 +8,7 @@ export class User {
   phone:string=""
   email:string=""
   address:string=""
-  type:string=""
+  isManager:boolean=false
   constructor(){}
 
 }

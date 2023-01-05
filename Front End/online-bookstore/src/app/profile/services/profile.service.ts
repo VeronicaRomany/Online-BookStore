@@ -10,11 +10,12 @@ import {User} from "../../user";
 export class ProfileService {
   currentUserInfo:User = new User
   constructor(private http:HttpClient,private token: TokenStorageService) { }
-  userURL:string = "http://localhost:8080/users"
+  userURL:string = "http://localhost:8080/api/v1/user/info"
 
-  getUserInfo(userID: number | undefined):Observable<User>{
-    console.log(userID)
-    return this.http.get<User>(this.userURL+"/profile/"+userID)
+  getUserInfo():Observable<User>{
+    
+    var headers=new HttpHeaders().append("Authorization","Bearer "+this.token.getUser().token)
+    return this.http.get<User>(this.userURL,{headers:headers})
   }
   setUser(user:User){
     this.currentUserInfo=user

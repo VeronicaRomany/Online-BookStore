@@ -12,6 +12,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.Console;
 import java.util.List;
 
 @Controller
@@ -61,6 +62,7 @@ public class ManagerController {
     @PostMapping(test + "/manager/user-promotion")
     public ResponseEntity<GenericResponse> promoteUser(@RequestBody PromoteUserRequest request,
                                                        Authentication auth) {
+        System.out.println(request);                                              
         boolean isPromoted = managerRepository.promoteUser(request, auth.getName());
 
         if (isPromoted)
