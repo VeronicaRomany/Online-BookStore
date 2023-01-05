@@ -54,7 +54,7 @@ export class NewBookComponent implements OnInit {
   ngOnInit(): void {
     this.form = this.formBuilder.group(
       {
-        ISBN: ['', Validators.required],
+        ISBN: ['', Validators.required,Validators.minLength(13),Validators.maxLength(13)],
         title: ['', Validators.required],
         Publisher: ['', Validators.required],
         price: ['',Validators.required],
@@ -208,6 +208,7 @@ export class NewBookComponent implements OnInit {
       // auth ttzwd f al request
       
       this.http.post<GenericResponse>("http://localhost:8080/api/v1/manager/book",JSON.parse(jsonString),{headers:headers}).subscribe((data) =>{
+          console.log(data)
           if(data.state){
             window.alert(data.message)
             this.router.navigate(['/', 'Home'])

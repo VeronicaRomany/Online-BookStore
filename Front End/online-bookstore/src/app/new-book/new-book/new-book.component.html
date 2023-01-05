@@ -45,6 +45,8 @@
                                 [ngClass]="{ 'is-invalid': submitted && f['ISBN'].errors }" />
                     <div *ngIf="submitted && f['ISBN'].errors" class="error" >
                         <div *ngIf="f['ISBN'].errors['required']">ISBN is required</div>
+                        <div *ngIf="f['ISBN'].errors['minLength']">ISBN should be 13 digit</div>
+                        <div *ngIf="f['ISBN'].errors['maxLength']">ISBN should be 13 digit</div>
                     </div>
                 </div>
 

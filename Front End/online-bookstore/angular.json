@@ -75,7 +75,8 @@
               "browserTarget": "online-bookstore:build:production"
             },
             "development": {
-              "browserTarget": "online-bookstore:build:development"
+              "browserTarget": "online-bookstore:build:development",
+              "proxyConfig": "src/proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"
