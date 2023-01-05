@@ -12,7 +12,8 @@ export class ModifyBookRequest{
      newAuthors:string[]=[];
 
 
-     fillData(isbn:string,tit:string,auth:string[],pub:string,year:number,price:number,cat:string,link:string,min:number,thre:number):void{
+     fillData(oisbn:string,isbn:string,tit:string,auth:string[],pub:string,year:number,price:number,cat:string,link:string,min:number,thre:number):void{
+        this.oldISBN=oisbn
         this.newISBN=isbn
         this.newTitle=tit
         this.newAuthors=auth

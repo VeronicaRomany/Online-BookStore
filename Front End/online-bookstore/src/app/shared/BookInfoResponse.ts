@@ -1,5 +1,5 @@
 export class BookInfoResponse{
-    ISBN:string=""
+    isbn:string=""
     title:string=""
     publisher:string=""
     pubYear:number=0

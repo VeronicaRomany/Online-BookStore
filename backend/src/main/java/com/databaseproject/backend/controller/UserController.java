@@ -86,6 +86,7 @@ public class UserController {
     @PostMapping(test + "/user/order")
     public ResponseEntity<GenericResponse> placeOrder(@RequestBody CreateOrderRequest order,
                                                       Authentication auth) {
+        System.out.println(order);                                             
         System.out.println(auth.getName());
         Integer orderID = userRepository.createUserOrder(order, auth.getName());
 

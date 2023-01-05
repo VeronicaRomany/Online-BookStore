@@ -141,6 +141,7 @@ public class ManagerRepository implements IManagerRepository {
                 book.setPubYear(rs.getInt("Pub_Year"));
                 book.setCategory(rs.getString("Category"));
                 book.setStock(rs.getInt("Stock"));
+                book.setPrice(rs.getInt("Price"));
                 book.setThreshold(rs.getInt("Threshold"));
                 book.setImageURL(rs.getString("Image_URL"));
                 List<String> authors = jdbcTemplate.query("CALL get_book_authors(?)",

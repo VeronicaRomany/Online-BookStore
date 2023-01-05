@@ -6,5 +6,5 @@ export class OrderRequest {
 
 export class Credit{
     number:string=""
-    expiryDate:string=""
+    expiryDate: string=""
 }
