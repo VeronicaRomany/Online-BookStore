@@ -3,6 +3,7 @@ package com.databaseproject.backend.Reporting.Service;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.mockito.Mockito.when;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeAll;
@@ -30,12 +31,12 @@ public class ReportingServiceTest {
     @Test
     void testGetBestSellings() {
         List<BestSelling> data = List.of(
-            new BestSelling("122345", "title1", 5),
-            new BestSelling("1223456", "title2", 6),
-            new BestSelling("122347", "title3", 7),
-            new BestSelling("122348", "title4", 8),
-            new BestSelling("122349", "title5", 9),
-            new BestSelling("122350", "title6", 10)
+            new BestSelling("122345", "title1", BigDecimal.valueOf(1)),
+            new BestSelling("1223456", "title2", BigDecimal.valueOf(6)),
+            new BestSelling("122347", "title3", BigDecimal.valueOf(7)),
+            new BestSelling("122348", "title4", BigDecimal.valueOf(8)),
+            new BestSelling("122349", "title5", BigDecimal.valueOf(9)),
+            new BestSelling("122350", "title6", BigDecimal.valueOf(10))
         );
 
         when(repo.getBestSellings()).thenReturn(data);

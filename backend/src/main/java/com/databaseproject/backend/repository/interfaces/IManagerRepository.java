@@ -4,7 +4,6 @@ import com.databaseproject.backend.request.*;
 import com.databaseproject.backend.response.BookInfoResponse;
 import com.databaseproject.backend.response.LibraryOrderResponse;
 
-import java.sql.CallableStatement;
 import java.util.List;
 
 public interface IManagerRepository {

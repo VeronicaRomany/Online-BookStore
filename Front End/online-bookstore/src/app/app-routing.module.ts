@@ -9,6 +9,7 @@ import { RegisterComponent } from './registeration/register/register.component';
 import {ProfileComponent} from "./profile/profile.component";
 import {SearchUsersComponent} from "./searchUsers/searchUsers.component";
 import { OrdersComponent } from './orders/orders.component';
+import { ReportViewerComponent } from './report-viewer/report-viewer.component';
 
 const routes: Routes = [
 
@@ -21,6 +22,7 @@ const routes: Routes = [
   {path:"Profile" , component:ProfileComponent},
   {path:"SearchUsers" , component:SearchUsersComponent},
   {path:"Orders" , component:OrdersComponent},
+  {path:"ReportViewer", component:ReportViewerComponent},
   {path:"**" ,redirectTo:"Home",pathMatch:"full"}
 ];
 

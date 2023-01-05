@@ -5,7 +5,7 @@
 
 
 	<field name = "title" class = "java.lang.String"/>
-	<field name = "amount" class = "java.lang.Integer"/>
+	<field name = "amount" class = "java.math.BigDecimal"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
