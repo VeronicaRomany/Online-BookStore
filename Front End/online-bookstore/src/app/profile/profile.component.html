@@ -1,13 +1,14 @@
 <div class="wrapper">
   <div class="left">
-      <img src="https://i.imgur.com/cMy8V5j.png" alt="user" width="200" height="200">
+    <img src='assets/manager.png' *ngIf="manager" alt="user" width="200" height="200">
+    <img src='assets/p.png' *ngIf="!manager" alt="user" width="200" height="200">
       <h2>{{ currentUserInfo.firstName }}</h2>
       <h2>{{ currentUserInfo.lastName }}</h2>
-    <h3>{{ currentUserInfo.username }}</h3>
+      <h3>{{ currentUserInfo.username }}</h3>
   </div>
   <div class="right">
       <div class="info">
-          <h3>Information</h3>
+          <h3>{{ currentUserInfo.type }}</h3>
           <div class="info_data">
                <div class="data">
                   <h4>Email</h4>
@@ -29,11 +30,9 @@
                </div>
           </div>
       </div>
-
       <div class="social_media">
           <ul>
-            <li><a style="font-size: small;" routerLink="/Edit" >edit</a></li>
-
+            <li><a style="font-size: small;" *ngIf="isMyProfile();" (click)="editProfile();" >Edit</a></li>
         </ul>
     </div>
   </div>

@@ -1,0 +1,33 @@
+<div class="box">
+  <div class="search-box">
+    <input type="text" placeholder="Type here..." ID="search">
+    <div class="ic">
+      <button  class="icon" mat-icon-button (click)="onSearch()"><mat-icon >search</mat-icon></button>
+    </div>
+  </div>
+</div>
+<div class="article-contener"  >
+  <h1 *ngIf="noUsers()" style="    display: flex;
+      justify-content: space-evenly; color:antiquewhite;  margin-bottom:30px; "> No Results</h1>
+  <ul class="groups" *ngFor="let item of users"  >
+    <li>
+      <div class="card"  >
+        <div class="image-session " >
+          <span class="image" *ngIf="photo(item.type)" style="background-image: url('assets/manager.png');"></span>
+          <span class="image" *ngIf="!photo(item.type)" style="background-image: url('assets/p.png');"></span>
+          <div class="body">
+            <h2 class="t">{{item.username}}</h2>
+            <h4 class="t">{{item.firstName}}</h4>
+            <h4 class="t">{{item.lastName}}</h4>
+            <h5 class="t2">Phone: {{item.phone}} &#13217;</h5>
+            <h5 class="t2">E-mail: {{item.email}} &#13217;</h5>
+            <h3 class="address">{{item.address}}</h3>
+          </div>
+          <div class="footer">
+            <a style="font-size: small;" class="settings" (click)="onPromote(item.userId)" *ngIf="(item.type == 'customer')&&isManager();">Promote</a>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>

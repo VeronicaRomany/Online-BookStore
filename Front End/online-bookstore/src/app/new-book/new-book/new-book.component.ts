@@ -77,7 +77,7 @@ export class NewBookComponent implements OnInit {
             this.edit=true
             this.modifiedBook.setOldISBN(params.data)
                       // dh msh s7 kda
-            this.http.get<BookInfoResponse>("http://localhost:8080/manager/book",params.data,).subscribe((data:any) =>{
+            this.http.get<BookInfoResponse>("http://localhost:8080/manager/book",params.data).subscribe((data:any) =>{
                   this.editBook=data
 
                     console.log(this.editBook)

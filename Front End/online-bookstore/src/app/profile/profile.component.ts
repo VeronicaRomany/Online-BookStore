@@ -16,10 +16,8 @@ export class ProfileComponent implements OnInit {
   currentUserInfo: User = new User();
   notLogIn = true
   userID: number = 0;
-  condition: boolean = false
-  editedID: number = 0
   loggedIn: boolean = false
-  currentPage: number = 0
+  manager: boolean = false
 
   constructor(private token: TokenStorageService, private profile: ProfileService, private router: Router, public dialog: MatDialog, private http: HttpClient) {
   }
@@ -35,5 +33,14 @@ export class ProfileComponent implements OnInit {
       this.currentUserInfo = result
       console.log(result)
     })
+    if(this.currentUser.type == "manager"){
+      this.manager=true
+    }
+  }
+  isMyProfile(){
+    return  this.userID == this.token.getUser().userId;
+  }
+  editProfile(){
+    this.router.navigate(['/', 'Edit'])
   }
 }
