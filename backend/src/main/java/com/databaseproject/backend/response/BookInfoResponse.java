@@ -19,5 +19,6 @@ public class BookInfoResponse {
     private Integer stock;
     private Integer threshold;
     private String imageURL;
+    private Integer price;
     private List<String> authors;
 }

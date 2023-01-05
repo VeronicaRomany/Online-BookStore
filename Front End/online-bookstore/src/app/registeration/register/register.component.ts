@@ -4,6 +4,8 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidatorFn, Vali
 import { Route, Router } from '@angular/router';
 import { GenericResponse } from 'src/app/shared/GenericResponse';
 import { UserRequest } from 'src/app/shared/UserRequest';
+import { AuthService } from 'src/app/_services/auth.service.service';
+import { TokenStorageService } from 'src/app/_services/token-storage.service';
 
 
 export default class Validation {
@@ -55,7 +57,7 @@ export class RegisterComponent implements OnInit {
   user:UserRequest=new UserRequest()
  
 
-  constructor(private formBuilder: FormBuilder,private http:HttpClient,private route:Router) { }
+  constructor(private formBuilder: FormBuilder,private http:HttpClient,private route:Router,public tokenStorage: TokenStorageService,private authService: AuthService) { }
 
   ngOnInit(): void {
     this.form = this.formBuilder.group(
@@ -129,6 +131,23 @@ export class RegisterComponent implements OnInit {
         if(data.state){
             // request login
             console.log(data)
+
+            this.authService.login(this.user.username, this.user.password).subscribe((dataReturned)=> {
+         
+              console.log(dataReturned)
+             let data=dataReturned.mgr
+             let token=dataReturned.token
+               this.tokenStorage.saveToken(this.user.username);
+               this.tokenStorage.saveUser({"username":this.user.username,"password":this.user.password,"isMgr":data,"token":token});
+               console.log(this.tokenStorage.getUser().mgr)
+    
+        
+              
+               window.location.reload();
+               console.log(this.tokenStorage.getUser().mgr)
+    
+               this.route.navigate(['/', 'Home'])
+            })
             this.route.navigate(['/', 'Home'])
         }else{
           window.alert(data.message+",Try again")

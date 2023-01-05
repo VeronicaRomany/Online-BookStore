@@ -1,5 +1,5 @@
 export class Book{
-    ISBN: string=""
+   isbn: string=""
     title:string=""
     authors:string[]=[]
     publisher:string=""
@@ -14,7 +14,7 @@ export class Book{
     constructor(){}
 
      fillData(isbn:string,tit:string,auth:string[],pub:string,year:number,price:number,cat:string,link:string,min:number,thre:number):void{
-        this.ISBN=isbn
+        this.isbn=isbn
         this.title=tit
         this.authors=auth
         this.publisher=pub

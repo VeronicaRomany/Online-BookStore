@@ -51,7 +51,7 @@ submit(){
   let ord : OrderRequest =new OrderRequest()
   let credit: Credit =new Credit()
   for(let i=0 ;i<this.cart.length;i++){
-      orders.set(this.cart[i].book.ISBN,this.cart[i].amount)
+      orders.set(this.cart[i].book.isbn,this.cart[i].amount)
   }
 
  console.log("<><><"+year.value);
