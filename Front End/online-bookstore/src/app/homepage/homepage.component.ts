@@ -93,4 +93,10 @@ export class HomepageComponent implements OnInit {
     }
 
    }
+   order(){
+
+   }
+   isManager(){
+    return this.token.getUser().isMgr
+  }
 }

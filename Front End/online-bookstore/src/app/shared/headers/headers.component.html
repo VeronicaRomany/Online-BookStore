@@ -1,9 +1,10 @@
 
 <mat-toolbar  style="    background: #971829;color: #ffffff;" class="mat-elevation-z4">
     <a href="/Home" mat-button>Home</a>
-    <a href="/newBook"  mat-button>Add Book</a>
     <a  mat-button href="Cart">Cart</a>
-    <a  mat-button href="Orders">Orders</a>
+    <a href="/newBook" *ngIf="isManager()"  mat-button>Add Book</a>
+    
+    <a  mat-button *ngIf="isManager()" href="Orders">Orders</a>
 
 
 
@@ -13,9 +14,9 @@
     <h1>Book Store</h1>
   </div>
   <div class="spacer"></div>
-  <a href="/SearchUsers" mat-button>Search for users</a>
-  <a href="/Profile" mat-button>Profile</a>
-  <a href="/Login"  mat-button>Login</a>
-  <a href="/Register"  mat-raised-button style="background-color: rgb(120, 241, 183); color:rgb(0, 0, 0);" >Sign Up</a>
-  <a mat-raised-button (click)="logout()"  style="background-color: rgb(120, 241, 183); color:rgb(0, 0, 0);" >Logout</a>
+  <a href="/SearchUsers" *ngIf="isManager()"  mat-button>Search for users</a>
+  <a href="/Profile" *ngIf="isLoggedIn" mat-button>{{username}}</a>
+  <a href="/Login" *ngIf="!isLoggedIn" mat-button>Login</a>
+  <a href="/Register"  *ngIf="!isLoggedIn" mat-raised-button style="background-color: rgb(120, 241, 183); color:rgb(0, 0, 0);" >Sign Up</a>
+  <a mat-raised-button (click)="logout()" *ngIf="isLoggedIn" style="background-color: rgb(120, 241, 183); color:rgb(0, 0, 0);" >Logout</a>
   </mat-toolbar>

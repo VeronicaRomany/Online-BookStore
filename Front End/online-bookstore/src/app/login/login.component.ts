@@ -29,6 +29,9 @@ export class LoginComponent implements OnInit {
       this.isLoggedIn = true;
       this.username = this.tokenStorage.getUser().username;
     }
+    if(this.isLoggedIn){
+      this.router.navigate(['/', 'Home'])
+    }
   }
 
   onSubmit(): void {
@@ -40,13 +43,14 @@ export class LoginComponent implements OnInit {
          let data=dataReturned.isMgr
          let token=dataReturned.token
            this.tokenStorage.saveToken(username);
-           this.tokenStorage.saveUser({"username":username,"password":password,"isMgr":true,"token":token});
+           this.tokenStorage.saveUser({"username":username,"password":password,"isMgr":data,"token":token});
            console.log(this.tokenStorage.getUser())
 
     
            this.isLoginFailed = false;
            this.isLoggedIn = true;
            this.username = this.tokenStorage.getUser().username;
+           window.location.reload();
            this.router.navigate(['/', 'Home'])
        },(error) => {
         console.log(error.status);

@@ -1,5 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { GenericResponse } from '../shared/GenericResponse';
+import { TokenStorageService } from '../_services/token-storage.service';
 import { ManagerOrder } from './managerOrders';
 import { OrdersService } from './services/orders.service';
 
@@ -10,7 +12,7 @@ import { OrdersService } from './services/orders.service';
 })
 export class OrdersComponent implements OnInit {
    orders:ManagerOrder[]=[]
-  constructor(private http:HttpClient, private serv: OrdersService) { }
+  constructor(private http:HttpClient, private serv: OrdersService,private token:TokenStorageService) { }
 
   ngOnInit(): void {
     this.orders=this.dummy()
@@ -20,7 +22,12 @@ export class OrdersComponent implements OnInit {
     })
   }
   confirm(orderID:number){
+    var headers=new HttpHeaders().append("Authorization","Bearer "+this.token.getUser().token)
+       this.http.post<GenericResponse>("http://localhost:8080/api/v1/manager/order-confirmation",{orderID},{headers}).subscribe(res=>{
 
+      console.log(res);
+      
+       })
   }
 
   dummy(){
