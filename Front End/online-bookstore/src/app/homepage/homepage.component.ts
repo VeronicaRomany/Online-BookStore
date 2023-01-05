@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { AddCartComponent } from '../popUp/add-cart/add-cart.component';
 import { Book } from '../shared/Book';
 import { TokenStorageService } from '../_services/token-storage.service';
@@ -16,7 +17,7 @@ export class HomepageComponent implements OnInit {
  numOfPosts:number=0
  postFlag:boolean=false
  maxPagesNum:number=0
-  constructor(public dialog:MatDialog,private http:HttpClient, private token: TokenStorageService) { }
+  constructor(public dialog:MatDialog,private http:HttpClient, private token: TokenStorageService,private router:Router) { }
 
 
   
@@ -32,7 +33,7 @@ export class HomepageComponent implements OnInit {
     var book =new Book()
     var book1 =new Book()
     var books:Book[]=[]
-    book.ISBN="1"
+    book.isbn="1"
     book.authors= ["mark","vero"]
     book.category="Art"
     book.imageURL= "https://diwanegypt.com/wp-content/uploads/2022/12/9781925946789-450x600.jpg"
@@ -43,7 +44,7 @@ export class HomepageComponent implements OnInit {
     book.title="Database"
     book.threshold=2
     book1.threshold=4
-    book1.ISBN="2"
+    book1.isbn="2"
     book1.authors= ["peter","bero"]
     book1.category="science"
     book1.imageURL= "https://diwanegypt.com/wp-content/uploads/2022/12/9781974708895-450x600.jpg"
@@ -82,7 +83,18 @@ export class HomepageComponent implements OnInit {
     
 //   })
       
+
+
+
     
+   }
+
+
+
+   edit(id:string){
+   
+      this.router.navigate([ '/','newBook'],{queryParams:{data:id}})
+ 
    }
    nextPage(){
       this.currentPage++

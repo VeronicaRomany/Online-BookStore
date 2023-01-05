@@ -97,6 +97,17 @@ public class ManagerController {
 
     @PostMapping(test + "/manager/book")
     public ResponseEntity<GenericResponse> addBook(@RequestBody AddBookRequest request, Authentication auth) {
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>> "+request.getISBN());        
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>> "+request.getCategory()); 
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>> "+request.getPublisher()); 
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>> "+request.getTitle()); 
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>> "+request.getPrice()); 
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>> "+request.getPubYear()); 
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>> "+request.getStock());
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>> "+request.getThreshold());  
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>> "+request.getAuthors()); 
+        
+
         boolean isAdded = managerRepository.addBook(request);
 
         if (isAdded)
@@ -106,8 +117,9 @@ public class ManagerController {
                 .body(new GenericResponse(false, "Failed to add book!", null));
     }
 
-    @GetMapping(test + "/manager/book")
-    public ResponseEntity<BookInfoResponse> findBook(@RequestParam String bookISBN) {
+    @PostMapping(test + "/manager/book/get")
+    public ResponseEntity<BookInfoResponse> findBook(@RequestBody String bookISBN) {
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>"+bookISBN);
         BookInfoResponse book = managerRepository.findBookByISBN(bookISBN);
 
         if(book != null)
