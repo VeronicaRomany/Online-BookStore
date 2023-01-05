@@ -39,7 +39,7 @@ export class HomepageComponent implements OnInit {
     book.stock=5
     book.pubYear=2009
     book.publisher="M.E"
-    book.price=90000
+    book.price=90
     book.title="Database"
     book.threshold=2
     book1.threshold=4
@@ -50,7 +50,7 @@ export class HomepageComponent implements OnInit {
     book1.stock=4
     book1.pubYear=2001
     book1.publisher="M.eeeE"
-    book1.price=80000
+    book1.price=80
     book1.title="Football"
     books.push(book,book1)
     return books
